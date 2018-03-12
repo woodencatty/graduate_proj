@@ -314,7 +314,6 @@ using v8::Object;
     //초기화 함수 지정
         NODE_MODULE(NODE_GYP_MODULE_NAME, init)
 }
-// namespace demo
 
 
 
