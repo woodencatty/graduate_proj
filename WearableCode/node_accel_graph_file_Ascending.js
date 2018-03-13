@@ -13,7 +13,7 @@ setTimeout(()=>{
   });
   
   }, 100);
- }, 20000);
+ }, 60000);
 
 
-setTimeout(()=>{ process.exit(1); }, 50000);
+setTimeout(()=>{ process.exit(1); }, 120000);
