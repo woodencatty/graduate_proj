@@ -14,4 +14,4 @@ fs.appendFile('data_log.txt', log, (err) => {
 
 }, 50);
 
-setTimeout(()=>{  process.exit(1);  }, 300000);
+setTimeout(()=>{ process.exit(1); }, 300000);
