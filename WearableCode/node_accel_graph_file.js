@@ -12,8 +12,8 @@ setTimeout(()=>{
     if (err) throw err;
   });
   
-  }, 50);
- }, 10000);
+  }, 100);
+ }, 20000);
 
 
-setTimeout(()=>{ process.exit(1); }, 300000);
+setTimeout(()=>{ process.exit(1); }, 120000);
