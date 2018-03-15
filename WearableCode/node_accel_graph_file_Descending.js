@@ -5,10 +5,10 @@ const fs = require('fs');
 
 //setTimeout(()=>{ 
   setInterval(()=>{
-  let log = accel.AccelX()+"\t"+accel.AccelY()+"\t"+accel.AccelZ()+"\t"+accel.GyroX()+"\t"+accel.GyroY()+"\t"+accel.GyroZ()+"\t"+accel.MagnX()+"\t"+accel.MagnY()+"\t"+accel.MagnZ()+"\tAscending\n"
+  let log = accel.AccelX()+"\t"+accel.AccelY()+"\t"+accel.AccelZ()+"\t"+accel.GyroX()+"\t"+accel.GyroY()+"\t"+accel.GyroZ()+"\t"+accel.MagnX()+"\t"+accel.MagnY()+"\t"+accel.MagnZ()+"\tDescending\n"
   console.log(log);
   
-  fs.appendFile('data_log_Ascending.txt', log, (err) => {
+  fs.appendFile('data_log_Descending.txt', log, (err) => {
     if (err) throw err;
   });
   
