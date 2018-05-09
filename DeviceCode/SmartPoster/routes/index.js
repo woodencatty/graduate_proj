@@ -66,11 +66,11 @@ router.get('/', function (req, res, next) {
   console.log("routed to /")
   Statuscallback = (returnData) => {
 
-    detectcallback = (deviceName)=>{
+  /*  detectcallback = (deviceName)=>{
       IDD_ID = deviceName;
     }
-
-    bluetooth.IDD_found(detectcallback);
+    bluetooth.IDD_found(detectcallback);*/
+    
     console.log("get data : " + returnData);
     if(returnData == "1"){
       if (IDD_ID == "") {
