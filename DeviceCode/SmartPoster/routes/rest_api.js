@@ -1,6 +1,6 @@
 const http = require('http');										//http 요청 모듈
 
-var serverIP = "192.9.44.141";
+var serverIP = "192.9.44.54";
 var serverPort = "8082";
 
 POST_APDError = {														//POST요청 JSON데이터 정의
