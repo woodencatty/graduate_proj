@@ -15,7 +15,7 @@ let IDD_ID = "";
 let User_Name = "";
 let User_Exercise = "";
 
-AP.setupAP(config.ssid, config.password, true, config.adaptor);
+AP.setupAP("WowWowWd", "123455", true, "Ethernet");
 
 
 function Setup_IDD_Socket() {
