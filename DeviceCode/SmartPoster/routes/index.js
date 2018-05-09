@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const sensor = require('./sensor.js');
-//const AP = require('./hotSpot.js');
+const AP = require('./hotSpot.js');
 const restAPI = require('./rest_api.js');
-const bluetooth = require('./ble_central.js')   
 
 const fs = require('fs');
 const http = require('http');
@@ -15,7 +14,7 @@ let IDD_ID = "";
 
 let User_Name = "";
 let User_Exercise = "";
-/*
+
 function Setup_IDD_Socket() {
   http.createServer((request, response) => {
     if (request.method == 'POST') {
@@ -47,14 +46,14 @@ function Setup_IDD_Socket() {
     console.log('Socket is Running (3010) ...');
   });
 }
-*/
+
 
 function initialize() {
   fs.readFile('./settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
-    //Setup_IDD_Socket();
-    /* AP.setupAP(config.ssid, config.password, true, config.adaptor);
-      interval = config.refreshInterval;*/
+    Setup_IDD_Socket();
+     AP.setupAP(config.ssid, config.password, true, config.adaptor);
+      interval = config.refreshInterval;
     APD_ID = config.deviceName;
     restAPI.init(config.serverIP, config.serverPort);
   });
@@ -75,12 +74,12 @@ router.get('/', function (req, res, next) {
     console.log("get data : " + returnData);
     if(returnData == "1"){
       if (IDD_ID == "") {
-       /* res.render('index', { Interval: refreshInterval, temp: 0, humi: 0});
-        */
-        sensorcallback = (temp, humi)=>{
+        res.render('index', { Interval: refreshInterval, temp: 0, humi: 0});
+        
+       /* sensorcallback = (temp, humi)=>{
           res.render('index', { Interval: refreshInterval, temp: temp, humi: humi });
         }
-        sensor.getTemp(sensorcallback);
+        sensor.getTemp(sensorcallback);*/
       } else {
         res.redirect('/detected');
       }}else {res.redirect('/unactivated');}
