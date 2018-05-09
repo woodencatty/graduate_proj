@@ -84,7 +84,7 @@ router.get('/', function (req, res, next) {
         res.redirect('/detected');
       }}else {res.redirect('/unactivated');}
   }
-  restAPI.requestDeviceStatus("APD001",  Statuscallback);
+  restAPI.requestDeviceStatus("SmartPostrt01",  Statuscallback);
 
 });
 
