@@ -17,9 +17,8 @@ module.exports = {
             console.log(curcon[0].signal_level);
             //todo : check signal
             if (curcon[0].signal_level > connectRange && searched == false) {
-                sendData.SubmitIDDname('IDD001');
-                fs.readFile('./exercise_log', 'utf8', function (error, readtext) { sendData.SubmitUserExercise('IDD001', readtext.toString());
-            
+                sendData.SubmitIDDname('Linker01');
+                fs.readFile('./exercise_log', 'utf8', function (error, readtext) { sendData.SubmitUserExercise('Linker01', readtext.toString());
 exec("sudo rm exercise_log", function (error, stdout, stderr) {
     console.log(stdout);
  });
