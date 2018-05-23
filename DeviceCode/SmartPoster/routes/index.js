@@ -15,9 +15,6 @@ let IDD_ID = "";
 let User_Name = "";
 let User_Exercise = "";
 
-AP.setupAP("WowWowWd", "123455", true, "Ethernet");
-
-
 function Setup_IDD_Socket() {
   http.createServer((request, response) => {
     if (request.method == 'POST') {
@@ -55,6 +52,7 @@ function initialize() {
   fs.readFile('./settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
     Setup_IDD_Socket();
+     AP.setupAP(config.ssid, config.password, true, config.adaptor);
       interval = config.refreshInterval;
     APD_ID = config.deviceName;
     restAPI.init(config.serverIP, config.serverPort);
@@ -72,7 +70,7 @@ router.get('/', function (req, res, next) {
       IDD_ID = deviceName;
     }
     bluetooth.IDD_found(detectcallback);*/
-
+    
     console.log("get data : " + returnData);
     if(returnData == "1"){
       if (IDD_ID == "") {

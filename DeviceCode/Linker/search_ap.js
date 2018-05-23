@@ -12,7 +12,7 @@ wifi.init({
 });
 
 module.exports = {
-    searchAPD: (apName, password, connectRange, leaveRange) => {
+    searchPoster: (apName, password, connectRange, leaveRange) => {
         wifi.getCurrentConnections((err, curcon) => {
             console.log(curcon[0].signal_level);
             //todo : check signal

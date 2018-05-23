@@ -9,7 +9,7 @@ let dateTime = new Date();
 
 function scanInterval(apName, connectRange, leaveRange, password, scanInterval) {
   this.scanInterval = setInterval(() => {
-    scanAP.searchAPD(apName, password, connectRange, leaveRange);
+    scanAP.searchPoster(apName, password, connectRange, leaveRange);
   }, scanInterval);
 }
 
