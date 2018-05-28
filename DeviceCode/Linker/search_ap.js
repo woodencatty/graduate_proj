@@ -28,7 +28,7 @@ exec("sudo rm exercise_log", function (error, stdout, stderr) {
             if (curcon[0].signal_level < leaveRange && searched == true) {
                 sendData.SubmitUserLeave();
                 searched = false;
-            }*/
+            }  */
         });   
     }
 }
