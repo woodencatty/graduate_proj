@@ -13,7 +13,6 @@ wifi.init({
 
 module.exports = {
     searchPoster: (apName, password, connectRange, leaveRange) => {
-
         wifi.getCurrentConnections((err, curcon) => {
             console.log(curcon);
             //todo : check signal
