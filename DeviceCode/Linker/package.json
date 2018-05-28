@@ -1,0 +1,13 @@
+{
+  "name": "idd",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./control.js"
+  },
+  "dependencies": {
+    "debug": "~2.6.9",
+    "serve-favicon": "~2.4.5",
+    "node-wifi": "~2.0.4"
+  }
+}
