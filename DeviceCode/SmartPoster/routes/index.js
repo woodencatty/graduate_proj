@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //const sensor = require('./sensor.js');
-const AP = require('./hotSpot.js');
+//const AP = require('./hotSpot.js');
 const restAPI = require('./rest_api.js');
 
 const fs = require('fs');
@@ -52,7 +52,7 @@ function initialize() {
   fs.readFile('./settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
     Setup_IDD_Socket();
-     AP.setupAP(config.ssid, config.password, true, config.adaptor);
+    // AP.setupAP(config.ssid, config.password, true, config.adaptor);
       interval = config.refreshInterval;
     APD_ID = config.deviceName;
     restAPI.init(config.serverIP, config.serverPort);
