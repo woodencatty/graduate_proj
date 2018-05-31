@@ -104,7 +104,12 @@ router.get('/detected', function (req, res, next) {
 router.get('/search_exercise', function (req, res, next) {
   dentifycallback = (returnData) => {
     User_Exercise = returnData; // 환자이름 빼먹음;
-    res.redirect('/'+returnData);
+    if(returnData == exercise_walk){
+      res.redirect('/exercise_walk');  
+    } else{
+      res.redirect('/exercise');
+    }
+    
   }
   restAPI.requestUserExercise(IDD_ID,dentifycallback);
 });
@@ -117,23 +122,21 @@ router.get('/reset', function (req, res, next) {
   res.render('reset');
 });
 
-router.get('/exercise1', function (req, res, next) {
-  var tts_query = "저를 따라 주먹을 쥐었다 폈다 해봐요!"
-  
-  res.render('exercise1', {query: tts_query});
+router.get('/exercise', function (req, res, next) {
+  exercisecallback = (returnData) =>{
+
+    res.render('exercise', {image: returnData});
+  }
+  restAPI.requestExerciseURL(User_Exercise,exercisecallback);
 });
 
-router.get('/exercise2', function (req, res, next) {
-  var tts_query = "저를 따라 뒷짐을 지고, 올려 봅시다!"
+
+router.get('/exercise_walk', function (req, res, next) {
+
+  res.render('exercise_walk');
   
-  res.render('exercise2', {query: tts_query});
 });
 
-router.get('/end', function (req, res, next) {
-  var tts_query = "수고하셨어요! 이제 휴식을 취하는게 좋을 것 같아요."
-  
-  res.render('end', {query: tts_query});
-});
 
 initialize();
 

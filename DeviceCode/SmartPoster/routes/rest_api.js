@@ -36,6 +36,13 @@ GET_UserExercise = {														//POST요청 JSON데이터 정의
 	method: 'GET'
 };
 
+GET_ExerciseURL = {														//POST요청 JSON데이터 정의
+	host: serverIP,
+	port: serverPort,
+	path: '/exercise/link',
+	method: 'GET'
+};
+
 GET_DeviceStatus = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: serverPort,
@@ -209,6 +216,70 @@ module.exports = {
 				});
 				console.log("sending REST");
 				req.setHeader("apd_id", ID);											//헤더에 요청 데이터 첨부
+				req.end();
+			}, 
+
+			requestExerciseURL: (exerciseID, callback) => {
+		
+				console.log(serverIP + serverPort);
+				getExerciseURLcallback = function (response) {
+					console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+					if (response.statusCode != 200) {
+						console.log('Error Response!');
+		
+						req.on('error', (e) => {
+							console.error(`problem with request: ${e.message}`);
+						});
+					} else {
+						let serverdata = '';
+		
+						response.on('data', function (chunk) {				
+								callback(chunk.toString());
+						});
+						response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+		
+						});
+					}
+				}
+		
+				let req = http.request(GET_ExerciseURL, getExerciseURLcallback);						//GET요청 전송
+				req.on('error', function (error) {
+					console.log('관리서버와 연결할 수 없습니다.'); 
+					console.log(error);								// 관리서버와 연결 불가능할 때에 오류 체크
+				});
+				req.setHeader("exercise_id", exerciseID);											//헤더에 요청 데이터 첨부
+				req.end();
+			},
+			
+			requestWalkExercise: (exerciseID, callback) => {
+		
+				console.log(serverIP + serverPort);
+				getExerciseURLcallback = function (response) {
+					console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+					if (response.statusCode != 200) {
+						console.log('Error Response!');
+		
+						req.on('error', (e) => {
+							console.error(`problem with request: ${e.message}`);
+						});
+					} else {
+						let serverdata = '';
+		
+						response.on('data', function (chunk) {				
+								callback(chunk.toString());
+						});
+						response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+		
+						});
+					}
+				}
+		
+				let req = http.request(GET_ExerciseURL, getExerciseURLcallback);						//GET요청 전송
+				req.on('error', function (error) {
+					console.log('관리서버와 연결할 수 없습니다.'); 
+					console.log(error);								// 관리서버와 연결 불가능할 때에 오류 체크
+				});
+				req.setHeader("exercise_id", exerciseID);											//헤더에 요청 데이터 첨부
 				req.end();
 			}
 
