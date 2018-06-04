@@ -5,7 +5,7 @@ var DeviceName = "";
 
 noble.on('stateChange', function (state) {
     if (state === 'poweredOn') {
-        noble.startScanning(['ff10'], true);
+        noble.startScanning(['ff10'], false);
     } else {
         noble.stopScanning();
     }
