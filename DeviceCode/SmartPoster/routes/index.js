@@ -23,6 +23,7 @@ function initialize() {
     APD_ID = config.deviceName;
     restAPI.init(config.serverIP, config.serverPort);
   });
+  console.log("Page is Running..(3000)");
 }
 
 

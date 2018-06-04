@@ -32,6 +32,10 @@ function connectAndSetUp(peripheral) {
     });
     // attach disconnect handler
     peripheral.on('disconnect', onDisconnect);
+        
+    setTimeout(() => {
+        peripheral.disconnect();
+        }, 5000);
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
@@ -40,18 +44,10 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
         return;
     }
     var LinkerCharacteristic = characteristics[0];
-
-    readDataInterval = setTimeout(()=>{
         LinkerCharacteristic.read ((error, data)=>{
             console.log(data);
-            if(data == "end"){
-                clearInterval(readDataInterval);
-            }})
-    }, 500);
-    
-    setTimeout(() => {
-        peripheral.disconnect();
-        }, 2000);
+           });
+
 }
 
 module.exports = {
