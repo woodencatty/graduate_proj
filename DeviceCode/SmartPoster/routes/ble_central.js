@@ -26,6 +26,7 @@ noble.on('discover', function (peripheral) {
 
 function connectAndSetUp(peripheral) {
     peripheral.connect(function (error) {
+        console.log("111");
         var serviceUUIDs = ['ff10'];
         var characteristicUUIDs = ['ff11'];
         peripheral.discoverSomeServicesAndCharacteristics
@@ -33,7 +34,7 @@ function connectAndSetUp(peripheral) {
             onServicesAndCharacteristicsDiscovered);
     });
     // attach disconnect handler
-  //  peripheral.on('disconnect', onDisconnect);
+    peripheral.on('disconnect', onDisconnect);
         
     setTimeout(() => {
         peripheral.disconnect();
@@ -41,12 +42,15 @@ function connectAndSetUp(peripheral) {
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
+    console.log("222");
     if (error) {
         console.log('Error discovering services and characteristics ' + error);
         return;
     }
     var LinkerCharacteristic = characteristics[0];
+    console.log("222-2");
         LinkerCharacteristic.read ((error, data)=>{
+            console.log("333");
             console.log(data);
            });
 
@@ -54,6 +58,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
 module.exports = {
     IDD_found:(callback)=> {
+        console.log("111-111");
         callback(DeviceName);
     }
   }
