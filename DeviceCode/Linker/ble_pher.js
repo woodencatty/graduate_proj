@@ -4,7 +4,6 @@ const fs = require('fs');
 
 var deviceName = 'Linker01';
 var exercise_log_arr;
-var data_count = 0;
 
 var Characteristic = bleno.Characteristic;
 var PrimaryService = bleno.PrimaryService;
@@ -23,15 +22,11 @@ var SwitchCharacteristic = function () {
 util.inherits(SwitchCharacteristic, Characteristic);
 
 SwitchCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    fs.readFile('./exercise_log', 'utf8', function (error, readtext) { exercise_log_arr = readtext.split(']')});
+    fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
     console.log('read request');
-    if(data_count < exercise_log_arr.length){
-        var data = new Buffer(exercise_log_arr[data_count], 'utf8');
-        data_count++;
-    }else{
-        var data = new Buffer("end", 'utf8');
-    }
+        var data = new Buffer(readtext, 'utf8');
     callback(this.RESULT_SUCCESS, data);
+});
 };
 
 SwitchCharacteristic.prototype.onWriteRequest = function (data, offset, withoutResponse, callback) {

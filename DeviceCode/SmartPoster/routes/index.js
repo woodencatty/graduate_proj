@@ -19,12 +19,10 @@ let User_Exercise = "";
 function initialize() {
   fs.readFile('./settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
-    Setup_IDD_Socket();
       interval = config.refreshInterval;
     APD_ID = config.deviceName;
     restAPI.init(config.serverIP, config.serverPort);
   });
-  console.log("Page is Running..(3000)");
 }
 
 
