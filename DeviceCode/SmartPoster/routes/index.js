@@ -4,7 +4,7 @@ var router = express.Router();
 //const sensor = require('./sensor.js');
 //const AP = require('./hotSpot.js');
 const restAPI = require('./rest_api.js');
-const bluetooth = require('./ble_central.js')   
+var bluetooth = require('./ble_central.js')   
 
 const fs = require('fs');
 const http = require('http');
@@ -27,6 +27,7 @@ function initialize() {
 setInterval(() => {
   
   detectcallback = (deviceName)=>{
+    console.log(deviceName + "탐색됨");
     IDD_ID = deviceName;
   }
   bluetooth.IDD_found(detectcallback);
@@ -87,7 +88,7 @@ router.get('/reset', function (req, res, next) {
   IDD_ID = "";
   User_Exercise = "";
   User_Name = "";
-  
+  bluetooth.reset();
   res.render('reset');
 });
 

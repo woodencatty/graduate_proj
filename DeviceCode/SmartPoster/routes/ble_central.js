@@ -1,5 +1,4 @@
 const noble = require('noble');
-const restAPI = require('./rest_api.js');
 
 var DeviceName = "";
 
@@ -50,15 +49,14 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
             console.log("데이터는 다음과 같습니다.");
             console.log(data);
            });
-
 }
 
 module.exports = {
     IDD_found:(callback)=> {
         callback(DeviceName);
-        setTimeout(() => {
-            DeviceName = "";
-        }, 100);
+    },
+    reset:()=>{
+        DeviceName = "";
     }
   }
   
