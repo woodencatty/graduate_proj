@@ -17,11 +17,13 @@ let User_Name = "";
 let User_Exercise = "";
 
 function initialize() {
+  
   fs.readFile('./settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
       interval = config.refreshInterval;
     APD_ID = config.deviceName;
     restAPI.init(config.serverIP, config.serverPort);
+    bluetooth.start_scan();
   });
   console.log("Page is Running..(3000)");
 
@@ -41,6 +43,7 @@ router.get('/', function (req, res, next) {
         detectcallback = (deviceName)=>{
           console.log(deviceName + "탐색됨");
           IDD_ID = deviceName;
+          bluetooth.stop_scan();
         }
 
         bluetooth.IDD_found(detectcallback);

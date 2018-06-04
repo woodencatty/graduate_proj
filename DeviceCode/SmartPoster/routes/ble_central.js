@@ -2,13 +2,6 @@ const noble = require('noble');
 
 var DeviceName = "";
 
-noble.on('stateChange', function (state) {
-    if (state === 'poweredOn') {
-        noble.startScanning(['ff10'], true);
-    } else {
-        noble.stopScanning();
-    }
-});
 noble.on('discover', function (peripheral) {
         if(peripheral.rssi <= 40){
             console.log("블루투스> 찾았음(discovery) ------------------------- ");
@@ -52,11 +45,19 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 }
 
 module.exports = {
+    start_scan:()=>{
+        noble.startScanning(['ff10'], true);
+    },
+    stop_scan:()=>{
+        noble.stopScanning();
+    },
+
     IDD_found:(callback)=> {
         callback(DeviceName);
     },
-    
+
     reset:()=>{
+        noble.startScanning(['ff10'], true);
         DeviceName = "";
     }
   }
