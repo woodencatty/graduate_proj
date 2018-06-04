@@ -3,10 +3,12 @@ const util = require('util');
 const fs = require('fs');
 
 var deviceName = 'Linker01';
-var log = ""
+var log = "";
 
     fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+        console.log(readtext);
         log = readtext;
+
     });     
 
 var Characteristic = bleno.Characteristic;
