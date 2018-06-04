@@ -17,16 +17,14 @@ noble.on('discover', function (peripheral) {
             console.log("블루투스> 주소: " + peripheral.address);
             console.log("블루투스> 신호세기(RSSI): " + peripheral.rssi);
             console.log("------------------------------------");
-            setTimeout(() => {
                 DeviceName =  peripheral.advertisement.localName;
-            }, 2000);
             connectAndSetUp(peripheral);
         }
 });
 
 function connectAndSetUp(peripheral) {
     peripheral.connect(function (error) {
-        console.log("111");
+        console.log("연결중입니다.");
         var serviceUUIDs = ['ff10'];
         var characteristicUUIDs = ['ff11'];
         peripheral.discoverSomeServicesAndCharacteristics
@@ -35,22 +33,21 @@ function connectAndSetUp(peripheral) {
     });
     // attach disconnect handler
     peripheral.on('disconnect', onDisconnect);
-        
     setTimeout(() => {
         peripheral.disconnect();
         }, 5000);
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
-    console.log("222");
+    console.log("데이터를 받으려 시도합니다.");
     if (error) {
         console.log('Error discovering services and characteristics ' + error);
         return;
     }
     var LinkerCharacteristic = characteristics[0];
-    console.log("222-2");
+    console.log("데이터를 받습니다.");
         LinkerCharacteristic.read ((error, data)=>{
-            console.log("333");
+            console.log("데이터는 다음과 같습니다.");
             console.log(data);
            });
 
@@ -58,7 +55,6 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
 module.exports = {
     IDD_found:(callback)=> {
-        console.log("111-111");
         callback(DeviceName);
     }
   }
