@@ -55,7 +55,11 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
 module.exports = {
     IDD_found:(callback)=> {
+        console.log("이름을 전달합니다.");
         callback(DeviceName);
+        setTimeout(() => {
+            DeviceName = "";
+        }, 100);
     }
   }
   
