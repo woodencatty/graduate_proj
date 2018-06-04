@@ -35,9 +35,9 @@ function connectAndSetUp(peripheral) {
     // attach disconnect handler
     peripheral.on('disconnect', onDisconnect);
         
-    setTimeout(() => {
+   /* setTimeout(() => {
         peripheral.disconnect();
-        }, 5000);
+        }, 5000);*/
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
