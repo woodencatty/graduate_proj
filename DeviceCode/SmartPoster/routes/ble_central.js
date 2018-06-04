@@ -1,7 +1,15 @@
 const noble = require('noble');
+const restAPI = require('./rest_api.js');
 
 var DeviceName = "";
 
+noble.on('stateChange', function (state) {
+    if (state === 'poweredOn') {
+        noble.startScanning(['ff10'], true);
+    } else {
+        noble.stopScanning();
+    }
+});
 noble.on('discover', function (peripheral) {
         if(peripheral.rssi <= 40){
             console.log("블루투스> 찾았음(discovery) ------------------------- ");
@@ -42,28 +50,14 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
             console.log("데이터는 다음과 같습니다.");
             console.log(data);
            });
+
 }
 
 module.exports = {
-    start_scan:()=>{
-        noble.on('stateChange', function (state) {
-            if (state === 'poweredOn') {
-        noble.startScanning(['ff10'], false);
-            }});
-    },
-    stop_scan:()=>{
-        noble.stopScanning();
-    },
-
     IDD_found:(callback)=> {
         callback(DeviceName);
     },
-
     reset:()=>{
-                noble.on('stateChange', function (state) {
-        if (state === 'poweredOn') {
-    noble.startScanning(['ff10'], false);
-        }});
         DeviceName = "";
     }
   }
