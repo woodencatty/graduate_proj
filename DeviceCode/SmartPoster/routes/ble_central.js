@@ -5,12 +5,13 @@ var DeviceName = "";
 
 noble.on('stateChange', function (state) {
     if (state === 'poweredOn') {
-        noble.startScanning(['ff10'], false);
+        noble.startScanning(['ff10'], true);
     } else {
         noble.stopScanning();
     }
 });
 noble.on('discover', function (peripheral) {
+    if(peripheral.advertisement.localName == "Linker01"){
         if(peripheral.rssi <= 40){
             console.log("블루투스> 찾았음(discovery) ------------------------- ");
             console.log("블루투스> 이름: " + peripheral.advertisement.localName);
@@ -19,7 +20,7 @@ noble.on('discover', function (peripheral) {
             console.log("------------------------------------");
                 DeviceName =  peripheral.advertisement.localName;
             connectAndSetUp(peripheral);
-        }
+        }}
 });
 
 function connectAndSetUp(peripheral) {
