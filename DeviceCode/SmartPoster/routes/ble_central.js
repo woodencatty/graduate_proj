@@ -48,7 +48,7 @@ module.exports = {
     start_scan:()=>{
         noble.on('stateChange', function (state) {
             if (state === 'poweredOn') {
-        noble.startScanning(['ff10'], true);
+        noble.startScanning(['ff10'], false);
             }});
     },
     stop_scan:()=>{
@@ -62,7 +62,7 @@ module.exports = {
     reset:()=>{
                 noble.on('stateChange', function (state) {
         if (state === 'poweredOn') {
-    noble.startScanning(['ff10'], true);
+    noble.startScanning(['ff10'], false);
         }});
         DeviceName = "";
     }
