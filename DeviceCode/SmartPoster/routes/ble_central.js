@@ -17,7 +17,9 @@ noble.on('discover', function (peripheral) {
             console.log("블루투스> 주소: " + peripheral.address);
             console.log("블루투스> 신호세기(RSSI): " + peripheral.rssi);
             console.log("------------------------------------");
-            DeviceName =  peripheral.advertisement.localName;
+            setTimeout(() => {
+                DeviceName =  peripheral.advertisement.localName;
+            }, 2000);
             connectAndSetUp(peripheral);
         }
 });

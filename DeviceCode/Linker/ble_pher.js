@@ -4,9 +4,12 @@ const fs = require('fs');
 
 var deviceName = 'Linker01';
 var log = ""
-fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-    log = readtext;
-});
+
+setInterval(() => {
+    fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+        log = readtext;
+    });        
+}, 6000);
 
 var Characteristic = bleno.Characteristic;
 var PrimaryService = bleno.PrimaryService;
