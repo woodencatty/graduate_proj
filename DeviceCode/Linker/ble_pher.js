@@ -8,7 +8,7 @@ var log = "";
     fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
         console.log(readtext);
         log = readtext;
-
+        console.log(log);
     });     
 
 var Characteristic = bleno.Characteristic;
