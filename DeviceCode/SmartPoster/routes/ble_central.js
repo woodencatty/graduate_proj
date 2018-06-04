@@ -46,7 +46,10 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
 module.exports = {
     start_scan:()=>{
+        noble.on('stateChange', function (state) {
+            if (state === 'poweredOn') {
         noble.startScanning(['ff10'], true);
+            }});
     },
     stop_scan:()=>{
         noble.stopScanning();
@@ -57,7 +60,10 @@ module.exports = {
     },
 
     reset:()=>{
-        noble.startScanning(['ff10'], true);
+                noble.on('stateChange', function (state) {
+        if (state === 'poweredOn') {
+    noble.startScanning(['ff10'], true);
+        }});
         DeviceName = "";
     }
   }
