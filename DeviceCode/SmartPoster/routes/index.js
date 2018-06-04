@@ -24,6 +24,14 @@ function initialize() {
     restAPI.init(config.serverIP, config.serverPort);
   });
   console.log("Page is Running..(3000)");
+setInterval(() => {
+  
+  detectcallback = (deviceName)=>{
+    IDD_ID = deviceName;
+  }
+  bluetooth.IDD_found(detectcallback);
+}, 1000);
+
 }
 
 
@@ -32,11 +40,6 @@ router.get('/', function (req, res, next) {
   console.log("routed to /")
   Statuscallback = (returnData) => {
 
-    detectcallback = (deviceName)=>{
-      IDD_ID = deviceName;
-    }
-    bluetooth.IDD_found(detectcallback);
-    
     console.log("get data : " + returnData);
     if(returnData == "1"){
       if (IDD_ID == "") {
