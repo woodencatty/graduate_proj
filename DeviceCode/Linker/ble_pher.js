@@ -27,7 +27,7 @@ util.inherits(SwitchCharacteristic, Characteristic);
 
 SwitchCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('read request');
-        var data = new Buffer(log, 'utf8');
+        var data = new Buffer("123123", 'utf8');
     callback(this.RESULT_SUCCESS, data);
 };
 
