@@ -17,8 +17,10 @@ noble.on('discover', function (peripheral) {
         console.log("------------------------------------");
     }
     setInterval(()=>{
-        connectAndSetUp(peripheral);
-    }, 5000)
+        peripheral.updateRssi((error, rssi)=>{
+            console.log(rssi);
+        });
+        }, 1000)
 });
 
 function connectAndSetUp(peripheral) {
