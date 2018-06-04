@@ -33,11 +33,11 @@ function connectAndSetUp(peripheral) {
             onServicesAndCharacteristicsDiscovered);
     });
     // attach disconnect handler
-    peripheral.on('disconnect', onDisconnect);
+  //  peripheral.on('disconnect', onDisconnect);
         
-   /* setTimeout(() => {
+    setTimeout(() => {
         peripheral.disconnect();
-        }, 5000);*/
+        }, 5000);
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
