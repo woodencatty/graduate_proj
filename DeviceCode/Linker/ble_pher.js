@@ -6,7 +6,6 @@ var deviceName = 'Linker01';
 var log = "";
 
     fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-        console.log(readtext);
         log = readtext;
     });     
 
@@ -27,7 +26,6 @@ var SwitchCharacteristic = function () {
 util.inherits(SwitchCharacteristic, Characteristic);
 
 SwitchCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    console.log(log);
 
     console.log('read request');
         var data = new Buffer("123123", 'utf8');
