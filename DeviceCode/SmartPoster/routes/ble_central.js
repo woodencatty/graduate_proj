@@ -1,5 +1,7 @@
 const noble = require('noble');
+const restAPI = require('./rest_api.js');
 
+var DeviceName = "";
 
 noble.on('stateChange', function (state) {
     if (state === 'poweredOn') {
@@ -15,10 +17,9 @@ noble.on('discover', function (peripheral) {
         console.log("블루투스> 주소: " + peripheral.address);
         console.log("블루투스> 신호세기(RSSI): " + peripheral.rssi);
         console.log("------------------------------------");
+        DeviceName =  peripheral.advertisement.localName;
     }
-    setInterval(()=>{
-        connectAndSetUp(peripheral);
-    }, 5000)
+    connectAndSetUp(peripheral);
 });
 
 function connectAndSetUp(peripheral) {
@@ -29,14 +30,8 @@ function connectAndSetUp(peripheral) {
             (serviceUUIDs, characteristicUUIDs,
             onServicesAndCharacteristicsDiscovered);
     });
-
-    setTimeout(() => {
-    peripheral.disconnect();
-    }, 2000);
     // attach disconnect handler
-    peripheral.on('disconnect', onDisconnect);
-
-
+   // peripheral.on('disconnect', onDisconnect);
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
@@ -46,15 +41,19 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     }
     var switchCharacteristic = characteristics[0];
 
-    
+    readDataInterval = setInterval(()=>{
+        switchCharacteristic.read ((error, data)=>{
+            console.log(data);
+            if(data == "end"){
+                clearInterval(readDataInterval);
+            }
+                })
+    }, 500);
 
-    switchCharacteristic.read ((error, data)=>{
-        console.log(data);
-            })
 }
 
-
-
-function onDisconnect(){
-    console.log("연결이 해지되었습니다");
-}
+module.exports = {
+    IDD_found:(callback)=> {
+        callback(DeviceName);
+    }
+  }
