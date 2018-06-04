@@ -8,7 +8,6 @@ var log = "";
     fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
         console.log(readtext);
         log = readtext;
-        console.log(log);
     });     
 
 var Characteristic = bleno.Characteristic;
@@ -28,6 +27,8 @@ var SwitchCharacteristic = function () {
 util.inherits(SwitchCharacteristic, Characteristic);
 
 SwitchCharacteristic.prototype.onReadRequest = function (offset, callback) {
+    console.log(log);
+
     console.log('read request');
         var data = new Buffer("123123", 'utf8');
     callback(this.RESULT_SUCCESS, data);
