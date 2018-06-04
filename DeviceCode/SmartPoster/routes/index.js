@@ -24,14 +24,6 @@ function initialize() {
     restAPI.init(config.serverIP, config.serverPort);
   });
   console.log("Page is Running..(3000)");
-setInterval(() => {
-  
-  detectcallback = (deviceName)=>{
-    console.log(deviceName + "탐색됨");
-    IDD_ID = deviceName;
-  }
-  bluetooth.IDD_found(detectcallback);
-}, 1000);
 
 }
 
@@ -45,7 +37,13 @@ router.get('/', function (req, res, next) {
     if(returnData == "1"){
       if (IDD_ID == "") {
         res.render('index', { Interval: refreshInterval, temp: 0, humi: 0});
-        
+
+        detectcallback = (deviceName)=>{
+          console.log(deviceName + "탐색됨");
+          IDD_ID = deviceName;
+        }
+
+        bluetooth.IDD_found(detectcallback);
        /* sensorcallback = (temp, humi)=>{
           res.render('index', { Interval: refreshInterval, temp: temp, humi: humi });
         }

@@ -55,6 +55,7 @@ module.exports = {
     IDD_found:(callback)=> {
         callback(DeviceName);
     },
+    
     reset:()=>{
         DeviceName = "";
     }
