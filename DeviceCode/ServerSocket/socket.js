@@ -61,7 +61,7 @@ function Setup_APD_Socket() {
                 });
 //작성필요
 //걷기운동 지정하는부분
-} else if (request.url == '/exercise/link') {
+} else if (request.url == '/exercise/walk') {
     console.log(request.headers.exercise_id);
     client.query('SELECT url FROM exercise WHERE id = ?', [request.headers.exercise_id], (err, rows) => {
         console.log(err);
@@ -76,6 +76,7 @@ function Setup_APD_Socket() {
             client.query('SELECT url FROM exercise WHERE id = ?', [request.headers.exercise_id], (err, rows) => {});
         }
     });
+    //걷기운동(출발지, 목적지, 해당환자번호);'
 //작성필요
             } else if (request.url == '/patient/exercise') {
                 console.log(request.headers.idd_id);

@@ -11,8 +11,8 @@ function loadFile() {
  
 loadFile(); 
 
-var output = net.run({x축_가속도: -298, y축_가속도: 1290, z축_가속도: 176, 
-    x축_자이로: -298, y축_자이로: 1290, z축_자이로: 199, 
-    x축_지자기: -666, y축_지자기: 255, z축_지자기: 107});   // Standing Data
+var output = net.run(
+    {input: {x축_가속도: 999, y축_가속도: -72, z축_가속도: -99, x축_자이로: 199, y축_자이로: -328, z축_자이로: -432, x축_지자기: -256, y축_지자기: 840, z축_지자기: 557}}
+);   // Standing Data
 
 console.log(output);
