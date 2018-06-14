@@ -4,6 +4,7 @@ var router = express.Router();
 //const sensor = require('./sensor.js');
 //const AP = require('./hotSpot.js');
 const restAPI = require('./rest_api.js');
+const sql = require('./rest_api.js');
 const fs = require('fs');
 const http = require('http');
 
@@ -84,7 +85,7 @@ router.get('/', function (req, res, next) {
         res.redirect('/detected');
       }}else {res.redirect('/unactivated');}
   }
-  restAPI.requestDeviceStatus("poster01",  Statuscallback);
+  sql.requestDeviceStatus("poster01",  Statuscallback);
 
 });
 
@@ -98,7 +99,7 @@ router.get('/detected', function (req, res, next) {
     var tts_query = "안녕하세요! "+User_Name+"님! 같이 운동 해볼까요?"
     res.render('detected', { username: User_Name, query: tts_query});
   }
-  restAPI.requestUserName(IDD_ID,Identifycallback);
+  sql.requestUserName(IDD_ID,Identifycallback);
 });
 
 router.get('/search_exercise', function (req, res, next) {
