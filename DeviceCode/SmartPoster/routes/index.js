@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+
 //const sensor = require('./sensor.js');
 //const AP = require('./hotSpot.js');
-const restAPI = require('./rest_api.js');
-const sql = require('./rest_api.js');
+//const restAPI = require('./rest_api.js');
+const sql = require('./sql.js');
 const fs = require('fs');
 const http = require('http');
 
@@ -26,12 +27,12 @@ function Setup_IDD_Socket() {
         console.log("Hi! " + IDD_ID);   //환자 식별
       } else if (request.url == '/patient/exercise') {
         response.writeHead(200);  
-        restAPI.SubmitUserExercise(request.headers.idd_id, request.headers.exercise);
+     //   restAPI.SubmitUserExercise(request.headers.idd_id, request.headers.exercise);
         console.log(request.headers.exercise);
         console.log(request.headers.idd_id);
         IDD_ID = request.headers.idd_id;        
         response.end("gotit");
-        restAPI.SubmitUserExercise(request.headers.idd_id, request.headers.exercise);
+    //    restAPI.SubmitUserExercise(request.headers.idd_id, request.headers.exercise);
       } else if (request.url == '/patient/leave') {
         response.writeHead(200);
         response.end("good-bye");
@@ -56,7 +57,6 @@ function initialize() {
     // AP.setupAP(config.ssid, config.password, true, config.adaptor);
       interval = config.refreshInterval;
     APD_ID = config.deviceName;
-    restAPI.init(config.serverIP, config.serverPort);
   });
   console.log("Page is Running..(3000)");
 }
@@ -114,7 +114,7 @@ router.get('/search_exercise', function (req, res, next) {
     }
     
   }
-  restAPI.requestUserExercise(IDD_ID,dentifycallback);
+  sql.requestUserExercise(IDD_ID,dentifycallback);
 });
 
 router.get('/reset', function (req, res, next) {
