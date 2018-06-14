@@ -8,7 +8,6 @@ const fs = require('fs');
 const http = require('http');
 
 let refreshInterval = 1;
-let APD_ID = "";
 let IDD_ID = "";
 
 let User_Name = "";
@@ -83,7 +82,7 @@ router.get('/', function (req, res, next) {
         res.redirect('/detected');
       }}else {res.redirect('/unactivated');}
   }
-  restAPI.requestDeviceStatus("SP01",  Statuscallback);
+  restAPI.requestDeviceStatus("poster01",  Statuscallback);
 
 });
 
