@@ -99,15 +99,17 @@ router.get('/detected', function (req, res, next) {
     var tts_query = "안녕하세요! "+User_Name+"님! 같이 운동 해볼까요?"
     res.render('detected', { username: User_Name, query: tts_query});
   }
-  restAPI.requestUserInfo(IDD_ID,Identifycallback);
+  restAPI.requestUserName(IDD_ID,Identifycallback);
 });
 
 router.get('/search_exercise', function (req, res, next) {
   dentifycallback = (returnData) => {
     User_Exercise = returnData; // 환자이름 빼먹음;
-    if(returnData == exercise_walk){
+    if(returnData == "exercise_walk"){
       res.redirect('/exercise_walk');  
-    } else{
+    }else if(returnData == "end"){
+    
+    }else{
       res.redirect('/exercise');
     }
     
@@ -124,11 +126,9 @@ router.get('/reset', function (req, res, next) {
 });
 
 router.get('/exercise', function (req, res, next) {
-  exercisecallback = (returnData) =>{
 
-    res.render('exercise', {image: returnData});
-  }
-  restAPI.requestExerciseURL(User_Exercise,exercisecallback);
+    res.render('exercise', {image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_"+User_Exercise+".png"});
+  
 });
 
 
