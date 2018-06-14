@@ -4,8 +4,6 @@ var router = express.Router();
 //const sensor = require('./sensor.js');
 //const AP = require('./hotSpot.js');
 const restAPI = require('./rest_api.js');
-//sibal
-
 const fs = require('fs');
 const http = require('http');
 
