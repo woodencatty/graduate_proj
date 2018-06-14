@@ -13,6 +13,8 @@ let IDD_ID = "";
 let User_Name = "";
 let User_Exercise = "";
 
+//direct
+
 function Setup_IDD_Socket() {
   http.createServer((request, response) => {
     if (request.method == 'POST') {
