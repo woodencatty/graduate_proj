@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const client = mysql.createConnection({
     host: 'localhost',
     port: 3306,
-    user: 'SMASH_Server',
+    user: 'root',
     password: '!305sns!',
     database: 'smashserver'
 });
@@ -14,7 +14,7 @@ const client = mysql.createConnection({
 function Setup_APD_Socket() {
     http.createServer((request, response) => {
         if (request.method == 'GET') {
-            if (request.url == '/patient/information') {
+            if (request.url == '/patient/name') {
                 console.log(request.headers.idd_id);
                 client.query('SELECT * FROM patient WHERE deviceNumber = ?', [request.headers.idd_id], (err, rows) => {
                     console.log(err);
@@ -43,25 +43,9 @@ function Setup_APD_Socket() {
                         client.query('SELECT activated FROM device WHERE deviceNumber = ?', [request.headers.apd_id], (err, rows) => {});
                     }
                 });
-//운동url 불러오는부분
-            } else if (request.url == '/exercise/link') {
-                console.log(request.headers.exercise_id);
-                client.query('SELECT url FROM exercise WHERE id = ?', [request.headers.exercise_id], (err, rows) => {
-                    console.log(err);
-                    console.log(rows);
-                    if (!rows.length) {
-                        console.log("DB query Error!");
-                        response.writeHead(404);
-                        response.end();
-                    } else {
-                        response.writeHead(200);
-                        response.end(rows[0].activated.toString()); //보내는 부분. 가공이 필요함.
-                        client.query('SELECT url FROM exercise WHERE id = ?', [request.headers.exercise_id], (err, rows) => {});
-                    }
-                });
-//작성필요
+
 //걷기운동 지정하는부분
-} else if (request.url == '/exercise/link') {
+} else if (request.url == '/exercise/walk') {
     console.log(request.headers.exercise_id);
     client.query('SELECT url FROM exercise WHERE id = ?', [request.headers.exercise_id], (err, rows) => {
         console.log(err);
@@ -76,6 +60,7 @@ function Setup_APD_Socket() {
             client.query('SELECT url FROM exercise WHERE id = ?', [request.headers.exercise_id], (err, rows) => {});
         }
     });
+    //걷기운동(출발지, 목적지, 해당환자번호);'
 //작성필요
             } else if (request.url == '/patient/exercise') {
                 console.log(request.headers.idd_id);
