@@ -3,6 +3,9 @@ const http = require('http');										//http 요청 모듈
 let serverIP = "10.0.0.5";
 let serverPort = "3010";
 
+const exec = require('child_process').exec;
+
+
 POST_IDDname = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: serverPort,
@@ -81,6 +84,10 @@ module.exports = {
 		console.log(exercise);
 		req.setHeader("exercise", exercise);											//헤더에 요청 데이터 첨부
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
+		
+		exec2("sudo rm exercise_log", function (error, stdout, stderr) {
+			console.log(stdout);
+		});
 		
 		req.end();
 	}, 
