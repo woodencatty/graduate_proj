@@ -8,7 +8,6 @@
   "dependencies": {
     "debug": "~2.6.9",
     "serve-favicon": "~2.4.5",
-    "node-wifi": "~2.0.4",
     "date-utils": "~1.2.21"
   }
 }
