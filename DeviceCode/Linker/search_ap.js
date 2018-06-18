@@ -22,7 +22,7 @@ module.exports = {
 
                 });
                 searched = true;
-            }else if (curcon[0].signal_level < leaveRange && searched == true) {
+            }else if (stdout < leaveRange && searched == true) {
                 sendData.SubmitUserLeave();
                 searched = false;
             }
