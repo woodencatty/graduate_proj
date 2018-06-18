@@ -11,8 +11,10 @@ const http = require('http');
 
 let refreshInterval = 1;
 let IDD_ID = "";
+let APD_ID="";
 
 let User_Name = "";
+let User_Number = "";
 let User_Exercise = "";
 
 //direct
@@ -36,7 +38,7 @@ function Setup_IDD_Socket() {
       } else if (request.url == '/patient/leave') {
         response.writeHead(200);
         response.end("good-bye");
-        let IDD_ID = "";
+        IDD_ID = "";
       } else {
         console.log("error");
         response.writeHead(404);
@@ -91,7 +93,7 @@ router.get('/', function (req, res, next) {
       res.redirect('/unactivated');
     }
   }
-  sql.requestDeviceStatus("poster01", Statuscallback);
+  sql.requestDeviceStatus(APD_ID, Statuscallback);
 
 });
 
@@ -100,8 +102,9 @@ router.get('/unactivated', function (req, res, next) {
 });
 
 router.get('/detected', function (req, res, next) {
-  Identifycallback = (returnData) => {
-    User_Name = returnData; // 환자이름 빼먹음;
+  Identifycallback = (user_Name, user_Number) => {
+    User_Name = user_Name; // 환자이름 빼먹음;
+    User_Number = user_Number;
     var tts_query = "안녕하세요! " + User_Name + "님! 같이 운동 해볼까요?"
     res.render('detected', {
       username: User_Name,
@@ -123,7 +126,7 @@ router.get('/search_exercise', function (req, res, next) {
     }
 
   }
-  sql.requestUserExercise(IDD_ID, dentifycallback);
+  sql.requestUserExercise(User_Number, dentifycallback);
 });
 
 router.get('/reset', function (req, res, next) {
@@ -137,7 +140,7 @@ router.get('/reset', function (req, res, next) {
 router.get('/exercise', function (req, res, next) {
 
   res.render('exercise', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png"
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".PNG"
   });
 
 });
