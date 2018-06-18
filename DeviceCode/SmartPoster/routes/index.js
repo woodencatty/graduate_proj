@@ -29,12 +29,11 @@ function Setup_IDD_Socket() {
         console.log("Hi! " + IDD_ID); //환자 식별
       } else if (request.url == '/patient/exercise') {
         response.writeHead(200);
-        //   restAPI.SubmitUserExercise(request.headers.idd_id, request.headers.exercise);
+        submitUserStep(request.headers.idd_id, request.headers.exercise);
         console.log(request.headers.exercise);
         console.log(request.headers.idd_id);
         IDD_ID = request.headers.idd_id;
         response.end("gotit");
-        //    restAPI.SubmitUserExercise(request.headers.idd_id, request.headers.exercise);
       } else if (request.url == '/patient/leave') {
         response.writeHead(200);
         response.end("good-bye");

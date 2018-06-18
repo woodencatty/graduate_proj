@@ -10,6 +10,11 @@ const client = mysql.createConnection({
 
 let dateTime = new Date();
 
+function getRandomInt() { //min ~ max 사이의 임의의 정수 반환
+    return Math.floor(Math.random() * (1000)) + 1;
+}
+
+
 module.exports = {
     requestDeviceStatus: (ID, callback) => {
 
@@ -55,6 +60,47 @@ module.exports = {
                 client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data, request.headers.idd_id]);
             }
         });
-    }
+    },
+    submitUserStep: (ID, Steps) => {
+        let total_step = Steps;
+        client.query('SELECT * FROM exercise WHERE patientNumber = ? AND exerciseTime = ?', [ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
+                    console.log(err);
+                    console.log(rows);
+                    if (!rows.length) {
+                        console.log("DB query Error!");
+                    } else {
+                    }
+                });
+            } else {
+                total_step = total_step + rows[0].DailyStep.toString();
+                client.query('DELETE FROM exercise WHERE patientNum=? AND exerciseTime=?', [ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
+                    console.log(err);
+                    console.log(rows);
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), total_step], (err, rows) => {
+                    console.log(err);
+                    console.log(rows);
+                    if (!rows.length) {
+                        console.log("DB query Error!");
+                    } else {
+                    }
+                });
+            });
+            }
+        });
+
+        client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [ID], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                console.log("DB query Error!");
+            } else {
+            }
+        });
+    },
+
 
 }

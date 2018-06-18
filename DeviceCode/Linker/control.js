@@ -42,7 +42,7 @@ function loggingInterval(loggingInterval, filename, fsOption) {
   this.loggingInterval = setInterval(() => {
     StepCountcallback = (StepCount) =>{
       fs.open(filename, fsOption, (err, fd) =>{
-        if (err) throw err;
+        if (err) throw err;dateT
         var buf = new Buffer(StepCount.toString() + ',' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS') + ']');
         fs.write(fd, buf, 0, buf.length, null, (err, written, buffer) =>{
           console.log(buf.toString());          
