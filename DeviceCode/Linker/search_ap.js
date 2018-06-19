@@ -17,14 +17,20 @@ module.exports = {
                 return;
             }
             console.log(stdout);            //todo : check signal
-            if (stdout > connectRange && searched == false) {
-                sendData.SubmitIDDname(deviceID);
-               fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-                    sendData.SubmitUserExercise(deviceID, readtext.toString());
-                    exercise.resetStepCount();
-                });
-                searched = true;
+            if (stdout > connectRange) {
+                console.log("Poster Detected");
+                if(searched == false){
+                    console.log("ID Sent");
+                    sendData.SubmitIDDname(deviceID);
+                   fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+                        sendData.SubmitUserExercise(deviceID, readtext.toString());
+                        exercise.resetStepCount();
+                    });
+                    searched = true;
+                }
+
             }else if (stdout < leaveRange && searched == true) {
+                console.log("Leaving");
                 sendData.SubmitUserLeave();
                 searched = false;
             }
