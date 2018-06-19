@@ -50,14 +50,14 @@ module.exports = {
                 let update_data = ""
                 if (previous_data[0] == "") {
                     callback("end"); //보내는 부분. 가공이 필요함.    
-                    client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["0,0,0,0,0", request.headers.idd_id]);
+                    client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["0,0,0,0,0", ID]);
                 } else {
                     callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
                     for (let i = 1; i < 5; i++) {
                         update_data += (previous_data[i] + ",");
                     }
                 }
-                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", request.headers.idd_id]);
+                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
 
                 client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,previous_data[0], dateTime.toFormat('YYYY-MM-DD'), "NULL"], (err, rows) => {
                     console.log(err);
