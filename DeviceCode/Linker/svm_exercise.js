@@ -47,7 +47,7 @@ module.exports = {
             changeY = Math.abs(Math.abs(AccelY_1) - Math.abs(AccelY_2));
             changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
-            let force = (changeX + changeY + changeZ) * 10000
+            let force = (changeX + changeY + changeZ)
 
             i++;
             if (force > ExerciseThreadhold) {

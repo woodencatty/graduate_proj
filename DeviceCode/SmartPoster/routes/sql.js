@@ -50,14 +50,14 @@ module.exports = {
                 let update_data = ""
                 if (previous_data[0] == "") {
                     callback("end"); //보내는 부분. 가공이 필요함.    
-                    client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["", request.headers.idd_id]);
+                    client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["0,0,0,0,0", request.headers.idd_id]);
                 } else {
                     callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
-                    for (let i = 1; i < previous_data.length; i++) {
+                    for (let i = 1; i < 5; i++) {
                         update_data += (previous_data[i] + ",");
                     }
                 }
-                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data, request.headers.idd_id]);
+                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", request.headers.idd_id]);
             }
         });
     },
@@ -67,7 +67,7 @@ module.exports = {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
@@ -100,7 +100,7 @@ module.exports = {
             } else {
             }
         });
-    },
+    }
 
 
 }

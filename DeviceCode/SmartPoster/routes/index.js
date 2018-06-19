@@ -16,7 +16,7 @@ let APD_ID="";
 let User_Name = "";
 let User_Number = "";
 let User_Exercise = "";
-
+let User_Step = 0;
 //direct
 
 function Setup_IDD_Socket() {
@@ -29,7 +29,7 @@ function Setup_IDD_Socket() {
         console.log("Hi! " + IDD_ID); //환자 식별
       } else if (request.url == '/patient/exercise') {
         response.writeHead(200);
-        submitUserStep(request.headers.idd_id, request.headers.exercise);
+        User_Step = request.headers.exercise;
         console.log(request.headers.exercise);
         console.log(request.headers.idd_id);
         IDD_ID = request.headers.idd_id;

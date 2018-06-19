@@ -1,4 +1,6 @@
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
+const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
+
 var searched = false;
 
 const fs = require('fs');
@@ -19,7 +21,7 @@ module.exports = {
                 sendData.SubmitIDDname(deviceID);
                fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
                     sendData.SubmitUserExercise(deviceID, readtext.toString());
-
+                    exercise.resetStepCount();
                 });
                 searched = true;
             }else if (stdout < leaveRange && searched == true) {
