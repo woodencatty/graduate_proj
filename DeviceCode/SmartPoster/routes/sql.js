@@ -8,6 +8,7 @@ const client = mysql.createConnection({
     database: 'smashserver'
 });
 
+require('date-utils');
 let dateTime = new Date();
 
 function getRandomInt() { //min ~ max 사이의 임의의 정수 반환
