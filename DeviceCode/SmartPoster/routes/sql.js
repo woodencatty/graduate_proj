@@ -46,7 +46,7 @@ module.exports = {
             if (!rows.length) {
                 console.log("DB query Error!");
             } else {
-                let previous_data = rows[0].exercise.toString().split(',');
+                let previous_data = rows[0].patientProgram.toString().split(',');
                 let update_data = ""
                 if (previous_data[0] == "") {
                     callback("end"); //보내는 부분. 가공이 필요함.    
