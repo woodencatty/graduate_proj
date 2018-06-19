@@ -60,7 +60,7 @@ module.exports = {
                 }
                 client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
 
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,previous_data[0], dateTime.toFormat('YYYY-MM-DD'), "NULL"], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID, previous_data[0], dateTime.toFormat('YYYY-MM-DD'), NULL], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
@@ -77,7 +77,7 @@ module.exports = {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep)  VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
@@ -91,7 +91,7 @@ module.exports = {
                 client.query('DELETE FROM exercise WHERE patientNum=? AND exerciseTime=?', [ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), total_step], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep)  VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), total_step], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
