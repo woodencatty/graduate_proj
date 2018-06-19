@@ -58,6 +58,15 @@ module.exports = {
                     }
                 }
                 client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", request.headers.idd_id]);
+
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,previous_data[0], dateTime.toFormat('YYYY-MM-DD'), "NULL"], (err, rows) => {
+                    console.log(err);
+                    console.log(rows);
+                    if (!rows.length) {
+                        console.log("DB query Error!");
+                    } else {
+                    }
+                });
             }
         });
     },
@@ -91,16 +100,4 @@ module.exports = {
             });
             }
         });
-
-        client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [ID], (err, rows) => {
-            console.log(err);
-            console.log(rows);
-            if (!rows.length) {
-                console.log("DB query Error!");
-            } else {
-            }
-        });
-    }
-
-
 }
