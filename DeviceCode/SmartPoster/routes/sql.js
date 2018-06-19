@@ -82,6 +82,7 @@ module.exports = {
                     if (!rows.length) {
                         console.log("DB query Error!");
                     } else {
+
                     }
                 });
             } else {
@@ -89,15 +90,17 @@ module.exports = {
                 client.query('DELETE FROM exercise WHERE patientNum=? AND exerciseTime=?', [ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), total_step], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), total_step], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
                         console.log("DB query Error!");
                     } else {
+
                     }
                 });
             });
             }
         });
+}
 }
