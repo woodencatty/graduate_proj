@@ -60,7 +60,7 @@ module.exports = {
                 }
                 client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
 
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID, previous_data[0], dateTime.toFormat('YYYY-MM-DD'), NULL], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID, previous_data[0], dateTime.toFormat('YYYY-MM-DD'), "NULL"], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {

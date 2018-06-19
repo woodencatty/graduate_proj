@@ -116,7 +116,7 @@ router.get('/detected', function (req, res, next) {
 router.get('/search_exercise', function (req, res, next) {
   dentifycallback = (returnData) => {
     User_Exercise = returnData; // 환자이름 빼먹음;
-    if (returnData == "exercise_walk") {
+    if (returnData == "walkProgram") {
       res.redirect('/exercise_walk');
     } else if (returnData == "end") {
 
@@ -147,7 +147,10 @@ router.get('/exercise', function (req, res, next) {
 
 router.get('/exercise_walk', function (req, res, next) {
 
-  res.render('exercise_walk');
+  res.render('exercise', {
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".PNG"
+  });
+  sql.submitUserStep(User_Number, User_Step);
 
 });
 
