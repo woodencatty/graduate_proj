@@ -139,7 +139,7 @@ router.get('/reset', function (req, res, next) {
 router.get('/exercise', function (req, res, next) {
 
   res.render('exercise', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".PNG"
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png"
   });
 
 });
@@ -148,7 +148,7 @@ router.get('/exercise', function (req, res, next) {
 router.get('/exercise_walk', function (req, res, next) {
 
   res.render('exercise', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".PNG"
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png"
   });
   sql.submitUserStep(User_Number, User_Step);
 

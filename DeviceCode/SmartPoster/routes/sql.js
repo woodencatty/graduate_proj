@@ -73,7 +73,7 @@ module.exports = {
     },
     submitUserStep: (ID, Steps) => {
         let total_step = Steps;
-        client.query('SELECT * FROM exercise WHERE patientNumber = ? AND exerciseTime = ?', [ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
+        client.query('SELECT * FROM exercise WHERE patientNumber = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
