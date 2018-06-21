@@ -71,6 +71,20 @@ module.exports = {
             }
         });
     },
+
+    requestExerciseTTS: (Program, callback) => {
+        client.query('SELECT content FROM program WHERE programNumber = ?', [Program], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                console.log("DB query Error!");
+            } else {
+                callback(rows[0].patientName.toString(), rows[0].patientNumber.toString())
+            }
+        });
+    },
+
+
     submitUserStep: (ID, Steps) => {
         let total_step = Steps;
         client.query('SELECT * FROM exercise WHERE patientNumber = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
