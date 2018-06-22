@@ -10,7 +10,7 @@ const fs = require('fs');
 const http = require('http');
 
 let refreshInterval = 1;
-let IDD_ID = "";
+let IDD_ID = "Linker01";
 let APD_ID="";
 
 let User_Name = "";
@@ -148,7 +148,7 @@ router.get('/exercise_walk', function (req, res, next) {
 router.get('/end', function (req, res, next) {
 
   res.render('end', {
-    
+
   });
 
 });
