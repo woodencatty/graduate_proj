@@ -145,6 +145,15 @@ router.get('/exercise_walk', function (req, res, next) {
 });
 
 
+router.get('/end', function (req, res, next) {
+
+  res.render('end', {
+    
+  });
+
+});
+
+
 initialize();
 
 module.exports = router;
