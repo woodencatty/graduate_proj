@@ -211,6 +211,8 @@ h3{
   font-family: 'Helvetica Neue',Helvetica, sans-serif;
   }
 .ribbon h1 {
+  position: absolute;
+  text-align: center;
   font-size: 25px!important;
   color: #ffffff;
   text-shadow: #000000 0 1px 0;
@@ -218,6 +220,7 @@ h3{
   padding: 15px 10px;
   }
 .ribbon:before, .ribbon:after {
+  text-align: center;
   content: '';
   position: absolute;
   display: block;
@@ -226,6 +229,9 @@ h3{
   z-index: -1;
   }
 .ribbon:before {
+  
+  position: absolute;
+  text-align: center;
   left: -2em;
   border-right-width: 1.5em;
   border-left-color: transparent;
@@ -234,6 +240,9 @@ h3{
   box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
   }
 .ribbon:after {
+  
+  position: absolute;
+  text-align: center;
   right: -2em;
   border-left-width: 1.5em;
   border-right-color: transparent;
@@ -242,6 +251,8 @@ h3{
   box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
   }
 .ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+  
+  text-align: center;
   border-color: #00ff99 transparent transparent transparent;
   position: absolute;
   display: block;

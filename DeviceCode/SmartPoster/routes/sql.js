@@ -71,7 +71,7 @@ module.exports = {
             if (!rows.length) {
                 console.log("DB query Error!");
             } else {
-                callback(rows[0].patientName.toString(), rows[0].patientNumber.toString())
+                callback(rows[0].content.toString())
             }
         });
     },
