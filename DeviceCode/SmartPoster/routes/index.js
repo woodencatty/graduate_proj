@@ -76,15 +76,8 @@ router.get('/', function (req, res, next) {
     if (returnData == "1") {
       if (IDD_ID == "") {
         res.render('index', {
-          Interval: refreshInterval,
-          temp: 0,
-          humi: 0
+          Interval: refreshInterval
         });
-
-        /* sensorcallback = (temp, humi)=>{
-           res.render('index', { Interval: refreshInterval, temp: temp, humi: humi });
-         }
-         sensor.getTemp(sensorcallback);*/
       } else {
         res.redirect('/detected');
       }
