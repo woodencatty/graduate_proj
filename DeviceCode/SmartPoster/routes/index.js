@@ -135,12 +135,19 @@ ttscallback = (tts)=>{
 
 
 router.get('/exercise_walk', function (req, res, next) {
+  ttscallback = (tts)=>{
 
   sql.addWalkExerciseDone(User_Number);
   res.render('exercise', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png"
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+    query: tts
+
   });
   sql.submitUserStep(User_Number, User_Step);
+}
+
+  sql.requestExerciseTTS(User_Exercise, ttscallback);
+
 
 });
 
