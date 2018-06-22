@@ -57,17 +57,9 @@ module.exports = {
                     for (let i = 1; i < 5; i++) {
                         update_data += (previous_data[i] + ",");
                     }
+                    client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
                 }
-                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
-
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID, previous_data[0], dateTime.toFormat('YYYY-MM-DD'), "NULL"], (err, rows) => {
-                    console.log(err);
-                    console.log(rows);
-                    if (!rows.length) {
-                        console.log("DB query Error!");
-                    } else {
-                    }
-                });
+                
             }
         });
     },
@@ -117,5 +109,21 @@ module.exports = {
             });
             }
         });
-}
+},
+addWalkExerciseDone: (ID) => {
+    client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
+        console.log(err);
+        console.log(rows);
+        if (!rows.length) {
+            console.log("DB query Error!");
+        } else {
+            let previous_data = rows[0].patientProgram.toString().split(',');
+            let update_data = "walkProgramDone, " + previous_data;
+           
+            client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
+        }
+    });
+},
+
+
 }

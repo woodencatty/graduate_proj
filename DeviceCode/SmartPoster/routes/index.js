@@ -54,7 +54,6 @@ function initialize() {
   fs.readFile('./settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
     Setup_IDD_Socket();
-    // AP.setupAP(config.ssid, config.password, true, config.adaptor);
     interval = config.refreshInterval;
     APD_ID = config.deviceName;
   });
@@ -66,12 +65,6 @@ function initialize() {
 router.get('/', function (req, res, next) {
   console.log("routed to /")
   Statuscallback = (returnData) => {
-
-    /*  detectcallback = (deviceName)=>{
-        IDD_ID = deviceName;
-      }
-      bluetooth.IDD_found(detectcallback);*/
-
     console.log("get data : " + returnData);
     if (returnData == "1") {
       if (IDD_ID == "") {
@@ -143,6 +136,7 @@ ttscallback = (tts)=>{
 
 router.get('/exercise_walk', function (req, res, next) {
 
+  sql.addWalkExerciseDone(User_Number);
   res.render('exercise', {
     image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png"
   });
