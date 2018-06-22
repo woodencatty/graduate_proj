@@ -18,6 +18,7 @@ a {
 }
 
 h1 {
+  text-align: center;
   color: white;
   font-size: 5em; 
 }
@@ -192,46 +193,39 @@ h3{
 	background:-ms-linear-gradient(#eb3d3d, #ff3030);
 	background:linear-gradient(#eb3d3d, #ff3030);
 }
-
 .ribbon {
-  width: 285px;
+  width: 600px;
   position: absolute;
   text-align: center;
-  font-size: 17px!important;
-  background: #15ff00;
-  background: -webkit-gradient(linear, left top, left bottom, from(#15ff00), to(#00ffbf));
-  background: -webkit-linear-gradient(top, #15ff00, #00ffbf);
-  background: -moz-linear-gradient(top, #15ff00, #00ffbf);
-  background: -ms-linear-gradient(top, #15ff00, #00ffbf);
-  background: -o-linear-gradient(top, #15ff00, #00ffbf);
-  background-image: -ms-linear-gradient(top, #15ff00 0%, #00ffbf 100%);
+  font-size: 32px!important;
+  background: #8ff2ff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#8ff2ff), to(#2cab46));
+  background: -webkit-linear-gradient(top, #8ff2ff, #2cab46);
+  background: -moz-linear-gradient(top, #8ff2ff, #2cab46);
+  background: -ms-linear-gradient(top, #8ff2ff, #2cab46);
+  background: -o-linear-gradient(top, #8ff2ff, #2cab46);
+  background-image: -ms-linear-gradient(top, #8ff2ff 0%, #2cab46 100%);
   -webkit-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
   -moz-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
   box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
   font-family: 'Helvetica Neue',Helvetica, sans-serif;
   }
 .ribbon h1 {
-  position: absolute;
-  text-align: center;
-  font-size: 25px!important;
-  color: #ffffff;
+  font-size: 49px!important;
+  color: #000000;
   text-shadow: #000000 0 1px 0;
   margin:0px;
   padding: 15px 10px;
   }
 .ribbon:before, .ribbon:after {
-  text-align: center;
   content: '';
   position: absolute;
   display: block;
   bottom: -1em;
-  border: 1.5em solid #3ac23a;
+  border: 1.5em solid #39f574;
   z-index: -1;
   }
 .ribbon:before {
-  
-  position: absolute;
-  text-align: center;
   left: -2em;
   border-right-width: 1.5em;
   border-left-color: transparent;
@@ -240,9 +234,6 @@ h3{
   box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
   }
 .ribbon:after {
-  
-  position: absolute;
-  text-align: center;
   right: -2em;
   border-left-width: 1.5em;
   border-right-color: transparent;
@@ -251,9 +242,7 @@ h3{
   box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
   }
 .ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
-  
-  text-align: center;
-  border-color: #00ff99 transparent transparent transparent;
+  border-color: #45ff96 transparent transparent transparent;
   position: absolute;
   display: block;
   border-style: solid;
@@ -282,83 +271,3 @@ h3{
   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
   }
-
-
-  .ribbon_END {
-    width: 332px;
-    position: absolute;
-    text-align: center;
-    font-size: 22px!important;
-    background: #00bbff;
-    background: -webkit-gradient(linear, left top, left bottom, from(#00bbff), to(#00ff33));
-    background: -webkit-linear-gradient(top, #00bbff, #00ff33);
-    background: -moz-linear-gradient(top, #00bbff, #00ff33);
-    background: -ms-linear-gradient(top, #00bbff, #00ff33);
-    background: -o-linear-gradient(top, #00bbff, #00ff33);
-    background-image: -ms-linear-gradient(top, #00bbff 0%, #00ff33 100%);
-    -webkit-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
-    -moz-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
-    box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
-    font-family: 'Helvetica Neue',Helvetica, sans-serif;
-    }
- .ribbon_END h1 {
-    font-size: 38px!important;
-    color: #ffffff;
-    text-shadow: #d65c5c 0 1px 0;
-    margin:0px;
-    padding: 15px 10px;
-    }
- .ribbon_END:before, .ribbon_END:after {
-    content: '';
-    position: absolute;
-    display: block;
-    bottom: -1em;
-    border: 1.5em solid #00ff66;
-    z-index: -1;
-    }
- .ribbon_END:before {
-    left: -2em;
-    border-right-width: 1.5em;
-    border-left-color: transparent;
-    -webkit-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
-    -moz-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
-    box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
-    }
- .ribbon_END:after {
-    right: -2em;
-    border-left-width: 1.5em;
-    border-right-color: transparent;
-    -webkit-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
-    -moz-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
-    box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
-    }
- .ribbon_END .ribbon-content:before_END, .ribbon_END .ribbon_END-content:after {
-    border-color: #00ffdd transparent transparent transparent;
-    position: absolute;
-    display: block;
-    border-style: solid;
-    bottom: -1em;
-    content: '';
-    }
- .ribbon_END .ribbon_END-content:before {
-    left: 0;
-    border-width: 1em 0 0 1em;
-    }
- .ribbon_END .ribbon_END-content:after {
-    right: 0;
-    border-width: 1em 1em 0 0;
-    }
- .ribbon_END-stitches-top {
-    margin-top:2px;
-    border-top: 1px dashed rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
-    }
- .ribbon_END-stitches-bottom {
-    margin-bottom:2px;
-    border-top: 1px dashed rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
-    }
