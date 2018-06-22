@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>운동 승낙</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+        <meta http-equiv="refresh" content="url='/search_exercise'">
+            <script src="/js/jquery-3.2.1.min.js"></script>
+                        <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+
+  </head>
+  <body>
+  <script type="text/javascript">
+      var speech = "<%= query %>";
+      console.log(speech);
+      responsiveVoice.speak(speech, "Korean Female", {rate: 1.0});
+      </script>
+      <br><br><br><br><br><br>
+      <br><br><br><br><br><br>
+<div class="ribbon"><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>걸어오시느라 수고하셨습니다!</h1></strong><div class="ribbon-stitches-bottom"></div></div>
+  
+  </body>
+</html>

@@ -105,7 +105,10 @@ router.get('/search_exercise', function (req, res, next) {
     if (returnData == "walkProgram") {
       res.redirect('/exercise_walk');
     } else if (returnData == "end") {
+      res.redirect('/end');
 
+    } else if (returnData == "walkProgramDone") {
+      res.redirect('/exercise_walk_done');
     } else {
       res.redirect('/exercise');
     }
@@ -138,19 +141,22 @@ router.get('/exercise_walk', function (req, res, next) {
   ttscallback = (tts)=>{
 
   sql.addWalkExerciseDone(User_Number);
-  res.render('exercise', {
+  res.render('exercise_walk', {
     image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
     query: tts
-
   });
   sql.submitUserStep(User_Number, User_Step);
 }
-
   sql.requestExerciseTTS(User_Exercise, ttscallback);
-
-
 });
 
+router.get('/exercise_walk_done', function (req, res, next) {
+  
+    res.render('exercise_walk_done', {
+      query: "걸어오시느라 수고하셨습니다!"
+    });
+  
+  });
 
 router.get('/end', function (req, res, next) {
 
