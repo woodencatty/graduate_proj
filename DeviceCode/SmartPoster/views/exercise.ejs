@@ -5,9 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
         <meta http-equiv="refresh" content="30;url='/search_exercise'">
             <script src="/js/jquery-3.2.1.min.js"></script>
+            <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+
   </head>
   <body>
-
+    <script type="text/javascript">
+      var speech = "<%= query %>";
+      console.log(speech);
+      responsiveVoice.speak(speech, "Korean Female", {rate: 1.0});
+      </script>
 
   <p id="ViewTimer"></p><img src="<%= image %>" id="img" width="576" height="900"/>
   <a href='/end' class='PauseBtn'>일시정지</a>
