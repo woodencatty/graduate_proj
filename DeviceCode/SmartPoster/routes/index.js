@@ -133,7 +133,7 @@ ttscallback = (tts)=>{
 
 walkcallback = (row)=>{
   res.render('exercise', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+    image: "http://192.9.44.54:8080/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
     query: tts,
     row : row
   });
@@ -149,7 +149,7 @@ router.get('/exercise_walk', function (req, res, next) {
 
   sql.addWalkExerciseDone(User_Number);
   res.render('exercise_walk', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+    image: "http://192.9.44.54:8080/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
     query: tts
   });
   sql.submitUserStep(User_Number, User_Step);
