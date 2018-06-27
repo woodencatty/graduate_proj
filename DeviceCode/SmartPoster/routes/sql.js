@@ -65,7 +65,7 @@ module.exports = {
     },
 
     requestUserwalk: (ID, callback) => {
-        client.query('select exerciseTime, DailyStep from exercise where patientNumber=?', [ID], (err, rows) => {
+        client.query('select exerciseTime, DailyStep from exercise where patientNum=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
@@ -92,7 +92,7 @@ module.exports = {
 
     submitUserStep: (ID, Steps) => {
         let total_step = Steps;
-        client.query('SELECT * FROM exercise WHERE patientNumber = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
+        client.query('SELECT * FROM exercise WHERE patientNum = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
