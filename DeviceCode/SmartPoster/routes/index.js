@@ -166,7 +166,7 @@ router.get('/end', function (req, res, next) {
 
   res.render('end', {
     query: "수고하셨습니다!",
-    id : user_Number
+    id : User_Number
   });
 
 });
