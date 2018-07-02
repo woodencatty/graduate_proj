@@ -106,7 +106,6 @@ router.get('/search_exercise', function (req, res, next) {
       res.redirect('/exercise_walk');
     } else if (returnData == "end") {
       res.redirect('/end');
-
     } else if (returnData == "walkProgramDone") {
       res.redirect('/exercise_walk_done');
     } else {

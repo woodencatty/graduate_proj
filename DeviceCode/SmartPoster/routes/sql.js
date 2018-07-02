@@ -49,9 +49,9 @@ module.exports = {
             } else {
                 let previous_data = rows[0].patientProgram.toString().split(',');
                 let update_data = ""
-                if (previous_data[0] == "") {
-                    callback("end"); //보내는 부분. 가공이 필요함.    
+                if (previous_data[0] == "0") {
                     client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["0,0,0,0,0", ID]);
+                    callback("end"); //보내는 부분. 가공이 필요함.    
                 } else {
                     callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
                     for (let i = 1; i < 5; i++) {

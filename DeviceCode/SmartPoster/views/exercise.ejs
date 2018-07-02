@@ -3,17 +3,10 @@
   <head>
     <title>운동 승낙</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-        <meta http-equiv="refresh" content="30;url='/search_exercise'">
+        <meta http-equiv="refresh" content="20;url='/search_exercise'">
             <script src="/js/jquery-3.2.1.min.js"></script>
             <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 
-
-        <!-- Bootstrap JS -->
-        <script src="js/bootstrap.js"></script>
-        <script src="js/bootstrap.bundle.js"></script>
-        
-        <!-- Chart JS -->
-        <script src="js/chart/Chart.js"></script>
 
   </head>
   <body>
@@ -23,11 +16,31 @@
       responsiveVoice.speak(speech, "Korean Female", {rate: 1.0});
       </script>
 
+<script language='javascript'>
+
+  cnt = 20; // 카운트다운 시간 초단위로 표시
+  function countdown() {
+   if(cnt == 0){
+          // 시간이 0일경우
+
+         locateKap();
+   }else {
+         // 시간이 남았을 경우 카운트다운을 지속한다.
+        document.all.choonDiv.innerHTML = cnt;
+        setTimeout("countdown()",1000);
+  cnt--;
+   }
+  }
+</script>
 
       <br><br><br><br><br><br>
       <br><br><br><br><br><br>
 
   <p id="ViewTimer"></p><img src="<%= image %>" id="img" width="576" height="900"/>
+
+<h1 id="choonDiv"></h1>
+
+<script>countdown();</script>
   <a href='/end' class='PauseBtn'>운동중단</a>
 
 
