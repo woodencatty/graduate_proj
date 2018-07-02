@@ -10,7 +10,7 @@ const fs = require('fs');
 const http = require('http');
 
 let refreshInterval = 1;
-let IDD_ID = "Linker01";
+let IDD_ID = "";
 let APD_ID="";
 
 let User_Name = "";
