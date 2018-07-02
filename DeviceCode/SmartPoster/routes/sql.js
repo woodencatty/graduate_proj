@@ -64,19 +64,6 @@ module.exports = {
         });
     },
 
-    requestUserwalk: (ID, callback) => {
-        client.query('select exerciseTime, DailyStep from exercise where patientNum=?', [ID], (err, rows) => {
-            console.log(err);
-            console.log(rows);
-            if (!rows.length) {
-                console.log("DB query Error!");
-            } else {
-                callback(rows); //보내는 부분. 가공이 필요함.    
-            }
-        });
-    },
-
-
     requestExerciseTTS: (Program, callback) => {
         client.query('SELECT content FROM program WHERE programNumber = ?', [Program], (err, rows) => {
             console.log(err);

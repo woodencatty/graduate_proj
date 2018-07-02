@@ -131,17 +131,14 @@ router.get('/reset', function (req, res, next) {
 router.get('/exercise', function (req, res, next) {
 ttscallback = (tts)=>{
 
-walkcallback = (row)=>{
   res.render('exercise', {
     image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
     query: tts,
-    row : row
   });
-}
-  sql.requestUserwalk(User_Number, walkcallback);
 }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
+
 
 
 router.get('/exercise_walk', function (req, res, next) {
@@ -168,7 +165,8 @@ router.get('/exercise_walk_done', function (req, res, next) {
 router.get('/end', function (req, res, next) {
 
   res.render('end', {
-
+    query: "수고하셨습니다!",
+    id : user_Number
   });
 
 });
