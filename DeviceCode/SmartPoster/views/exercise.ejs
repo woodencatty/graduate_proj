@@ -23,30 +23,6 @@
       responsiveVoice.speak(speech, "Korean Female", {rate: 1.0});
       </script>
 
-				<div class="row content_body">
-					<!-- 운동 진행 프로그래스바 -->
-					<div class="col-lg-4 exercise_progress">
-						<p class="body_title">총 운동 진행 상황</p>
-						<hr>
-						<div class="item">
-							<canvas id="myPieChart" width="500px" height="500px"></canvas>
-							<!-- 운동 진행 입력 -->
-							<p id="ex_amount">currentExer</p>
-						</div>
-					</div>
-
-					<!-- 그래프 -->
-					<div class="col-lg-7 exercise_amount">
-						<p class="body_title">지난 한주간의 걸음수</p>
-						<hr>
-						<canvas id="myAreaChart" width="100%" height="40"> </canvas>
-						<div class="data">
-							<!-- 데이터 테이블 -->
-							<table>
-							</table>
-						</div>
-					</div>
-				</div>
 
       <br><br><br><br><br><br>
       <br><br><br><br><br><br>
@@ -54,74 +30,6 @@
   <p id="ViewTimer"></p><img src="<%= image %>" id="img" width="576" height="900"/>
   <a href='/end' class='PauseBtn'>운동중단</a>
 
-
-
-	<script>
-		// 데이터 추출
-		var dataList = new Array();
-		var labelsList = new Array();
-		
-<% for (var i = 0; i < <%= row.length %>; i++) { 
-dataList.push(<%= row[i].DailyStep %>);
-labelsList.push(<%= row[i].exerciseTime %>);
-} %>
-		
-		var done = <%= done %>;	// 총 운동량
-
-
-		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-		Chart.defaults.global.defaultFontColor = '#292b2c';
-
-		var ctx = document.getElementById("myPieChart");
-		var myPieChart = new Chart(ctx, {
-			type : 'pie',
-			data : {
-				labels : [ "현재 운동량", "부족 운동량" ],
-				datasets : [ {
-					data : [ done, 5-done],
-					backgroundColor : [ '#004593', 'rgba(2,117,216,0.2)' ],
-				} ],
-			},
-		});
-
-		var ctx = document.getElementById("myAreaChart");
-		var myLineChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				labels : labelsList,
-				datasets : [ {
-					label : '걸음 수',
-					data : dataList,
-					lineTension : 0.0,
-					backgroundColor : "rgba(2,117,216,0.2)",
-					borderColor : "#004593",
-					pointRadius : 3,
-					pointBackgroundColor : "#004593",
-					pointBorderColor : "#004593",
-					pointHoverRadius : 5,
-					pointHoverBackgroundColor : "rgba(2,117,216,1)",
-					pointHitRadius : 20,
-					pointBorderWidth : 0
-				} ]
-			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							min : 0,
-							max : 500
-						}, 
-						gridLines : {
-							color : "rgba(0, 0, 0, .125)",
-						}
-					} ]
-				}
-			},
-			legend : {
-				display : false
-			}
-		});
-	</script>
 
 
   </body>
