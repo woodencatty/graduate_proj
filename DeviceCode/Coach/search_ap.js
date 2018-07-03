@@ -31,32 +31,34 @@ bleno.on('stateChange', function(state) {
     bleno.stopAdvertising();
   }
 });
-
-setInterval(()=>{
-  bleno.updateRssi((error, rssi)=>{
-    if (error) {
-        console.error(error);
-        return;
-    }
-    console.log(rssi);            //todo : check signal
-    if (rssi > connectRange) {
-        console.log("Poster Detected");
-        if(searched == false){
-            console.log("ID Sent");
-            sendData.SubmitIDDname(deviceID);
-           fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-                sendData.SubmitUserExercise(deviceID, readtext);
-                exercise.resetStepCount();
-            });
-            searched = true;
-        }
-    }else if (rssi < leaveRange && searched == true) {
-        console.log("Leaving");
-        sendData.SubmitUserLeave();
-        searched = false;
-    }
+bleno.on('accept',(clientAddress)=>{
+  console.log("accepted to  " + clientAddress);
+  setInterval(()=>{
+    bleno.updateRssi((error, rssi)=>{
+      if (error) {
+          console.error(error);
+          return;
+      }
+      console.log(rssi);            //todo : check signal
+      if (rssi > connectRange) {
+          console.log("Poster Detected");
+          if(searched == false){
+              console.log("ID Sent");
+              sendData.SubmitIDDname(deviceID);
+             fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+                  sendData.SubmitUserExercise(deviceID, readtext);
+                  exercise.resetStepCount();
+              });
+              searched = true;
+          }
+      }else if (rssi < leaveRange && searched == true) {
+          console.log("Leaving");
+          sendData.SubmitUserLeave();
+          searched = false;
+      }
+  });
+  }, 500)
 });
-}, 1000)
 
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
