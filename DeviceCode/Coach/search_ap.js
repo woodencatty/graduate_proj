@@ -14,6 +14,11 @@ var BlenoPrimaryService = bleno.PrimaryService;
 
 var EchoCharacteristic = require('./characteristic');
 
+wifi.init({
+  iface : null // network interface, choose a random wifi interface if set to null
+});
+
+
 console.log('Poster scanning');
 
 bleno.on('stateChange', function(state) {
