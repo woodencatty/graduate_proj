@@ -5,6 +5,7 @@ var wifi = require('node-wifi');
 var searched = false;
 var connectRange = 0;
 var leaveRange = 0;
+var deviceID = "";
 
 const fs = require('fs');
 
@@ -81,8 +82,9 @@ bleno.on('advertisingStart', function(error) {
 
 module.exports = {
 
-  init: (connectRange1, leaveRange1) => {
+  init: (connectRange1, leaveRange1, deviceID1) => {
     connectRange = connectRange1;
     leaveRange = leaveRange1;
+    deviceID = deviceID1;
   }
 }    
