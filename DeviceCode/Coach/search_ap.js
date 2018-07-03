@@ -24,16 +24,14 @@ bleno.on('stateChange', function(state) {
   }
 });
 
-
-bleno.updateRssi((error, rssi)=>{
+setInterval(()=>{
+  bleno.updateRssi((error, rssi)=>{
     if (error) {
         console.error(error);
         return;
     }
     console.log(rssi);            //todo : check signal
     if (rssi > connectRange) {
-
-      
         console.log("Poster Detected");
         if(searched == false){
 
@@ -58,11 +56,10 @@ bleno.updateRssi((error, rssi)=>{
         searched = false;
     }
 });
-
+}, 1000)
 
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-
   if (!error) {
     bleno.setServices([
       new BlenoPrimaryService({
