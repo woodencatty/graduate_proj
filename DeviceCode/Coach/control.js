@@ -7,12 +7,12 @@ require('date-utils');
 let dateTime = new Date();
 
 
-function scanInterval(apName, connectRange, leaveRange, password, scanInterval, deviceID) {
+/*function scanInterval(apName, connectRange, leaveRange, password, scanInterval, deviceID) {
   this.scanInterval = setInterval(() => {
     scanAP.searchPoster(apName, password, connectRange, leaveRange, deviceID);
   }, scanInterval);
 }
-
+*/
 function StepInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
     exercise.setStepCount(walkThreadhold, forceSenseTime);
@@ -62,7 +62,7 @@ function initialize() {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
     StepInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);    
-    scanInterval(config.apName, config.connectRange, config.leaveRange, config.password, config.scanInterval, config.deviceID);
+//    scanInterval(config.apName, config.connectRange, config.leaveRange, config.password, config.scanInterval, config.deviceID);
     loggingInterval(config.LoggingInterval, config.ExerciseDataFileName, config.fsOption);
   });
 }

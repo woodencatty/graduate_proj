@@ -16,9 +16,6 @@ noble.on('stateChange', function(state) {
       console.log();
 
         peripheral.connect(function(error) {
-          setInterval(()=>{
-            console.log('connected to peripheral: ' + peripheral.uuid + "and "+ peripheral.rssi);
 
-          }, 1000);
       });
   });
