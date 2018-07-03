@@ -23,7 +23,7 @@ module.exports = {
                     console.log("ID Sent");
                     sendData.SubmitIDDname(deviceID);
                    fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-                        sendData.SubmitUserExercise(deviceID, readtext.toString());
+                        sendData.SubmitUserExercise(deviceID, readtext);
                         exercise.resetStepCount();
                     });
                     searched = true;
