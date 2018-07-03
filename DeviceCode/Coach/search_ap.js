@@ -42,12 +42,6 @@ setInterval(()=>{
     if (rssi > connectRange) {
         console.log("Poster Detected");
         if(searched == false){
-
-          wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            console.log('Connected');
             console.log("ID Sent");
             sendData.SubmitIDDname(deviceID);
            fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
@@ -55,8 +49,6 @@ setInterval(()=>{
                 exercise.resetStepCount();
             });
             searched = true;
-        });
-
         }
     }else if (rssi < leaveRange && searched == true) {
         console.log("Leaving");
