@@ -1,39 +1,77 @@
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
 const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
+var wifi = require('node-wifi');
 
 var searched = false;
 
 const fs = require('fs');
 
-const exec = require('child_process').exec;
+var bleno = require('bleno');
+
+var BlenoPrimaryService = bleno.PrimaryService;
+
+var EchoCharacteristic = require('./characteristic');
+
+console.log('Poster scanning');
+
+bleno.on('stateChange', function(state) {
+  console.log('on -> stateChange: ' + state);
+
+  if (state === 'poweredOn') {
+    bleno.startAdvertising('echo', ['ec00']);
+  } else {
+    bleno.stopAdvertising();
+  }
+});
 
 
-module.exports = {
-    searchPoster: (apName, password, connectRange, leaveRange, deviceID) => {
-
-        exec(" iwconfig | grep level | cut -d '=' -f 3 | cut -d ' ' -f 1", (err, stdout, stderr) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            console.log(stdout);            //todo : check signal
-            if (stdout > connectRange) {
-                console.log("Poster Detected");
-                if(searched == false){
-                    console.log("ID Sent");
-                    sendData.SubmitIDDname(deviceID);
-                   fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-                        sendData.SubmitUserExercise(deviceID, readtext);
-                        exercise.resetStepCount();
-                    });
-                    searched = true;
-                }
-
-            }else if (stdout < leaveRange && searched == true) {
-                console.log("Leaving");
-                sendData.SubmitUserLeave();
-                searched = false;
-            }
-        });
+bleno.updateRssi((error, rssi)=>{
+    if (error) {
+        console.error(error);
+        return;
     }
-}
+    console.log(rssi);            //todo : check signal
+    if (rssi > connectRange) {
+
+      
+        console.log("Poster Detected");
+        if(searched == false){
+
+          wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
+            if (err) {
+                console.log(err);
+            }
+            console.log('Connected');
+            console.log("ID Sent");
+            sendData.SubmitIDDname(deviceID);
+           fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+                sendData.SubmitUserExercise(deviceID, readtext);
+                exercise.resetStepCount();
+            });
+            searched = true;
+        });
+
+        }
+    }else if (rssi < leaveRange && searched == true) {
+        console.log("Leaving");
+        sendData.SubmitUserLeave();
+        searched = false;
+    }
+});
+
+
+bleno.on('advertisingStart', function(error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+
+  if (!error) {
+    bleno.setServices([
+      new BlenoPrimaryService({
+        uuid: 'ec00',
+        characteristics: [
+          new EchoCharacteristic()
+        ]
+      })
+    ]);
+  }
+});
+

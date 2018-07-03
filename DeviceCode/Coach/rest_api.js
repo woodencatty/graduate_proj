@@ -1,6 +1,6 @@
 const http = require('http');										//http 요청 모듈
 
-let serverIP = "192.9.44.119";
+let serverIP = "192.9.45.213";
 let serverPort = "3010";
 
 const exec = require('child_process').exec;
