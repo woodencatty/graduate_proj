@@ -9,10 +9,19 @@ wifi.init({
 setInterval(()=>{
 }, 1000)
 
-wifi.disconnect(function(err) {
+wifi.scan(function(err, networks) {
     if (err) {
         console.log(err);
+    } else {
+        console.log(networks.ssid);
+        if(networks.ssid == "WiFi2"){
+            wifi.connect({ ssid : "WiFi2", password : "201333558"}, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('Connected');
+            });
+        }
+
     }
-    console.log('Disconnected');
 });
-// Scan networks
