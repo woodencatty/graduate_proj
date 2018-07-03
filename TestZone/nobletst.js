@@ -1,3 +1,6 @@
+var noble = require('noble');
+
+
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
         noble.startScanning(["ec00"], true); 
