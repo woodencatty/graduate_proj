@@ -7,28 +7,12 @@ wifi.init({
 });
  
 setInterval(()=>{
-    wifi.getCurrentConnections(function(err, currentConnections) {
-        if (err) {
-            console.log(err);
-        }
-        console.log(currentConnections.signal_level);
-        /*
-        // you may have several connections
-        [
-            {
-                iface: '...', // network interface used for the connection, not available on macOS
-                ssid: '...',
-                bssid: '...',
-                mac: '...', // equals to bssid (for retrocompatibility)
-                channel: <number>,
-                frequency: <number>, // in MHz
-                signal_level: <number>, // in dB
-                security: '...' //
-                security_flags: '...' // encryption protocols (format currently depending of the OS)
-                mode: '...' // network mode like Infra (format currently depending of the OS)
-            }
-        ]
-        */
-    });
 }, 1000)
+
+wifi.disconnect(function(err) {
+    if (err) {
+        console.log(err);
+    }
+    console.log('Disconnected');
+});
 // Scan networks
