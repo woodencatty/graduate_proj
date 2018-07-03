@@ -11,7 +11,7 @@ setInterval(()=>{
         if (err) {
             console.log(err);
         }
-        console.log(currentConnections);
+        console.log(currentConnections.signal_level);
         /*
         // you may have several connections
         [
