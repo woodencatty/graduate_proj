@@ -3,6 +3,8 @@ const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 var wifi = require('node-wifi');
 
 var searched = false;
+var connectRange = 0;
+var leaveRange = 0;
 
 const fs = require('fs');
 
@@ -72,3 +74,10 @@ bleno.on('advertisingStart', function(error) {
   }
 });
 
+module.exports = {
+
+  init: (connectRange1, leaveRange1) => {
+    connectRange = connectRange1;
+    leaveRange = leaveRange1;
+  }
+}    
