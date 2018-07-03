@@ -1,7 +1,7 @@
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
-      noble.startScanning();
-    } else {
+        noble.startScanning(["ec00"], true); 
+        } else {
       noble.stopScanning();
     }
   });
