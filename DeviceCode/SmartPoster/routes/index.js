@@ -183,6 +183,11 @@ router.get('/pause', function (req, res, next) {
 });
 
 
+router.get('/wrong_direction', function (req, res, next) {
+  res.render('wrong_direction', {});
+});
+
+
 
 initialize();
 
