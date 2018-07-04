@@ -138,7 +138,6 @@ router.get('/reset', function (req, res, next) {
 
 router.get('/exercise', function (req, res, next) {
   ttscallback = (tts) => {
-
     res.render('exercise', {
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts,
@@ -184,12 +183,11 @@ router.get('/pause', function (req, res, next) {
 
 router.get('/wrong_direction', function (req, res, next) {
   res.render('wrong_direction', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_walk331to305.png",
       query: "여기가 아니에요!"
   });
 
 });
-
 
 
 initialize();
