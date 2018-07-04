@@ -169,7 +169,7 @@ router.get('/exercise_walk_done', function (req, res, next) {
 
 router.get('/end', function (req, res, next) {
   res.render('end', {
-    query: "수고하셨습니다!",
+    query: "운동을 모두 끝냈습니다. 얼마나 했는지 알아볼까요?",
     id: User_Number
   });
 
