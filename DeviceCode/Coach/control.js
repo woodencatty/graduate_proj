@@ -4,9 +4,6 @@ const scanAP = require('./search_ap.js')   //포스터기기 탐색 모듈 impor
 const fs = require('fs');
 require('date-utils');
 
-let dateTime = new Date();
-
-
 /*function scanInterval(apName, connectRange, leaveRange, password, scanInterval, deviceID) {
   this.scanInterval = setInterval(() => {
     scanAP.searchPoster(apName, password, connectRange, leaveRange, deviceID);
