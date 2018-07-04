@@ -14,7 +14,7 @@ noble.on('stateChange', function(state) {
   noble.on('discover', function(peripheral) {
       console.log('Found device with local name: ' + peripheral.advertisement.localName);
       console.log('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
-      console.log();
+      console.log(peripheral);
       pher = peripheral;
 
         peripheral.connect(function(error) {
