@@ -31,8 +31,8 @@ bleno.on('stateChange', function(state) {
     bleno.stopAdvertising();
   }
 });
-bleno.on('advertisingStop',()=>{
   console.log("connected to poster");
+  
   setInterval(()=>{
     bleno.updateRssi((error, rssi)=>{
       if (error) {
@@ -58,7 +58,7 @@ bleno.on('advertisingStop',()=>{
       }
   });
   }, 500)
-});
+
 
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
