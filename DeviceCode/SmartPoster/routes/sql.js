@@ -83,7 +83,7 @@ module.exports = {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep)  VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep)  VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID,"walk331to305", dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
@@ -94,10 +94,8 @@ module.exports = {
                 });
             } else {
                 total_step = total_step + rows[0].DailyStep.toString();
-                client.query('DELETE FROM exercise WHERE patientNum=? AND exerciseTime=?', [ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
-                    console.log(err);
-                    console.log(rows);
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep)  VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID,"walkProgram", dateTime.toFormat('YYYY-MM-DD'), total_step], (err, rows) => {
+
+                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [ total_step,ID,dateTime.toFormat('YYYY-MM-DD') ], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
@@ -106,7 +104,6 @@ module.exports = {
 
                     }
                 });
-            });
             }
         });
 },
