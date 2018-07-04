@@ -3,29 +3,62 @@ var noble = require('noble');
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
         console.log("scanning");
-        noble.startScanning(["ec00"], true); 
+        noble.startScanning(); 
         } else {
       noble.stopScanning();
     }
   });
   
-  noble.on('discover', function(peripheral) {
-      console.log('Found device with local name: ' + peripheral.advertisement.localName);
-      console.log('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
-if(peripheral.advertisement.localName == 'echo'){
-  console.log(peripheral);
-  peripheral.connect(function(error) {
-    console.log(error);
+
+  noble.on('scanStart', function()
+  {
+      console.log('Scanning for peripherals ...');
   });
-}
+  
+  noble.on('scanStop', function()
+  {
+      console.log('Scan stopped.');
+  
+      setTimeout(function()
+      {
+          noble.startScanning();
+      }, 500);
   });
+
+
+  noble.on('discover', function(peripheral)
+  {
+      console.log('Found peripheral.');
+  
+      if(peripheral.advertisement.localName == 'echo'){
+        peripheral.connect(function(err)
+        {
+            handleConnect(err, peripheral);
+        });
+      }
+  });
+  
+  
+  function handleConnect(err, peripheral)
+  {
+      console.log('Connected.');
+  
+      peripheral.once('disconnect', function()
+      {
+          handleDisconnect(peripheral);
+      });
+  }
+  
+  
+  function handleDisconnect(peripheral)
+  {
+      console.log('Connection lost.');
+  
+      noble.stopScanning();
+  }
 
   module.exports = {
   	PherClear: () => {
 
      }
   }
-
-function keepconnect(){
-  console.log("keep connected");
-}
