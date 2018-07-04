@@ -54,7 +54,7 @@ module.exports = {
                 if (!count_flag) {
                     StepCount++;
                     count_flag = true;
-                    console.log(StepCount);
+                    console.log(force);
                 }
             } else {
                 count_flag = false;
