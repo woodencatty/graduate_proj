@@ -12,7 +12,7 @@ const coachSearch = require('./CoachSearch.js');
 
 let refreshInterval = 1;
 let IDD_ID = "";
-let APD_ID="";
+let poster_ID = "";
 
 let User_Name = "";
 let User_Number = "";
@@ -56,7 +56,7 @@ function initialize() {
     var config = JSON.parse(data);
     Setup_IDD_Socket();
     interval = config.refreshInterval;
-    APD_ID = config.deviceName;
+    poster_ID = config.deviceName;
   });
   console.log("Page is Running..(3000)");
 }
@@ -79,7 +79,7 @@ router.get('/', function (req, res, next) {
       res.redirect('/unactivated');
     }
   }
-  sql.requestDeviceStatus(APD_ID, Statuscallback);
+  sql.requestDeviceStatus(poster_ID, Statuscallback);
 
 });
 
@@ -103,12 +103,19 @@ router.get('/detected', function (req, res, next) {
 router.get('/search_exercise', function (req, res, next) {
   dentifycallback = (returnData) => {
     User_Exercise = returnData; // 환자이름 빼먹음;
-    if (returnData == "walkProgram") {
+    if (returnData == "walk331to305") {
       res.redirect('/exercise_walk');
     } else if (returnData == "end") {
       res.redirect('/end');
-    } else if (returnData == "walkProgramDone") {
-      res.redirect('/exercise_walk_done');
+    } else if (returnData == "walkfinish331to305") {
+      checkcallback = (isCorrect) => {
+        if (isCorrect == 1) {
+          res.redirect('/exercise_walk_done');
+        } else {
+          res.redirect('/wrong_direction');
+        }
+      }
+      checkArrivePoster(poster_ID, returnData, checkcallback);
     } else {
       res.redirect('/exercise');
     }
@@ -122,58 +129,55 @@ router.get('/reset', function (req, res, next) {
   IDD_ID = "";
   User_Exercise = "";
   User_Name = "";
-  
+
   User_Number = "";
   User_Step = 0;
   res.render('reset');
 });
 
 router.get('/exercise', function (req, res, next) {
-ttscallback = (tts)=>{
+  ttscallback = (tts) => {
 
-  res.render('exercise', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
-    query: tts,
-  });
-}
+    res.render('exercise', {
+      image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+      query: tts,
+    });
+  }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
 
 
 
 router.get('/exercise_walk', function (req, res, next) {
-  ttscallback = (tts)=>{
-
-  sql.addWalkExerciseDone(User_Number);
-  res.render('exercise_walk', {
-    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
-    query: tts
-  });
-  sql.submitUserStep(User_Number, User_Step);
-}
+  ttscallback = (tts) => {
+    sql.addWalkExerciseDone(User_Number);
+    res.render('exercise_walk', {
+      image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+      query: tts
+    });
+  }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
 
 router.get('/exercise_walk_done', function (req, res, next) {
-  
-    res.render('exercise_walk_done', {
-      query: "걸어오시느라 수고하셨습니다!"
-    });
-  
+  sql.submitUserStep(User_Number, User_Step);
+  res.render('exercise_walk_done', {
+    query: "걸어오시느라 수고하셨습니다!"
   });
+
+});
 
 router.get('/end', function (req, res, next) {
 
   res.render('end', {
     query: "수고하셨습니다!",
-    id : User_Number
+    id: User_Number
   });
 
 });
 
 router.get('/pause', function (req, res, next) {
-  res.render('pause', {
-  });
+  res.render('pause', {});
 
 });
 

@@ -124,6 +124,16 @@ addWalkExerciseDone: (ID) => {
         }
     });
 },
+checkArrivePoster: (poster_ID, program_ID, callback) => {
 
-
+    client.query('SELECT * FROM program WHERE programNumber = ?', [program_ID], (err, rows) => {
+        console.log(err);
+        console.log(rows);
+        if(rows[0].ArrivePoster.toString() == poster_ID){
+            callback(1);
+        }else {
+            callback(0);
+        }
+    });
+}
 }
