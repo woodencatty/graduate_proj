@@ -34,47 +34,47 @@ bleno.on('stateChange', function(state) {
 
 
 bleno.on('accept', (clientAddress)=>{
+  bleno.stopAdvertising();
   console.log("accepted" + clientAddress);
-});
-
-bleno.on('advertisingStop', ()=>{
-  console.log("advstop");
-
-});
-
-bleno.on('rssiUpdate', (rssi)=>{
-  console.log("rssiup" + rssi);
-
-});
-
-
- /* setInterval(()=>{
+  setInterval(()=>{
     bleno.updateRssi((error, rssi)=>{
       if (error) {
           console.error(error);
           return;
       }
-      console.log(rssi);            //todo : check signal
-      if (rssi > connectRange) {
-          console.log("Poster Detected");
-          if(searched == false){
-              console.log("ID Sent");
-              sendData.SubmitIDDname(deviceID);
-             fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-                  sendData.SubmitUserExercise(deviceID, readtext);
-                  exercise.resetStepCount();
-              });
-              searched = true;
-          }
-      }else if (rssi < leaveRange && searched == true) {
-          console.log("Leaving");
-          sendData.SubmitUserLeave();
-          searched = false;
-      }
   });
-  }, 500)
+  }, 500);
+});
 
-*/
+bleno.on('disconnect', (clientAddress)=>{
+  console.log("disconnect");
+  if (state === 'poweredOn') {
+    bleno.startAdvertising('echo', ['ec00']);
+  } else {
+    bleno.stopAdvertising();
+  }
+});
+
+bleno.on('rssiUpdate', (rssi)=>{
+  console.log("rssiup" + rssi);
+  if (rssi > connectRange) {
+    console.log("Poster Detected");
+    if(searched == false){
+        console.log("ID Sent");
+        sendData.SubmitIDDname(deviceID);
+       fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+            sendData.SubmitUserExercise(deviceID, readtext);
+            exercise.resetStepCount();
+        });
+        searched = true;
+    }
+}else if (rssi < leaveRange && searched == true) {
+    console.log("Leaving");
+    sendData.SubmitUserLeave();
+    searched = false;
+}
+});
+
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
   if (!error) {
