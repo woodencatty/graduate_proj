@@ -1,9 +1,5 @@
 var noble = require('noble');
 
-var pher;
-
-var connectinterval;
-
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
         console.log("scanning");
@@ -17,7 +13,6 @@ noble.on('stateChange', function(state) {
       console.log('Found device with local name: ' + peripheral.advertisement.localName);
       console.log('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
       console.log(peripheral);
-      pher = peripheral;
 
         peripheral.connect(function(error) {
           console.log(error);
