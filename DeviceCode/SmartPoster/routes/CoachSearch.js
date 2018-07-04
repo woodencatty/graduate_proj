@@ -21,14 +21,12 @@ noble.on('stateChange', function(state) {
 
         peripheral.connect(function(error) {
           console.log(error);
-          connectinterval = setInterval(keepconnect, 5000);
+          noble.stopScanning();
         });
   });
 
   module.exports = {
   	PherClear: () => {
-        clearInterval(connectinterval);
-
         noble.on('stateChange', function(state) {
           if (state === 'poweredOn') {
               console.log("scanning");
