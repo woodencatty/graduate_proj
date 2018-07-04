@@ -104,6 +104,7 @@ router.get('/search_exercise', function (req, res, next) {
   dentifycallback = (returnData) => {
     User_Exercise = returnData; // 환자이름 빼먹음;
     if (returnData == "walk331to305") {
+      User_Exercise = returnData; // 환자이름 빼먹음;
       res.redirect('/exercise_walk');
     } else if (returnData == "end") {
       res.redirect('/end');

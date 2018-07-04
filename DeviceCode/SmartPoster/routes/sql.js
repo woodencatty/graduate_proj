@@ -118,7 +118,7 @@ addWalkExerciseDone: (ID) => {
             console.log("DB query Error!");
         } else {
             let previous_data = rows[0].patientProgram.toString().split(',');
-            let update_data = "walkProgramDone, " + previous_data;
+            let update_data = "walkfinish331to305, " + previous_data;
            
             client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
         }
