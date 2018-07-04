@@ -67,7 +67,7 @@ bleno.on('rssiUpdate', (rssi)=>{
             exercise.resetStepCount();
         });
         searched = true;
-    }
+    }     console.log("But already connected");
 }else if (rssi < leaveRange && searched == true) {
     console.log("Leaving");
     sendData.SubmitUserLeave();
