@@ -118,13 +118,13 @@ router.get('/search_exercise', function (req, res, next) {
 });
 
 router.get('/reset', function (req, res, next) {
+  coachSearch.PherClear();
   IDD_ID = "";
   User_Exercise = "";
   User_Name = "";
   
   User_Number = "";
   User_Step = 0;
-
   res.render('reset');
 });
 
@@ -170,6 +170,13 @@ router.get('/end', function (req, res, next) {
   });
 
 });
+
+router.get('/pause', function (req, res, next) {
+  res.render('pause', {
+  });
+
+});
+
 
 
 initialize();

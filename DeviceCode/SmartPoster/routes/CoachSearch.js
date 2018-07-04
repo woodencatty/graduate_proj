@@ -1,5 +1,6 @@
 var noble = require('noble');
 
+var pher;
 
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
@@ -14,11 +15,16 @@ noble.on('stateChange', function(state) {
       console.log('Found device with local name: ' + peripheral.advertisement.localName);
       console.log('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
       console.log();
+      pher = peripheral;
 
         peripheral.connect(function(error) {
-          setInterval(()=>{
-            console.log('connected to peripheral: ' + peripheral.uuid + "and "+ peripheral.rssi);
-
-          }, 1000);
+          console.log(error);
       });
   });
+
+  module.exports = {
+  	PherClear: () => {
+      pher.disconnect(function(error) {
+        console.log(error);
+    });    }
+  }
