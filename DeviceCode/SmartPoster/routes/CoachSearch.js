@@ -2,6 +2,8 @@ var noble = require('noble');
 
 var pher;
 
+var connectinterval;
+
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
         console.log("scanning");
@@ -19,12 +21,18 @@ noble.on('stateChange', function(state) {
 
         peripheral.connect(function(error) {
           console.log(error);
-      });
+          connectinterval = setInterval(keepconnect, 5000);
+        });
   });
 
   module.exports = {
   	PherClear: () => {
       pher.disconnect(function(error) {
+        clearInterval(connectinterval);
         console.log(error);
     });    }
   }
+
+function keepconnect(){
+  console.log("keep connected");
+}
