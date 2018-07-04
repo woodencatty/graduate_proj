@@ -169,7 +169,6 @@ router.get('/exercise_walk_done', function (req, res, next) {
 });
 
 router.get('/end', function (req, res, next) {
-
   res.render('end', {
     query: "수고하셨습니다!",
     id: User_Number
@@ -184,7 +183,10 @@ router.get('/pause', function (req, res, next) {
 
 
 router.get('/wrong_direction', function (req, res, next) {
-  res.render('wrong_direction', {});
+  res.render('wrong_direction', {
+    image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+      query: "여기가 아니에요!"
+  });
 
 });
 
