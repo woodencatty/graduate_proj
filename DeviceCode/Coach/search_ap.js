@@ -1,6 +1,5 @@
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
 const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
-var wifi = require('node-wifi');
 
 var searched = false;
 var connectRange = 0;
@@ -14,10 +13,6 @@ var bleno = require('bleno');
 var BlenoPrimaryService = bleno.PrimaryService;
 
 var EchoCharacteristic = require('./characteristic');
-
-wifi.init({
-  iface : null // network interface, choose a random wifi interface if set to null
-});
 
 
 console.log('Poster scanning');
