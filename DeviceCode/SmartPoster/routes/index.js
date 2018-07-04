@@ -116,7 +116,7 @@ router.get('/search_exercise', function (req, res, next) {
           res.redirect('/wrong_direction');
         }
       }
-      checkArrivePoster(poster_ID, returnData, checkcallback);
+      sql.checkArrivePoster(poster_ID, returnData, checkcallback);
     } else {
       res.redirect('/exercise');
     }
