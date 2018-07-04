@@ -7,7 +7,7 @@ var connectinterval;
 noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
         console.log("scanning");
-        noble.startScanning(["ec00"], true); 
+        noble.startScanning(["ec00"], false); 
         } else {
       noble.stopScanning();
     }
