@@ -46,15 +46,6 @@ bleno.on('accept', (clientAddress)=>{
   }, 500);
 });
 
-bleno.on('disconnect', (clientAddress)=>{
-  console.log("disconnect");
-  if (state === 'poweredOn') {
-    bleno.startAdvertising('echo', ['ec00']);
-  } else {
-    bleno.stopAdvertising();
-  }
-});
-
 bleno.on('rssiUpdate', (rssi)=>{
   console.log("rssiup" + rssi);
   if (rssi > connectRange) {
