@@ -31,8 +31,23 @@ bleno.on('stateChange', function(state) {
     bleno.stopAdvertising();
   }
 });
-  console.log("connected to poster");
-  
+
+
+bleno.on('accept', (clientAddress)=>{
+  console.log("accepted" + clientAddress);
+});
+
+bleno.on('advertisingStop', ()=>{
+  console.log("advstop");
+
+});
+
+bleno.on('rssiUpdate', (rssi)=>{
+  console.log("rssiup" + rssi);
+
+});
+
+
   setInterval(()=>{
     bleno.updateRssi((error, rssi)=>{
       if (error) {
