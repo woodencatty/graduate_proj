@@ -19,6 +19,12 @@ noble.on('stateChange', function(state) {
 
         peripheral.connect(function(error) {
           console.log(error);
+          setInterval(()=>{
+            peripheral.updateRssi((error, rssi)=>{
+              console.log(error);
+              console.log(rssi);
+            });
+          }, 1000)
       });
   });
 

@@ -48,7 +48,7 @@ bleno.on('rssiUpdate', (rssi)=>{
 });
 
 
-  setInterval(()=>{
+ /* setInterval(()=>{
     bleno.updateRssi((error, rssi)=>{
       if (error) {
           console.error(error);
@@ -74,7 +74,7 @@ bleno.on('rssiUpdate', (rssi)=>{
   });
   }, 500)
 
-
+*/
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
   if (!error) {
