@@ -3,9 +3,6 @@ const http = require('http');										//http 요청 모듈
 let serverIP = "172.24.1.1";
 let serverPort = "3010";
 
-const exec = require('child_process').exec;
-
-
 POST_IDDname = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: serverPort,
