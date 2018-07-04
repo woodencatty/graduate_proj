@@ -83,7 +83,7 @@ module.exports = {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
-                client.query('INSERT INTO exercise(exerciseNum,patientNum,programNum,exerciseTime,DailyStep)  VALUES(?, ?, ?, ?, ?) ', [getRandomInt(), ID,"walk331to305", dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
+                client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
