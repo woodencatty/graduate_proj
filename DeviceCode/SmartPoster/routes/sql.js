@@ -110,17 +110,29 @@ module.exports = {
             }
         });
 },
-checkThisPoster: (poster_ID, program_ID, callback) => {
+addWalkExerciseDone: (ID) => {
+    client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
+        console.log(err);
+        console.log(rows);
+        if (!rows.length) {
+            console.log("DB query Error!");
+        } else {
+            let previous_data = rows[0].patientProgram.toString().split(',');
+            let update_data = "walkfinish331to305," + previous_data[0] +previous_data[1] +previous_data[2] +previous_data[3];
+           
+            client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data, ID]);
+        }
+    });
+},
+checkArrivePoster: (poster_ID, program_ID, callback) => {
 
     client.query('SELECT * FROM program WHERE programNumber = ?', [program_ID], (err, rows) => {
         console.log(err);
         console.log(rows);
         if(rows[0].ArrivePoster.toString() == poster_ID){
-            callback("ArrivePoster");
-        }else if(rows[0].StartPoster.toString() == poster_ID){
-            callback("StartPoster");
-        }else{
-            callback("WrongPoster");
+            callback(1);
+        }else {
+            callback(0);
         }
     });
 }
