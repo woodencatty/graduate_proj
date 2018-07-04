@@ -108,15 +108,6 @@ router.get('/search_exercise', function (req, res, next) {
       res.redirect('/exercise_walk');
     } else if (returnData == "end") {
       res.redirect('/end');
-    } else if (returnData == "walkfinish331to305") {
-      checkcallback = (isCorrect) => {
-        if (isCorrect == 1) {
-          res.redirect('/exercise_walk_done');
-        } else {
-          res.redirect('/wrong_direction');
-        }
-      }
-      sql.checkArrivePoster(poster_ID, returnData, checkcallback);
     } else {
       res.redirect('/exercise');
     }
@@ -138,7 +129,6 @@ router.get('/reset', function (req, res, next) {
 
 router.get('/exercise', function (req, res, next) {
   ttscallback = (tts) => {
-
     res.render('exercise', {
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts,
@@ -150,26 +140,32 @@ router.get('/exercise', function (req, res, next) {
 
 
 router.get('/exercise_walk', function (req, res, next) {
-  ttscallback = (tts) => {
-    sql.addWalkExerciseDone(User_Number);
-    res.render('exercise_walk', {
-      image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
-      query: tts
-    });
+  checkcallback = (whoami) => {
+    if (whoami == "StartPoster") {
+      ttscallback = (tts) => {
+        res.render('exercise_walk', {
+          image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+          query: tts
+        });
+      }
+      sql.requestExerciseTTS(User_Exercise, ttscallback);
+    } else if (whoami == "ArrivePoster"){
+      sql.submitUserStep(User_Number, User_Step);
+      res.render('exercise_walk_done', {
+        query: "걸어오시느라 수고하셨습니다!"
+      });
+    }else {
+      res.render('wrong_direction', {
+        image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+        query: "여기가 아니에요!"
+      });
+    }
   }
-  sql.requestExerciseTTS(User_Exercise, ttscallback);
+  sql.checkThisPoster(poster_ID, returnData, checkcallback);
 });
 
-router.get('/exercise_walk_done', function (req, res, next) {
-  sql.submitUserStep(User_Number, User_Step);
-  res.render('exercise_walk_done', {
-    query: "걸어오시느라 수고하셨습니다!"
-  });
-
-});
 
 router.get('/end', function (req, res, next) {
-
   res.render('end', {
     query: "수고하셨습니다!",
     id: User_Number
@@ -181,12 +177,6 @@ router.get('/pause', function (req, res, next) {
   res.render('pause', {});
 
 });
-
-
-router.get('/wrong_direction', function (req, res, next) {
-  res.render('wrong_direction', {});
-});
-
 
 
 initialize();
