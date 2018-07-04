@@ -22,14 +22,7 @@ if(peripheral.advertisement.localName == 'echo'){
 
   module.exports = {
   	PherClear: () => {
-        noble.on('stateChange', function(state) {
-          if (state === 'poweredOn') {
-              console.log("scanning");
-              noble.startScanning(["ec00"], false); 
-              } else {
-            noble.stopScanning();
-          }
-        });
+
      }
   }
 
