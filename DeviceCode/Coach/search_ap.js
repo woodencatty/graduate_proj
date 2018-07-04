@@ -34,7 +34,6 @@ bleno.on('stateChange', function(state) {
 
 
 bleno.on('accept', (clientAddress)=>{
-  bleno.stopAdvertising();
   console.log("accepted" + clientAddress);
   setInterval(()=>{
     bleno.updateRssi((error, rssi)=>{
