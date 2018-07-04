@@ -24,7 +24,7 @@ noble.on('stateChange', function(state) {
           connectinterval = setInterval(keepconnect, 5000);
         });
   });
-
+/*
   module.exports = {
   	PherClear: () => {
       pher.disconnect(function(error) {
@@ -32,7 +32,7 @@ noble.on('stateChange', function(state) {
         console.log(error);
     });    }
   }
-
+*/
 function keepconnect(){
   console.log("keep connected");
 }
