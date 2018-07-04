@@ -92,10 +92,18 @@ router.get('/detected', function (req, res, next) {
     User_Name = user_Name; // 환자이름 빼먹음;
     User_Number = user_Number;
     var tts_query = "안녕하세요! " + User_Name + "님! 같이 운동 해볼까요?"
-    res.render('detected', {
-      username: User_Name,
-      query: tts_query
-    });
+
+    countcallback = (count) => {
+
+      res.render('detected', {
+        username: User_Name,
+        query: tts_query,
+        count: count
+      });
+
+    }
+    countUserExercise(User_Number, countcallback);
+
   }
   sql.requestUserName(IDD_ID, Identifycallback);
 });
@@ -162,21 +170,35 @@ router.get('/exercise_walk', function (req, res, next) {
 router.get('/exercise_walk_done', function (req, res, next) {
   sql.submitUserStep(User_Number, User_Step);
   res.render('exercise_walk_done', {
-    query: "걸어오시느라 수고하셨습니다!"
+    query: "걸어오시느라 수고하셨습니다!" + User_Name + "님"
   });
 
 });
 
 router.get('/end', function (req, res, next) {
-  res.render('end', {
-    query: "운동을 모두 끝냈습니다. 얼마나 했는지 알아볼까요?",
-    id: User_Number
-  });
+  stepcountcallback = (stepcount) => {
+    res.render('end', {
+      query: "운동을 모두 끝냈습니다. 얼마나 했는지 알아볼까요?",
+      name: User_Number,
+      todaywalk: User_Exercise,
+      todaycalorie: User_Exercise * 0.66,
+      totalwalk: stepcount,
+      totalcalorie: stepcount * 0.66
+    });
+  }
 
+  countUserStep(User_Number, stepcountcallback);
 });
 
 router.get('/pause', function (req, res, next) {
-  res.render('pause', {});
+  countcallback = (count) => {
+
+    res.render('pause', {
+      query: "다음에 꼭 같이해요.",
+      count: count
+    });
+  }
+  countUserExercise(User_Number, countcallback);
 
 });
 
@@ -184,7 +206,7 @@ router.get('/pause', function (req, res, next) {
 router.get('/wrong_direction', function (req, res, next) {
   res.render('wrong_direction', {
     image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_walk331to305.png",
-      query: "여기가 아니에요!"
+    query: "여기가 아니에요!" + User_Name + "님"
   });
 
 });

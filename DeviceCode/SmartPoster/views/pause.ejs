@@ -3,17 +3,23 @@
   <head>
     <title>초기화..</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+                        <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+
     <meta http-equiv="refresh" content="5;url='/reset'">
   </head>
   <body>
-    <h1> </h1>      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
 
+  
+<script type="text/javascript">
+var speech = "<%= query %>";
+console.log(speech);
+responsiveVoice.speak(speech, "Korean Female");
+</script>
+
+  
 <div class="ribbon"><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>일시중단하셨습니다.<br>다음에 계속 하실수있습니다.</h1></strong><div class="ribbon-stitches-bottom"></div></div>
+  
+         <h1> 남은 운동 갯수 : <%= count %></h1>
+
   </body>
 </html>

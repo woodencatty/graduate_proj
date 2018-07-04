@@ -15,27 +15,22 @@ responsiveVoice.speak(speech, "Korean Female");
 </script>
 
   <div class="ribbon"><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>운동을 모두 끝냈습니다.</h1></strong><div class="ribbon-stitches-bottom"></div></div>
-  <a href='/reset' class='PauseBtn'>고마워요</a>
+       <br><br><br><br><br><br>
 
-      <br><br><br><br><br><br>
+       <h1> <%= name %>님 운동진행상황</h1>
+       <h1> 오늘 걸은 걸음 수 : <%= todaywalk %></h1>
+       <h1> 오늘 소모 칼로리량 : <%= todaycalorie %></h1>
+        <br><br><br><br><br><br>
+       <h1> 오늘 걸은 걸음 수 : <%= totalwalk %></h1>
+       <h1> 오늘 소모 칼로리량 : <%= totalcalorie %></h1>
+
+               <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+
+  <a href='/reset' class='PauseBtn'>고마워요</a>
  <br><br><br><br><br><br>
 
-    <div style="position: absolute; left:0px; width:1000px; height:1200px;">
-    <object type="text/html" data="http://192.9.44.54:8081/smash/medic/PatientInfo?pNum=<%= id %>"
-            style="width:100%; height:100%; margin:1%;">
-    </object>
-</div>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    
-    <br><br>
-    <h1>이제 휴식을 취하는게 좋을 것 같아요.</h1>
-    <h1>얼마나 했는지 알아볼까요?</h1>
-    <h1>30초뒤에 초기화됩니다.</h1>
-    <br><br><br><br><br><br>
 
   </body>
 </html>

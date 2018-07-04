@@ -59,7 +59,7 @@ module.exports = {
                     }
                     client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
                 }
-                
+
             }
         });
     },
@@ -95,7 +95,7 @@ module.exports = {
             } else {
                 total_step = total_step + rows[0].DailyStep.toString();
 
-                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [ total_step,ID,dateTime.toFormat('YYYY-MM-DD') ], (err, rows) => {
+                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [total_step, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
@@ -106,31 +106,59 @@ module.exports = {
                 });
             }
         });
-},
-addWalkExerciseDone: (ID) => {
-    client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
-        console.log(err);
-        console.log(rows);
-        if (!rows.length) {
-            console.log("DB query Error!");
-        } else {
-            let previous_data = rows[0].patientProgram.toString().split(',');
-            let update_data = "walkfinish331to305," + previous_data[0]+"," +previous_data[1]+"," +previous_data[2]+"," +previous_data[3];
-           
-            client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data, ID]);
-        }
-    });
-},
-checkArrivePoster: (poster_ID, program_ID, callback) => {
+    },
+    addWalkExerciseDone: (ID) => {
+        client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                console.log("DB query Error!");
+            } else {
+                let previous_data = rows[0].patientProgram.toString().split(',');
+                let update_data = "walkfinish331to305," + previous_data[0] + "," + previous_data[1] + "," + previous_data[2] + "," + previous_data[3];
 
-    client.query('SELECT * FROM program WHERE programNumber = ?', [program_ID], (err, rows) => {
-        console.log(err);
-        console.log(rows);
-        if(rows[0].ArrivePoster.toString() == poster_ID){
-            callback(1);
-        }else {
-            callback(0);
-        }
-    });
-}
+                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data, ID]);
+            }
+        });
+    },
+    checkArrivePoster: (poster_ID, program_ID, callback) => {
+
+        client.query('SELECT * FROM program WHERE programNumber = ?', [program_ID], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (rows[0].ArrivePoster.toString() == poster_ID) {
+                callback(1);
+            } else {
+                callback(0);
+            }
+        });
+    },
+
+    countUserExercise: (ID, callback) => {
+        client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                console.log("DB query Error!");
+            } else {
+                let exercisedata = rows[0].patientProgram.toString().split(',');
+                callback(exercisedata.length);
+            }
+        });
+    },
+    countUserStep: (ID, callback) => {
+        client.query('select DailyStep from exercise where patientNumber=?', [ID], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                console.log("DB query Error!");
+            } else {
+                var totalstep = 0;
+                for (var i = 0; i < rows.length; i++) {
+                    totalstep += rows[i].DailyStep;
+                }
+                callback(totalstep);
+            }
+        });
+    }
 }
