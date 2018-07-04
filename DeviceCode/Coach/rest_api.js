@@ -85,10 +85,6 @@ module.exports = {
 		req.setHeader("exercise", exercise);											//헤더에 요청 데이터 첨부
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 		
-		exec("sudo rm exercise_log", function (error, stdout, stderr) {
-			console.log(stdout);
-		});
-		
 		req.end();
 	}, 
 	SubmitUserLeave: () => {
