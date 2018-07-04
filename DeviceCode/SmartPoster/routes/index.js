@@ -161,7 +161,7 @@ router.get('/exercise_walk', function (req, res, next) {
       });
     }
   }
-  sql.checkThisPoster(poster_ID, returnData, checkcallback);
+  sql.checkThisPoster(poster_ID, User_Exercise, checkcallback);
 });
 
 
