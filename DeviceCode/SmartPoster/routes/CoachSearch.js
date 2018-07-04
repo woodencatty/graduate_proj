@@ -28,7 +28,6 @@ noble.on('stateChange', function(state) {
   module.exports = {
   	PherClear: () => {
         clearInterval(connectinterval);
-        console.log(error);
      }
   }
 
