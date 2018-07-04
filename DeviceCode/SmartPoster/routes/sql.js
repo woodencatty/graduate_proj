@@ -121,6 +121,20 @@ module.exports = {
             }
         });
     },
+    undoExerciseDone: (ID, undoExercise) => {
+        client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
+            console.log(err);
+            console.log(rows);
+            if (!rows.length) {
+                console.log("DB query Error!");
+            } else {
+                let previous_data = rows[0].patientProgram.toString().split(',');
+                let update_data = undoExercise + "," + previous_data[0] + "," + previous_data[1] + "," + previous_data[2] + "," + previous_data[3];
+
+                client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data, ID]);
+            }
+        });
+    },
     checkArrivePoster: (poster_ID, program_ID, callback) => {
 
         client.query('SELECT * FROM program WHERE programNumber = ?', [program_ID], (err, rows) => {

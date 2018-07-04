@@ -92,6 +92,7 @@ router.get('/detected', function (req, res, next) {
     User_Name = user_Name; // 환자이름 빼먹음;
     User_Number = user_Number;
     var tts_query = "안녕하세요! " + User_Name + "님! 같이 운동 해볼까요?"
+    sql.submitUserStep(User_Number, User_Step);
 
     countcallback = (count) => {
 
@@ -168,7 +169,6 @@ router.get('/exercise_walk', function (req, res, next) {
 });
 
 router.get('/exercise_walk_done', function (req, res, next) {
-  sql.submitUserStep(User_Number, User_Step);
   res.render('exercise_walk_done', {
     query: "걸어오시느라 수고하셨습니다!" + User_Name + "님"
   });
@@ -191,6 +191,8 @@ router.get('/end', function (req, res, next) {
 });
 
 router.get('/pause', function (req, res, next) {
+
+  sql.undoExerciseDone(User_Number, User_Exercise);
   countcallback = (count) => {
 
     res.render('pause', {
