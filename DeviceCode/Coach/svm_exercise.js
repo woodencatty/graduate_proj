@@ -50,11 +50,13 @@ module.exports = {
             let force = (changeX + changeY + changeZ)
 
             i++;
+            console.log(force);
+
             if (force > ExerciseThreadhold) {
                 if (!count_flag) {
                     StepCount++;
                     count_flag = true;
-                    console.log(force);
+                    console.log(StepCount);
                 }
             } else {
                 count_flag = false;
