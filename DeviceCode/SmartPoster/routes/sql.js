@@ -53,11 +53,11 @@ module.exports = {
                     client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["0,0,0,0,0", ID]);
                     callback("end"); //보내는 부분. 가공이 필요함.    
                 } else {
-                    callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
                     for (let i = 1; i < 5; i++) {
                         update_data += (previous_data[i] + ",");
                     }
                     client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
+                    callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
                 }
 
             }

@@ -184,9 +184,9 @@ router.get('/end', function (req, res, next) {
   stepcountcallback = (stepcount) => {
     res.render('end', {
       query: "운동을 모두 끝냈습니다. 얼마나 했는지 알아볼까요?",
-      name: User_Number,
-      todaywalk: User_Exercise,
-      todaycalorie: User_Exercise * 0.66,
+      name: User_Name,
+      todaywalk: User_Step,
+      todaycalorie: User_Step * 0.66,
       totalwalk: stepcount,
       totalcalorie: stepcount * 0.66
     });
