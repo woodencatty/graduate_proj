@@ -156,6 +156,7 @@ module.exports = {
                 console.log("DB query Error!");
             } else {
                 let exercisedata = rows[0].patientProgram.toString().split(',');
+                console.log(exercisedata);
                 let numberofexercise = 0;
                 for(var i=0; i<exercisedata.length; i++){
                     if(exercisedata[i] == "0"){
