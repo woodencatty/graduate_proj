@@ -148,15 +148,15 @@ router.get('/reset', function (req, res, next) {
 router.get('/exercise', function (req, res, next) {
   ttscallback = (tts) => {
     count2callback = (count) => {
-    res.render('exercise', {
-      image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
-      query: tts,
-      name:User_Name,
-      count:count
-    });
-    countUserExercise(User_Number, count2callback);
+      res.render('exercise', {
+        image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+        query: tts,
+        name: User_Name,
+        count: count
+      });
+      countUserExercise(User_Number, count2callback);
+    }
   }
-}
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
 
