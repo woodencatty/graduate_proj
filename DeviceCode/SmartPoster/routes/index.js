@@ -100,7 +100,7 @@ router.get('/detected', function (req, res, next) {
       res.render('detected', {
         username: User_Name,
         query: tts_query,
-        count: count
+        count: User_Exercise_Count
       });
 
     }
@@ -151,7 +151,7 @@ router.get('/exercise', function (req, res, next) {
     res.render('exercise', {
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts,
-      name:User_Name,
+      username:User_Name,
       count:User_Exercise_Count
     });
 }
