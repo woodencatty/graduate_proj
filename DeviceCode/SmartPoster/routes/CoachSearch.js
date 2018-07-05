@@ -34,7 +34,7 @@ noble.on('discover', function (peripheral) {
 });
 
 
-function handleConnect(err, peripheal) {
+function handleConnect(err, peripheral) {
   console.log('Connected.');
 
   peripheral.once('disconnect', function () {

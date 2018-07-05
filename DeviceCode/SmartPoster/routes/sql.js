@@ -53,11 +53,11 @@ module.exports = {
                     client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', ["0,0,0,0,0", ID]);
                     callback("end"); //보내는 부분. 가공이 필요함.    
                 } else {
-                    callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
                     for (let i = 1; i < 5; i++) {
                         update_data += (previous_data[i] + ",");
                     }
                     client.query('UPDATE patient SET patientProgram=? WHERE patientNumber=?', [update_data + "0", ID]);
+                    callback(previous_data[0]); //보내는 부분. 가공이 필요함.    
                 }
 
             }
@@ -156,12 +156,21 @@ module.exports = {
                 console.log("DB query Error!");
             } else {
                 let exercisedata = rows[0].patientProgram.toString().split(',');
+                console.log(exercisedata);
+                let numberofexercise = 0;
+                for(var i=0; i<exercisedata.length; i++){
+                    if(exercisedata[i] == "0"){
+
+                    }else{
+                        numberofexercise++;
+                    }
+                }
                 callback(exercisedata.length);
             }
         });
     },
     countUserStep: (ID, callback) => {
-        client.query('select DailyStep from exercise where patientNumber=?', [ID], (err, rows) => {
+        client.query('select DailyStep from exercise where patientNum=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
             if (!rows.length) {
