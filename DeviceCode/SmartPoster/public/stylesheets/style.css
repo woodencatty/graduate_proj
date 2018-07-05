@@ -24,6 +24,7 @@ h1 {
 }
 
 h2 {
+  position: relative;
   color: white;  
   font-size: 2em; 
   margin-bottom: -2em; 

@@ -78,7 +78,6 @@ module.exports = {
 
 
     submitUserStep: (ID, Steps) => {
-        let total_step = Steps;
         client.query('SELECT * FROM exercise WHERE patientNum = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
             console.log(err);
             console.log(rows);
@@ -93,9 +92,7 @@ module.exports = {
                     }
                 });
             } else {
-                total_step = total_step + rows[0].DailyStep.toString();
-
-                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [total_step, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
+                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [Steps, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {

@@ -148,12 +148,18 @@ router.get('/reset', function (req, res, next) {
 
 router.get('/exercise', function (req, res, next) {
   ttscallback = (tts) => {
+    step2countcallback = (stepcount) => {
+
+
     res.render('exercise', {
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts,
       username:User_Name,
-      count:User_Exercise_Count
+      count:User_Exercise_Count,
+      step:stepcount
     });
+  }
+    sql.countUserStep(User_Number, step2countcallback);
 }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
@@ -173,7 +179,7 @@ router.get('/exercise_walk', function (req, res, next) {
 
 router.get('/exercise_walk_done', function (req, res, next) {
   res.render('exercise_walk_done', {
-    query: "걸어오시느라 수고하셨습니다!" + User_Name + "님"
+    query: "걸어오시느라 수고하셨습니다!" + User_Name + "님, 운동을 마무리 해볼까요?"
   });
 
 });

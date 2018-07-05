@@ -1,4 +1,4 @@
-const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
+const exercise = require('./StepCount.js')   //운동량 측정 모듈 import
 const scanAP = require('./search_ap.js')   //포스터기기 탐색 모듈 import
 
 const fs = require('fs');
@@ -12,7 +12,7 @@ require('date-utils');
 */
 function StepInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
-    exercise.setStepCount(walkThreadhold, forceSenseTime);
+    exercise.setStepCount();
   }, AccelInterval);
 }
 
@@ -58,7 +58,7 @@ function initialize() {
   fs.readFile('./settings.conf', 'utf8',(err, data)=> {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-    StepInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);    
+    StepInterval(config.AccelInterval);    
 //    scanInterval(config.apName, config.connectRange, config.leaveRange, config.password, config.scanInterval, config.deviceID);
 scanAP.init(config.connectRange, config.leaveRange, config.deviceID);
     loggingInterval(config.LoggingInterval, config.ExerciseDataFileName, config.fsOption);
