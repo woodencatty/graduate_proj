@@ -17,7 +17,8 @@ let poster_ID = "";
 let User_Name = "";
 let User_Number = "";
 let User_Exercise = "";
-let User_Step = 20;
+let User_Exercise_Count = 0;
+let User_Step = 0;
 //direct
 
 function Setup_IDD_Socket() {
@@ -95,7 +96,7 @@ router.get('/detected', function (req, res, next) {
     sql.submitUserStep(User_Number, User_Step);
 
     countcallback = (count) => {
-
+      User_Exercise_Count = count;
       res.render('detected', {
         username: User_Name,
         query: tts_query,
@@ -147,16 +148,12 @@ router.get('/reset', function (req, res, next) {
 
 router.get('/exercise', function (req, res, next) {
   ttscallback = (tts) => {
-    count2callback = (count) => {
-
     res.render('exercise', {
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts,
       name:User_Name,
-      count:count
+      count:User_Exercise_Count
     });
-    sql.countUserExercise(User_Number, count2callback);
-  }
 }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
