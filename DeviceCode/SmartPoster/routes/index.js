@@ -103,7 +103,7 @@ router.get('/detected', function (req, res, next) {
       });
 
     }
-    countUserExercise(User_Number, countcallback);
+    sql.countUserExercise(User_Number, countcallback);
 
   }
   sql.requestUserName(IDD_ID, Identifycallback);
@@ -154,7 +154,7 @@ router.get('/exercise', function (req, res, next) {
       name:User_Name,
       count:count
     });
-    countUserExercise(User_Number, count2callback);
+    sql.countUserExercise(User_Number, count2callback);
   }
 }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
@@ -192,7 +192,7 @@ router.get('/end', function (req, res, next) {
     });
   }
 
-  countUserStep(User_Number, stepcountcallback);
+  sql.countUserStep(User_Number, stepcountcallback);
 });
 
 router.get('/pause', function (req, res, next) {
@@ -205,7 +205,7 @@ router.get('/pause', function (req, res, next) {
       count: count
     });
   }
-  countUserExercise(User_Number, countcallback);
+  sql.countUserExercise(User_Number, countcallback);
 
 });
 
