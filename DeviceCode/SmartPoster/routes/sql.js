@@ -165,7 +165,7 @@ module.exports = {
                         numberofexercise++;
                     }
                 }
-                callback(exercisedata.length);
+                callback(numberofexercise);
             }
         });
     },
