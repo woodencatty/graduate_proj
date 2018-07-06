@@ -43,13 +43,7 @@ module.exports = {
             Walking = parseInt(output.Walking);
             Descending = parseInt(output.Descending);
             Ascending = parseInt(output.Ascending);
-
-
-            console.log("Standing" + Standing);
-            console.log("Walking" + Walking);
-            console.log("Descending" + Descending);
-            console.log("Ascending" + Ascending);
-
+            
             if (Standing > 1) {
                 console.log("Standing" + Standing);
             } else if (Walking > 1) {
