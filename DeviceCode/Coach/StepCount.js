@@ -2,10 +2,10 @@ const Accel = require('./sensor.js'); //가속도 센서 모듈 import
 
 //센서의 X, Y, Z값을 받아온다.
 var StepCount = 0;
-var Standing = 0.0;
-var Walking = 0.0;
-var Descending = 0.0;
-var Ascending = 0.0;
+var Standing = 0;
+var Walking = 0;
+var Descending = 0;
+var Ascending = 0;
 
 
 
@@ -39,10 +39,10 @@ module.exports = {
                 z축_지자기: MagnZ
             });
             //                var parsedoutput = JSON.parse(output);
-            Standing = output.Standing;
-            Walking = output.Walking;
-            Descending = output.Descending;
-            Ascending = output.Ascending;
+            Standing =parseInt(output.Standing);
+            Walking = parseInt(output.Walking);
+            Descending = parseInt(output.Descending);
+            Ascending = parseInt(output.Ascending);
 
 
             console.log("Standing" + Standing);
@@ -50,15 +50,15 @@ module.exports = {
             console.log("Descending" + Descending);
             console.log("Ascending" + Ascending);
 
-            if (Standing > 1.0) {
+            if (Standing > 1) {
                 console.log("Standing" + Standing);
-            } else if (Walking > 1.0) {
+            } else if (Walking > 1) {
                 console.log("Walking" + Walking);
                 StepCount ++;
-            } else if (Descending > 1.0) {
+            } else if (Descending > 1) {
                 console.log("Descending" + Descending);
                 StepCount ++;
-            } else if (Ascending > 1.0) {
+            } else if (Ascending > 1) {
                 console.log("Ascending" + Ascending);
                 StepCount ++;
             } else {
