@@ -15,7 +15,7 @@ var fs = require("fs");
 var net = new brain.NeuralNetwork();
 
 function loadFile() {
-    var obj = JSON.parse(fs.readFileSync('./network.json', 'utf8'));
+    var obj = JSON.parse(fs.readFileSync('/home/pi/graduate_proj/DeviceCode/Coach/network.json', 'utf8'));
     net.fromJSON(obj);
     console.log("file loaded");
 }
