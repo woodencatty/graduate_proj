@@ -45,18 +45,18 @@ module.exports = {
             Ascending = parseInt(output.Ascending);
 
             if (Walking > 1) {
-                console.log("Walking" + Walking);
+             //   console.log("Walking" + Walking);
                 StepCount++;
             } else if (Standing > 1) {
-                console.log("Standing" + Standing);
+            //    console.log("Standing" + Standing);
             } else if (Descending > 1) {
-                console.log("Descending" + Descending);
+            //    console.log("Descending" + Descending);
                 StepCount++;
             } else if (Ascending > 1) {
-                console.log("Ascending" + Ascending);
+           //     console.log("Ascending" + Ascending);
                 StepCount++;
             } else {
-                console.log("?");
+           //     console.log("?");
             }
         }
         Accel.getAccel(GetAccelCallback);
