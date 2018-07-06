@@ -92,7 +92,8 @@ module.exports = {
                     }
                 });
             } else {
-                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [Steps, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
+                var addedStep = parseInt(rows[0].DailyStep.toString()) + Steps;
+                client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [addedStep, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
                     if (!rows.length) {
