@@ -25,7 +25,7 @@ module.exports = {
                 x축_자이로: GyroX, y축_자이로: GyroY, z축_자이로: GyroZ, 
                 x축_지자기: MagnX, y축_지자기: MagnY, z축_지자기: MagnZ }); 
 //                var parsedoutput = JSON.parse(output);
-                console.log(JSON.stringify(output));
+                console.log(output);
                 if(parsedoutput.Standing > 1.0){ console.log("Standing" + parsedoutput.Standing);
                 }else  if(parsedoutput.Walking > 1.0){console.log("Walking" + parsedoutput.Walking);
                 }else  if(parsedoutput.Descending > 1.0){console.log("Descending" + parsedoutput.Descending);
