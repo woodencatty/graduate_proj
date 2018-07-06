@@ -22,7 +22,12 @@ module.exports = {
         client.query('SELECT activated FROM device WHERE deviceNumber = ?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-
+            if (!rows.length) {
+                callback("0");
+            }
+            if(err){
+                callback("0");
+            }
             callback(rows[0].activated.toString());
         });
 
@@ -35,7 +40,7 @@ module.exports = {
             if (!rows.length) {
                 console.log("DB query Error!");
             } else {
-                callback(rows[0].patientName.toString(), rows[0].patientNumber.toString())
+                callback(rows[0].patientName.toString(), rows[0].patientNumber.toString());
             }
         });
     },
