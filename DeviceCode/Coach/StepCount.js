@@ -24,7 +24,7 @@ module.exports = {
             var output = net.run({ x축_가속도: AccelX, y축_가속도: AccelY, z축_가속도: AccelZ, 
                 x축_자이로: GyroX, y축_자이로: GyroY, z축_자이로: GyroZ, 
                 x축_지자기: MagnX, y축_지자기: MagnY, z축_지자기: MagnZ }); 
-                console.log("Standing" + output.Standing);
+                console.log(output);
                 if(output.Standing > 1.0){
                     console.log("Standing" + output.Standing);
                 }else  if(output.Walking > 1.0){console.log("Walking" + output.Walking);
