@@ -39,22 +39,22 @@ module.exports = {
                 z축_지자기: MagnZ
             });
             //                var parsedoutput = JSON.parse(output);
-            Standing =parseInt(output.Standing);
+            Standing = parseInt(output.Standing);
             Walking = parseInt(output.Walking);
             Descending = parseInt(output.Descending);
             Ascending = parseInt(output.Ascending);
-            
-            if (Standing > 1) {
-                console.log("Standing" + Standing);
-            } else if (Walking > 1) {
+
+            if (Walking > 1) {
                 console.log("Walking" + Walking);
-                StepCount ++;
+                StepCount++;
+            } else if (Standing > 1) {
+                console.log("Standing" + Standing);
             } else if (Descending > 1) {
                 console.log("Descending" + Descending);
-                StepCount ++;
+                StepCount++;
             } else if (Ascending > 1) {
                 console.log("Ascending" + Ascending);
-                StepCount ++;
+                StepCount++;
             } else {
                 console.log("?");
             }
