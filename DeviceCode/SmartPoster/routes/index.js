@@ -53,7 +53,7 @@ function Setup_IDD_Socket() {
 
 
 function initialize() {
-  fs.readFile('./settings.conf', 'utf8', function (err, data) {
+  fs.readFile('/home/pi/graduate_proj/DeviceCode/SmartPoster/settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
     Setup_IDD_Socket();
     interval = config.refreshInterval;

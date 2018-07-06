@@ -55,7 +55,7 @@ function loggingInterval(loggingInterval, filename, fsOption) {
 }
 
 function initialize() {
-  fs.readFile('./settings.conf', 'utf8',(err, data)=> {
+  fs.readFile('/home/pi/graduate_proj/DeviceCode/Coach/settings.conf', 'utf8',(err, data)=> {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
     StepInterval(config.AccelInterval);    
