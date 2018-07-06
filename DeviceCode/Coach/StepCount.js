@@ -1,7 +1,7 @@
 const Accel = require('./sensor.js');   //가속도 센서 모듈 import
 
 //센서의 X, Y, Z값을 받아온다.
-var StepCount;
+var StepCount = 0;
 
 var brain = require("brain.js");
 var fs = require("fs");
@@ -24,11 +24,14 @@ module.exports = {
             var output = net.run({ x축_가속도: AccelX, y축_가속도: AccelY, z축_가속도: AccelZ, 
                 x축_자이로: GyroX, y축_자이로: GyroY, z축_자이로: GyroZ, 
                 x축_지자기: MagnX, y축_지자기: MagnY, z축_지자기: MagnZ }); 
-                console.log(output.Standing);
                 if(output.Standing > 1.0){
+                    console.log("Standing" + output.Standing);
+                }else  if(output.Walking > 1.0){console.log("Walking" + output.Walking);
+                }else  if(output.Descending > 1.0){console.log("Descending" + output.Descending);
+                }else  if(output.Ascending > 1.0){console.log("Ascending" + output.Ascending);
                 }else {
-                StepCount++;
-                }// Walking Data
+                    console.log("?");
+                }
         }
         Accel.getAccel(GetAccelCallback);
     },
