@@ -162,7 +162,7 @@ module.exports = {
                 console.log(exercisedata);
                 let numberofexercise = 0;
                 for(var i=0; i<exercisedata.length; i++){
-                    if(exercisedata[i] == "0"){
+                    if(exercisedata[i] == 0){
 
                     }else{
                         numberofexercise++;
