@@ -1,4 +1,4 @@
-const exercise = require('./StepCount.js')   //운동량 측정 모듈 import
+const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 const scanAP = require('./search_ap.js')   //포스터기기 탐색 모듈 import
 
 const fs = require('fs');
