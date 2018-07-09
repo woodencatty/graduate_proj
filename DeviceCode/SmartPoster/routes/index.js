@@ -192,6 +192,12 @@ router.get('/exercise_walk', function (req, res, next) {
   ttscallback = (tts) => {
     sql.addWalkExerciseDone(User_Number);
     res.render('exercise_walk', {
+      name: User_Name,
+      todaywalk: User_Step,
+      todaycalorie: User_Step * 0.66,
+      totalwalk: stepcount,
+      totalcalorie: stepcount * 0.66,
+
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts
     });
