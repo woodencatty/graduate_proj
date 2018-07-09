@@ -67,7 +67,6 @@ function userEnterCheck(interval){
           User_Enter=1;
           console.log("User enter!");
         }
-
       });
 });
 
@@ -93,12 +92,12 @@ router.get('/', function (req, res, next) {
     console.log("get data : " + returnData);
     if (returnData == "1") {
 
-      if (IDD_ID == "" || User_Enter == 0) {
+      if (IDD_ID != "" && User_Enter == 1) {
+        res.redirect('/detected');
+      } else {
         res.render('index', {
           Interval: refreshInterval
         });
-      } else {
-        res.redirect('/detected');
       }
     } else {
       res.redirect('/unactivated');
@@ -167,6 +166,7 @@ router.get('/reset', function (req, res, next) {
 
   User_Number = "";
   User_Step = 0;
+  User_Enter = 0;
   res.render('reset');
 });
 
