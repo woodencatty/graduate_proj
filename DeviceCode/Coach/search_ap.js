@@ -77,6 +77,9 @@ bleno.on('advertisingStart', function(error) {
 module.exports = {
 
   init: (connectRange1, leaveRange1, deviceID1) => {
+    setInterval(()=>{
+      searched = false;
+    }, 5000);
     connectRange = connectRange1;
     leaveRange = leaveRange1;
     deviceID = deviceID1;
