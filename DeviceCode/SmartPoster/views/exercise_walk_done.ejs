@@ -14,10 +14,15 @@
       console.log(speech);
       responsiveVoice.speak(speech, "Korean Female", {rate: 1.0});
       </script>
-      <br><br><br><br><br><br>
-      <br><br><br><br><br><br>
 <div class="ribbon"><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>여기에요!</h1></strong><div class="ribbon-stitches-bottom"></div></div>
     <p id="ViewTimer"></p><img src="http://192.9.44.54:8081/smash/resources/img/programimg/programImg_walkfinish331to305.png" id="img" width="576" height="900"/>
 
-  </body>
+
+       <h2> 오늘 걸은 걸음 수 : <%= todaywalk %>걸음</h2>
+       <h2> 오늘 소모 칼로리량 : <%= todaycalorie %>Kcal</h2>
+        <br><br>
+       <h2> 오늘 걸은 걸음 수 : <%= totalwalk %>걸음</h2>
+       <h2> 오늘 소모 칼로리량 : <%= totalcalorie %>Kcal</h2>
+        <br><br>
+          </body>
 </html>
