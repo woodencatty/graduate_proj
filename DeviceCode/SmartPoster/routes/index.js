@@ -9,7 +9,7 @@ const fs = require('fs');
 const http = require('http');
 const coachSearch = require('./CoachSearch.js');
 var McpAdc = require('mcp-adc');
-var adc = new McpAdc.Mcp3208();
+var adc = new McpAdc.Mcp3008();
 
 
 let refreshInterval = 1;
