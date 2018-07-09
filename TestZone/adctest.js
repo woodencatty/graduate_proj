@@ -1,6 +1,10 @@
 var McpAdc = require('mcp-adc');
 var adc = new McpAdc.Mcp3008();
 
+var channel_0 = 0;
+var channel_1 = 1;
+
+var User_Enter = 0;
 
 setInterval(()=>{
     adc.readRawValue(channel_0, function(value0) {
@@ -9,7 +13,7 @@ setInterval(()=>{
         console.log("Raw value:\t" + value1);
         if(value0>500 || value1>500){
           User_Enter=1;
-          console.log("User enter!");
+          console.log("User enter!" + User_Enter);
         }
 
       });
