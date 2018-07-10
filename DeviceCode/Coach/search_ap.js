@@ -36,7 +36,7 @@ bleno.on('accept', (clientAddress)=>{
        sendData.SubmitUserExercise(deviceID, readtext);
        exercise.resetStepCount();
    });
-   
+
 });
 
 bleno.on('rssiUpdate', (rssi)=>{
@@ -45,11 +45,11 @@ bleno.on('rssiUpdate', (rssi)=>{
     console.log("Poster Detected");
     if(searched == false){
         console.log("ID Sent");
-        sendData.SubmitIDDname(deviceID);
+        /*sendData.SubmitIDDname(deviceID);
        fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
             sendData.SubmitUserExercise(deviceID, readtext);
             exercise.resetStepCount();
-        });
+        });*/
         searched = true;
     }     console.log("But already connected");
 }else if (rssi < leaveRange && searched == true) {
@@ -77,8 +77,15 @@ module.exports = {
 
   init: (connectRange1, leaveRange1, deviceID1) => {
     setInterval(()=>{
-      searched = false;
-    }, 5000);
+              sendData.SubmitIDDname(deviceID);
+       fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+            sendData.SubmitUserExercise(deviceID, readtext);
+            exercise.resetStepCount();
+        });
+        setTimeout(()=>{
+          sendData.SubmitUserLeave();
+        },700 )
+    }, 1000);
     connectRange = connectRange1;
     leaveRange = leaveRange1;
     deviceID = deviceID1;
