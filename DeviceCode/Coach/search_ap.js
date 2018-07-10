@@ -92,7 +92,7 @@ module.exports = {
       
       },700)  
     }, 1000);
-/*
+
     setInterval(()=>{
       wifi.scan().then(function (networks) {
         wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
@@ -112,31 +112,7 @@ module.exports = {
         console.log('Disconnected');
     });
     }, 4000)
-    },5000)*/
-
-    wifi.scan(function(err, networks) {
-      if (err) {
-          console.log(err);
-      } else {
-          console.log(networks);
-          /*
-          networks = [
-              {
-                ssid: '...',
-                bssid: '...',
-                mac: '...', // equals to bssid (for retrocompatibility)
-                channel: <number>,
-                frequency: <number>, // in MHz
-                signal_level: <number>, // in dB
-                security: 'WPA WPA2' // format depending on locale for open networks in Windows
-                security_flags: '...' // encryption protocols (format currently depending of the OS)
-                mode: '...' // network mode like Infra (format currently depending of the OS)
-              },
-              ...
-          ];
-          */
-      }
-  });
+    },5000)
    
     connectRange = connectRange1;
     leaveRange = leaveRange1;
