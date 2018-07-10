@@ -58,7 +58,7 @@ function initialize() {
   fs.readFile('/home/pi/graduate_proj/DeviceCode/Coach/settings.conf', 'utf8',(err, data)=> {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-    StepInterval(config.AccelInterval);    
+    StepInterval(config.AccelInterval,config.walkThreadhold,config.forceSenseTime);    
 //    scanInterval(config.apName, config.connectRange, config.leaveRange, config.password, config.scanInterval, config.deviceID);
 scanAP.init(config.connectRange, config.leaveRange, config.deviceID);
     loggingInterval(config.LoggingInterval, config.ExerciseDataFileName, config.fsOption);
