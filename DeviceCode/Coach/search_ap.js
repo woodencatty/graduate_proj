@@ -82,7 +82,7 @@ module.exports = {
         console.log(stdout);
         if(stdout.indexOf("poster_ap")>0){
           sendData.SubmitIDDname(deviceID);
-        }else if(stdout.indexOf("wownow_2")>0){
+        }else if(stdout.indexOf("another")>0){
           sendData2.SubmitIDDname(deviceID);
         }else if(stdout.indexOf("WiFi2")>0){
           console.log("hi Wifi2")
@@ -92,7 +92,7 @@ module.exports = {
         fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
           if(stdout.indexOf("poster_ap")>0){
             sendData.SubmitUserExercise(deviceID, readtext);
-          }else if(stdout.indexOf("poster_ap_2")>0){
+          }else if(stdout.indexOf("another")>0){
             sendData2.SubmitUserExercise(deviceID, readtext);
           }else{
           }
@@ -100,7 +100,7 @@ module.exports = {
       setTimeout(()=>{
         if(stdout.indexOf("poster_ap")>0){
           sendData.SubmitUserLeave();
-        }else if(stdout.indexOf("poster_ap_2")>0){
+        }else if(stdout.indexOf("another")>0){
           sendData2.SubmitUserLeave();
         }else{
         }
