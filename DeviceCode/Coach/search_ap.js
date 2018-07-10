@@ -22,7 +22,6 @@ var bleno = require('bleno');
 var BlenoPrimaryService = bleno.PrimaryService;
 
 var EchoCharacteristic = require('./characteristic');
-const { exec } = require('child_process');
 
 
 console.log('Poster scanning');
