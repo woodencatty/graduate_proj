@@ -80,9 +80,9 @@ module.exports = {
           return;
         }
         console.log(stdout);
-        if(stdout == "\"poster_ap\""){
+        if(stdout.indexOf("poster_ap")>0){
           sendData.SubmitIDDname(deviceID);
-        }else if(stdout == "\"poster_ap_2\""){
+        }else if(stdout.indexOf("poster_ap_2")>0){
           sendData2.SubmitIDDname(deviceID);
         }else if(stdout.indexOf("WiFi2")>0){
           console.log("hi Wifi2")
@@ -90,17 +90,17 @@ module.exports = {
           console.log("not here");
         }
         fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-          if(stdout == "\"poster_ap\""){
+          if(stdout.indexOf("poster_ap")>0){
             sendData.SubmitUserExercise(deviceID, readtext);
-          }else if(stdout == "\"poster_ap_2\""){
+          }else if(stdout.indexOf("poster_ap_2")>0){
             sendData2.SubmitUserExercise(deviceID, readtext);
           }else{
           }
       });
       setTimeout(()=>{
-        if(stdout == "\"poster_ap\""){
+        if(stdout.indexOf("poster_ap")>0){
           sendData.SubmitUserLeave();
-        }else if(stdout == "\"poster_ap_2\""){
+        }else if(stdout.indexOf("poster_ap_2")>0){
           sendData2.SubmitUserLeave();
         }else{
         }
