@@ -5,7 +5,7 @@ const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 var searched = false;
 var connectRange = 0;
 var leaveRange = 0;
-var deviceID = "";
+var deviceID = "coach01";
 
 
 const fs = require('fs');
