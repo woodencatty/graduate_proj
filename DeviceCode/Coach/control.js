@@ -16,11 +16,11 @@ function StepInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   }, AccelInterval);
 }
 
-/*
+
 function loggingInterval(loggingInterval, filename, fsOption) {
   console.log("logging");
   //5초에 한번 걸음 수를 업데이트하여 로그에 저장함.
-  
+  /*
   this.loggingInterval = setInterval(() => {
     ExerciseCallback = (Action) =>{
       fs.open(filename, fsOption, (err, fd) =>{
@@ -34,7 +34,7 @@ function loggingInterval(loggingInterval, filename, fsOption) {
       });
     }
     exercise.getExercise(ExerciseCallback);
-  }, loggingInterval);
+  }, loggingInterval);*/
 
   this.loggingInterval = setInterval(() => {
     StepCountcallback = (StepCount) =>{
@@ -52,7 +52,7 @@ function loggingInterval(loggingInterval, filename, fsOption) {
     }
     exercise.getStepCount(StepCountcallback);
   }, loggingInterval);
-}*/
+}
 
 function initialize() {
   fs.readFile('/home/pi/graduate_proj/DeviceCode/Coach/settings.conf', 'utf8',(err, data)=> {
@@ -61,7 +61,7 @@ function initialize() {
     StepInterval(config.AccelInterval,config.walkThreadhold,config.forceSenseTime);    
 //    scanInterval(config.apName, config.connectRange, config.leaveRange, config.password, config.scanInterval, config.deviceID);
 scanAP.init(config.connectRange, config.leaveRange, config.deviceID);
-  //  loggingInterval(config.LoggingInterval, config.ExerciseDataFileName, config.fsOption);
+    loggingInterval(config.LoggingInterval, config.ExerciseDataFileName, config.fsOption);
   });
 }
 
