@@ -1,6 +1,14 @@
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
 const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
-
+var wifi = require('node-wifi');
+ 
+// Initialize wifi module
+// Absolutely necessary even to set interface to null
+wifi.init({
+    iface : null // network interface, choose a random wifi interface if set to null
+});
+ 
+    
 var searched = false;
 var connectRange = 0;
 var leaveRange = 0;
@@ -85,6 +93,15 @@ module.exports = {
       
       },700)  
     }, 1000);
+
+    setInterval(()=>{
+      wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
+        if (err) {
+            console.log(err);
+        }
+        console.log('Connected');
+    });
+    },5000)
     connectRange = connectRange1;
     leaveRange = leaveRange1;
     deviceID = deviceID1;
