@@ -47,7 +47,6 @@ module.exports = {
             changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
             let force = (changeX + changeY + changeZ)
-            console.log(ExerciseThreadhold, force, forceSenseTime)
             if (force > ExerciseThreadhold) {
                 if (!count_flag) {
                     StepCount++;
