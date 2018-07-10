@@ -14,6 +14,7 @@ var bleno = require('bleno');
 var BlenoPrimaryService = bleno.PrimaryService;
 
 var EchoCharacteristic = require('./characteristic');
+const { exec } = require('child_process');
 
 
 console.log('Poster scanning');
@@ -32,16 +33,6 @@ bleno.on('stateChange', function(state) {
 bleno.on('accept', (clientAddress)=>{
   console.log("accepted" + clientAddress);
 
-  sendData.SubmitIDDname(deviceID);
-  sendData2.SubmitIDDname(deviceID);
-
-  fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-       sendData.SubmitUserExercise(deviceID, readtext);
-       sendData2.SubmitUserExercise(deviceID, readtext);
-
-      // exercise.resetStepCount();
-   });
-
 });
 
 bleno.on('rssiUpdate', (rssi)=>{
@@ -59,8 +50,6 @@ bleno.on('rssiUpdate', (rssi)=>{
     }     console.log("But already connected");
 }else if (rssi < leaveRange && searched == true) {
     console.log("Leaving");
-    sendData.SubmitUserLeave();
-    sendData2.SubmitUserLeave();
 
     searched = false;
 }
@@ -84,20 +73,40 @@ module.exports = {
 
   init: (connectRange1, leaveRange1, deviceID1) => {
     setInterval(()=>{
-              sendData.SubmitIDDname(deviceID);
-              sendData2.SubmitIDDname(deviceID);
+      exec("iwconfig wlan0| awk -F'[ :]+' '/ESSID/ {print $5}'", (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          return;
+        }
+        if(stdout == "\"poster_ap\""){
+          sendData.SubmitIDDname(deviceID);
+        }else if(stdout == "\"poster_ap_2\""){
+          sendData2.SubmitIDDname(deviceID);
+        }else{
 
-       fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+        }
+        fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+          if(stdout == "\"poster_ap\""){
             sendData.SubmitUserExercise(deviceID, readtext);
+          }else if(stdout == "\"poster_ap_2\""){
             sendData2.SubmitUserExercise(deviceID, readtext);
-
-         //   exercise.resetStepCount();
-        });
-        setTimeout(()=>{
+          }else{
+          }
+      });
+      setTimeout(()=>{
+        if(stdout == "\"poster_ap\""){
           sendData.SubmitUserLeave();
+        }else if(stdout == "\"poster_ap_2\""){
           sendData2.SubmitUserLeave();
+        }else{
+        }
 
-        },700 )
+      },700)
+      });         
+              
+
+      
+
     }, 1000);
     connectRange = connectRange1;
     leaveRange = leaveRange1;
