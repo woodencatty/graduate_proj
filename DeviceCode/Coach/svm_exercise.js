@@ -1,5 +1,6 @@
 
 const Accel = require('./sensor.js');   //가속도 센서 모듈 import
+const fs = require('fs');
 
 //센서의 X, Y, Z값을 받아온다.
 
@@ -50,6 +51,18 @@ module.exports = {
             if (force > ExerciseThreadhold) {
                 if (!count_flag) {
                     StepCount++;
+                    fs.open(filename, fsOption, (err, fd) =>{
+                        if (err) throw err;
+                        var buf = new Buffer(StepCount.toString());
+                        fs.write(fd, buf, 0, buf.length, null, (err, written, buffer) =>{
+                          console.log(buf.toString());          
+                          if (err) throw err;
+                          fs.close(fd, () => {
+                            console.log("file Written");
+                          });
+                        });
+                      }); 
+
                     count_flag = true;
                     console.log(StepCount);
                 }

@@ -34,7 +34,7 @@ function loggingInterval(loggingInterval, filename, fsOption) {
       });
     }
     exercise.getExercise(ExerciseCallback);
-  }, loggingInterval);*/
+  }, loggingInterval);
 
   this.loggingInterval = setInterval(() => {
     StepCountcallback = (StepCount) =>{
@@ -52,7 +52,7 @@ function loggingInterval(loggingInterval, filename, fsOption) {
     }
     exercise.getStepCount(StepCountcallback);
   }, loggingInterval);
-}
+}*/
 
 function initialize() {
   fs.readFile('/home/pi/graduate_proj/DeviceCode/Coach/settings.conf', 'utf8',(err, data)=> {
