@@ -4,7 +4,7 @@ let serverIP = "169.254.11.54";
 let serverPort = "3010";
 
 POST_IDDname2 = {														//POST요청 JSON데이터 정의
-	host: serverIP,
+	localAddress: serverIP,
 	port: serverPort,
 	path: '/identify/information',
 	method: 'POST'
@@ -12,14 +12,14 @@ POST_IDDname2 = {														//POST요청 JSON데이터 정의
 
 
 POST_UserExercise2 = {														//POST요청 JSON데이터 정의
-	host: serverIP,
+	localAddress: serverIP,
 	port: serverPort,
 	path: '/patient/exercise',
 	method: 'POST'
 };
 
 POST_Userleave2 = {														//POST요청 JSON데이터 정
-	host: serverIP,
+	localAddress: serverIP,
 	port: serverPort,
 	path: '/patient/leave',
 	method: 'POST'
