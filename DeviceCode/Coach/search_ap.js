@@ -10,64 +10,7 @@ var deviceID = "";
 
 const fs = require('fs');
 
-var bleno = require('bleno');
-
-var BlenoPrimaryService = bleno.PrimaryService;
-
-var EchoCharacteristic = require('./characteristic');
-
-
 console.log('Poster scanning');
-
-bleno.on('stateChange', function(state) {
-  console.log('on -> stateChange: ' + state);
-
-  if (state === 'poweredOn') {
-    bleno.startAdvertising('echo', ['ec00']);
-  } else {
-    bleno.stopAdvertising();
-  }
-});
-
-
-bleno.on('accept', (clientAddress)=>{
-  console.log("accepted" + clientAddress);
-
-});
-
-bleno.on('rssiUpdate', (rssi)=>{
-  console.log("rssiup" + rssi);
-  if (rssi > connectRange) {
-    console.log("Poster Detected");
-    if(searched == false){
-        console.log("ID Sent");
-        /*sendData.SubmitIDDname(deviceID);
-       fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-            sendData.SubmitUserExercise(deviceID, readtext);
-            exercise.resetStepCount();
-        });*/
-        searched = true;
-    }     console.log("But already connected");
-}else if (rssi < leaveRange && searched == true) {
-    console.log("Leaving");
-
-    searched = false;
-}
-});
-
-bleno.on('advertisingStart', function(error) {
-  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-  if (!error) {
-    bleno.setServices([
-      new BlenoPrimaryService({
-        uuid: 'ec00',
-        characteristics: [
-          new EchoCharacteristic()
-        ]
-      })
-    ]);
-  }
-});
 
 setInterval(()=>{
   sendData.SubmitIDDname(deviceID);
