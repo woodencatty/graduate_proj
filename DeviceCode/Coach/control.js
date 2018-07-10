@@ -12,7 +12,7 @@ require('date-utils');
 */
 function StepInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
-    exercise.setStepCount();
+    exercise.setStepCount(walkThreadhold, forceSenseTime);
   }, AccelInterval);
 }
 
