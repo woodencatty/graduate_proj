@@ -78,12 +78,13 @@ module.exports = {
           console.error(`exec error: ${error}`);
           return;
         }
+        console.log(stdout);
         if(stdout == "\"poster_ap\""){
           sendData.SubmitIDDname(deviceID);
         }else if(stdout == "\"poster_ap_2\""){
           sendData2.SubmitIDDname(deviceID);
         }else{
-
+          console.log("not here");
         }
         fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
           if(stdout == "\"poster_ap\""){
