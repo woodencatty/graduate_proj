@@ -7,6 +7,7 @@ var connectRange = 0;
 var leaveRange = 0;
 var deviceID = "";
 
+
 const fs = require('fs');
 
 var bleno = require('bleno');
@@ -83,7 +84,7 @@ module.exports = {
           sendData.SubmitIDDname(deviceID);
         }else if(stdout == "\"poster_ap_2\""){
           sendData2.SubmitIDDname(deviceID);
-        }else if(stdout == "\"WiFi2\""){
+        }else if(stdout.indexOf("WiFi2")>0){
           console.log("hi Wifi2")
         }else{
           console.log("not here");
