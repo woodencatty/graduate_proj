@@ -47,7 +47,6 @@ module.exports = {
             changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
             let force = (changeX + changeY + changeZ)
-            console.log(force);
             if(force>5000){
 
             }else if (force > ExerciseThreadhold) {

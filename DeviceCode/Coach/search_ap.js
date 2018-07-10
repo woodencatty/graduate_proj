@@ -83,6 +83,8 @@ module.exports = {
           sendData.SubmitIDDname(deviceID);
         }else if(stdout == "\"poster_ap_2\""){
           sendData2.SubmitIDDname(deviceID);
+        }else if(stdout == "\"WiFi2\""){
+          console.log("hi Wifi2")
         }else{
           console.log("not here");
         }
