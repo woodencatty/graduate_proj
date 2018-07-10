@@ -1,5 +1,5 @@
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
-const exercise = require('./StepCount.js')   //운동량 측정 모듈 import
+const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 
 var searched = false;
 var connectRange = 0;
@@ -34,7 +34,7 @@ bleno.on('accept', (clientAddress)=>{
   sendData.SubmitIDDname(deviceID);
   fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
        sendData.SubmitUserExercise(deviceID, readtext);
-       exercise.resetStepCount();
+      // exercise.resetStepCount();
    });
 
 });
@@ -80,7 +80,7 @@ module.exports = {
               sendData.SubmitIDDname(deviceID);
        fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
             sendData.SubmitUserExercise(deviceID, readtext);
-            exercise.resetStepCount();
+         //   exercise.resetStepCount();
         });
         setTimeout(()=>{
           sendData.SubmitUserLeave();
