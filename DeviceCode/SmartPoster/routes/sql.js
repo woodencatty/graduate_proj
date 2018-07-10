@@ -22,13 +22,11 @@ module.exports = {
         client.query('SELECT activated FROM device WHERE deviceNumber = ?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
-                callback("0");
-            }
             if(err){
                 callback("0");
+            }else {
+                callback(rows[0].activated.toString());
             }
-            callback(rows[0].activated.toString());
         });
 
     },
@@ -37,7 +35,7 @@ module.exports = {
         client.query('select patientName,patient.patientNumber from device join patient on device.patientNumber = patient.patientNumber and deviceNumber = ?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 callback(rows[0].patientName.toString(), rows[0].patientNumber.toString());
@@ -49,7 +47,7 @@ module.exports = {
         client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 let previous_data = rows[0].patientProgram.toString().split(',');
@@ -73,7 +71,7 @@ module.exports = {
         client.query('SELECT content FROM program WHERE programNumber = ?', [Program], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 callback(rows[0].content.toString())
@@ -86,11 +84,11 @@ module.exports = {
         client.query('SELECT * FROM exercise WHERE patientNum = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
                     console.log(err);
                     console.log(rows);
-                    if (!rows.length) {
+                    if (err) {
                         console.log("DB query Error!");
                     } else {
 
@@ -101,7 +99,7 @@ module.exports = {
                 client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [addedStep, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
-                    if (!rows.length) {
+                    if (err) {
                         console.log("DB query Error!");
                     } else {
 
@@ -114,7 +112,7 @@ module.exports = {
         client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 let previous_data = rows[0].patientProgram.toString().split(',');
@@ -128,7 +126,7 @@ module.exports = {
         client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 let previous_data = rows[0].patientProgram.toString().split(',');
@@ -155,7 +153,7 @@ module.exports = {
         client.query('select patientProgram from patient where patientNumber=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 let exercisedata = rows[0].patientProgram.toString().split(',');
@@ -176,7 +174,7 @@ module.exports = {
         client.query('select DailyStep from exercise where patientNum=?', [ID], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (!rows.length) {
+            if (err) {
                 console.log("DB query Error!");
             } else {
                 var totalstep = 0;

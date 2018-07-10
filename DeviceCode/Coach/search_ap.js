@@ -30,14 +30,13 @@ bleno.on('stateChange', function(state) {
 
 bleno.on('accept', (clientAddress)=>{
   console.log("accepted" + clientAddress);
-  setInterval(()=>{
-    bleno.updateRssi((error, rssi)=>{
-      if (error) {
-          console.error(error);
-          return;
-      }
-  });
-  }, 500);
+
+  sendData.SubmitIDDname(deviceID);
+  fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+       sendData.SubmitUserExercise(deviceID, readtext);
+       exercise.resetStepCount();
+   });
+   
 });
 
 bleno.on('rssiUpdate', (rssi)=>{
