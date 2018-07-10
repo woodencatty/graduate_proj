@@ -189,7 +189,9 @@ router.get('/exercise', function (req, res, next) {
 
 
 router.get('/exercise_walk', function (req, res, next) {
+
   ttscallback = (tts) => {
+    stepcountcallback = (stepcount) => {
     sql.addWalkExerciseDone(User_Number);
     res.render('exercise_walk', {
       name: User_Name,
@@ -202,10 +204,14 @@ router.get('/exercise_walk', function (req, res, next) {
       query: tts
     });
   }
+
+}
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
 
 router.get('/exercise_walk_done', function (req, res, next) {
+  stepcountcallback = (stepcount) => {
+
   res.render('exercise_walk_done', {
     name: User_Name,
     todaywalk: User_Step,
@@ -215,7 +221,8 @@ router.get('/exercise_walk_done', function (req, res, next) {
 
     query: "걸어오시느라 수고하셨습니다!" + User_Name + "님, 운동을 마무리 해볼까요?"
   });
-
+  }
+  sql.countUserStep(User_Number, stepcountcallback);
 });
 
 router.get('/end', function (req, res, next) {
