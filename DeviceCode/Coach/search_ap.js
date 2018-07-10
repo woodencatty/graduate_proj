@@ -1,4 +1,5 @@
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
+const sendData2 = require('./rest_api_p2.js')   //포스터기기 연결 모듈 import
 const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 
 var searched = false;
@@ -32,8 +33,12 @@ bleno.on('accept', (clientAddress)=>{
   console.log("accepted" + clientAddress);
 
   sendData.SubmitIDDname(deviceID);
+  sendData2.SubmitIDDname(deviceID);
+
   fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
        sendData.SubmitUserExercise(deviceID, readtext);
+       sendData2.SubmitUserExercise(deviceID, readtext);
+
       // exercise.resetStepCount();
    });
 
@@ -55,6 +60,8 @@ bleno.on('rssiUpdate', (rssi)=>{
 }else if (rssi < leaveRange && searched == true) {
     console.log("Leaving");
     sendData.SubmitUserLeave();
+    sendData2.SubmitUserLeave();
+
     searched = false;
 }
 });
@@ -78,12 +85,18 @@ module.exports = {
   init: (connectRange1, leaveRange1, deviceID1) => {
     setInterval(()=>{
               sendData.SubmitIDDname(deviceID);
+              sendData2.SubmitIDDname(deviceID);
+
        fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
             sendData.SubmitUserExercise(deviceID, readtext);
+            sendData2.SubmitUserExercise(deviceID, readtext);
+
          //   exercise.resetStepCount();
         });
         setTimeout(()=>{
           sendData.SubmitUserLeave();
+          sendData2.SubmitUserLeave();
+
         },700 )
     }, 1000);
     connectRange = connectRange1;
