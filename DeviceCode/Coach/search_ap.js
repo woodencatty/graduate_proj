@@ -94,12 +94,16 @@ module.exports = {
     }, 1000);
 
     setInterval(()=>{
-      wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
-        if (err) {
-            console.log(err);
-        }
-        console.log('Connected');
-    });
+      wifi.scan().then(function (networks) {
+        wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
+          if (err) {
+              console.log(err);
+          }
+          console.log('Connected');
+      });
+      }).catch(function (error) {
+        // error
+      })
     setTimeout(()=>{
       wifi.disconnect(function(err) {
         if (err) {
