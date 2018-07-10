@@ -159,7 +159,7 @@ router.get('/search_exercise', function (req, res, next) {
 });
 
 router.get('/reset', function (req, res, next) {
-  coachSearch.PherClear();
+ // coachSearch.PherClear();
   IDD_ID = "";
   User_Exercise = "";
   User_Name = "";
