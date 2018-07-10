@@ -95,7 +95,7 @@ module.exports = {
                     }
                 });
             } else {
-                var addedStep = rows[0].DailyStep + Steps;
+                var addedStep = parseInt(rows[0].DailyStep) + parseInt(Steps);
                 client.query('UPDATE exercise SET DailyStep=? WHERE patientNum=? AND exerciseTime=?', [addedStep, ID, dateTime.toFormat('YYYY-MM-DD')], (err, rows) => {
                     console.log(err);
                     console.log(rows);
