@@ -82,7 +82,7 @@ module.exports = {
         console.log(stdout);
         if(stdout.indexOf("poster_ap")>0){
           sendData.SubmitIDDname(deviceID);
-        }else if(stdout.indexOf("poster_ap_2")>0){
+        }else if(stdout.indexOf("wownow_2")>0){
           sendData2.SubmitIDDname(deviceID);
         }else if(stdout.indexOf("WiFi2")>0){
           console.log("hi Wifi2")
