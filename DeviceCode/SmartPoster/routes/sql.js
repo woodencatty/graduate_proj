@@ -84,7 +84,7 @@ module.exports = {
         client.query('SELECT * FROM exercise WHERE patientNum = ? AND exerciseTime = ?', [ID, dateTime.toFormat("YYYY-MM-DD")], (err, rows) => {
             console.log(err);
             console.log(rows);
-            if (rows[0] == []) {
+            if (rows[0] == null) {
                 client.query('INSERT INTO exercise(exerciseNum,patientNum,exerciseTime,DailyStep) VALUES(?, ?, ?, ?) ', [getRandomInt(), ID, dateTime.toFormat('YYYY-MM-DD'), Steps], (err, rows) => {
                     console.log(err);
                     console.log(rows);
