@@ -93,15 +93,6 @@ module.exports = {
       },700)  
     }, 1000);
 
-    setInterval(()=>{
-        wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
-          if (err) {
-              console.log(err);
-          }
-          console.log('Connected');
-      });
-    },5000)
-   
     connectRange = connectRange1;
     leaveRange = leaveRange1;
     deviceID = deviceID1;
