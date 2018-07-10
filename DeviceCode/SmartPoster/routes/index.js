@@ -91,13 +91,13 @@ router.get('/', function (req, res, next) {
   Statuscallback = (returnData) => {
     console.log("get data : " + returnData);
     if (returnData == "1") {
-      if (IDD_ID != "" && User_Enter == 1) {
-        res.redirect('/detected');
-      } else {
+      if (IDD_ID == "" || User_Enter == 0) {
         res.render('index', {
           Interval: refreshInterval
         });
         User_Enter=0;
+      } else {
+        res.redirect('/detected');
       }
     } else {
       res.redirect('/unactivated');
