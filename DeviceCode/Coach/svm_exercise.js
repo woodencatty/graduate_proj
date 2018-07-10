@@ -25,7 +25,6 @@ module.exports = {
     setStepCount: (ExerciseThreadhold, forceSenseTime) => {
         GetAccelCallback_1 = (AccelX, AccelY, AccelZ, a, b, c, d, e, f) => {
 
-
             AccelX_1 = AccelX;
             AccelY_1 = AccelY;
             AccelZ_1 = AccelZ;
@@ -36,6 +35,7 @@ module.exports = {
 
         setTimeout(() => {
             GetAccelCallback_2 = (AccelX, AccelY, AccelZ, a, b, c, d, e, f) => {
+                console.log(AccelX_1, AccelY_1, AccelZ_1);
 
                 AccelX_2 = AccelX;
                 AccelY_2 = AccelY;
