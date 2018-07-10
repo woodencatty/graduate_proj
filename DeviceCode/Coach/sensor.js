@@ -8,6 +8,7 @@ const accel = require('./build/Release/LSM9DS0');
 
 module.exports = {
   getAccel: (callback) => {
+    console.log(accel.AccelX(), accel.AccelY(), accel.AccelZ(), accel.GyroX(), accel.GyroY(), accel.GyroZ(), accel.MagnX(), accel.MagnY(), accel.MagnZ());
         callback(accel.AccelX(), accel.AccelY(), accel.AccelZ(), accel.GyroX(), accel.GyroY(), accel.GyroZ(), accel.MagnX(), accel.MagnY(), accel.MagnZ());
   }
 }
