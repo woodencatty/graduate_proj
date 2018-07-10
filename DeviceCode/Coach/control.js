@@ -60,7 +60,7 @@ function initialize() {
     var config = JSON.parse(data);
     StepInterval(config.AccelInterval,config.walkThreadhold,config.forceSenseTime);    
 //    scanInterval(config.apName, config.connectRange, config.leaveRange, config.password, config.scanInterval, config.deviceID);
-scanAP.init(config.connectRange, config.leaveRange, config.deviceID);
+//scanAP.init(config.connectRange, config.leaveRange, config.deviceID);
     loggingInterval(config.LoggingInterval, config.ExerciseDataFileName, config.fsOption);
   });
 }

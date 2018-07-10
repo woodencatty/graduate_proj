@@ -69,24 +69,12 @@ bleno.on('advertisingStart', function(error) {
   }
 });
 
-module.exports = {
-
-  init: (connectRange1, leaveRange1, deviceID1) => {
-    setInterval(()=>{
-     
-          sendData.SubmitIDDname(deviceID);
-       
-        fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-       
-            sendData.SubmitUserExercise(deviceID, readtext);
-      });
-      setTimeout(()=>{
-          sendData.SubmitUserLeave();
-      
-      },700)  
-    }, 1000);
-    connectRange = connectRange1;
-    leaveRange = leaveRange1;
-    deviceID = deviceID1;
-  }
-}    
+setInterval(()=>{
+  sendData.SubmitIDDname(deviceID);
+fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
+    sendData.SubmitUserExercise(deviceID, readtext);
+});
+setTimeout(()=>{
+  sendData.SubmitUserLeave();
+},700)  
+}, 1000);
