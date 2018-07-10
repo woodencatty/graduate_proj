@@ -51,6 +51,7 @@ module.exports = {
 			console.log('can not connect to APD');								// 관리서버와 연결 불가능할 때에 오류 체크
 
 		});
+		console.log(POST_IDDname);
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 		console.log("message send!");
 		req.end();
