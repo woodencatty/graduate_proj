@@ -1,5 +1,5 @@
-const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
 const sendData2 = require('./rest_api_p2.js')   //포스터기기 연결 모듈 import
+const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
 const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 
 var searched = false;
