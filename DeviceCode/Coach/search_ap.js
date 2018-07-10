@@ -94,20 +94,12 @@ module.exports = {
     }, 1000);
 
     setInterval(()=>{
-        wifi.connect({ ssid : "WiFi2", password : "201333558"}, function(err) {
+        wifi.connect({ ssid : "poster_ap", password : "1q2w3e4r"}, function(err) {
           if (err) {
               console.log(err);
           }
           console.log('Connected');
       });
-    setTimeout(()=>{
-      wifi.disconnect(function(err) {
-        if (err) {
-            console.log(err);
-        }
-        console.log('Disconnected');
-    });
-    }, 4000)
     },5000)
    
     connectRange = connectRange1;
