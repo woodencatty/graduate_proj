@@ -1,4 +1,3 @@
-const sendData2 = require('./rest_api_p2.js')   //포스터기기 연결 모듈 import
 const sendData = require('./rest_api.js')   //포스터기기 연결 모듈 import
 const exercise = require('./svm_exercise.js')   //운동량 측정 모듈 import
 
@@ -74,43 +73,17 @@ module.exports = {
 
   init: (connectRange1, leaveRange1, deviceID1) => {
     setInterval(()=>{
-      exec("iwconfig wlan0| awk -F'[ :]+' '/ESSID/ {print $5}'", (error, stdout, stderr) => {
-        if (error) {
-          console.error(`exec error: ${error}`);
-          return;
-        }
-        console.log(stdout);
-        if(stdout.indexOf("poster_ap")>0){
+     
           sendData.SubmitIDDname(deviceID);
-        }else if(stdout.indexOf("another")>0){
-          sendData2.SubmitIDDname(deviceID);
-        }else if(stdout.indexOf("WiFi2")>0){
-          console.log("hi Wifi2")
-        }else{
-          console.log("not here");
-        }
+       
         fs.readFile('./exercise_log', 'utf8', function (error, readtext) {
-          if(stdout.indexOf("poster_ap")>0){
+       
             sendData.SubmitUserExercise(deviceID, readtext);
-          }else if(stdout.indexOf("another")>0){
-            sendData2.SubmitUserExercise(deviceID, readtext);
-          }else{
-          }
       });
       setTimeout(()=>{
-        if(stdout.indexOf("poster_ap")>0){
           sendData.SubmitUserLeave();
-        }else if(stdout.indexOf("another")>0){
-          sendData2.SubmitUserLeave();
-        }else{
-        }
-
-      },700)
-      });         
-              
-
       
-
+      },700)  
     }, 1000);
     connectRange = connectRange1;
     leaveRange = leaveRange1;
