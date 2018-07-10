@@ -3,7 +3,7 @@ const http = require('http');										//http 요청 모듈
 let serverIP = "169.254.11.54";
 let serverPort = "3010";
 
-POST_IDDname = {														//POST요청 JSON데이터 정의
+POST_IDDname2 = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: serverPort,
 	path: '/identify/information',
@@ -11,14 +11,14 @@ POST_IDDname = {														//POST요청 JSON데이터 정의
 };
 
 
-POST_UserExercise = {														//POST요청 JSON데이터 정의
+POST_UserExercise2 = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: serverPort,
 	path: '/patient/exercise',
 	method: 'POST'
 };
 
-POST_Userleave = {														//POST요청 JSON데이터 정
+POST_Userleave2 = {														//POST요청 JSON데이터 정
 	host: serverIP,
 	port: serverPort,
 	path: '/patient/leave',
@@ -45,7 +45,7 @@ module.exports = {
 				});
 			}
 		}
-		let req = http.request(POST_IDDname, SubmitIDDnamecallback);						//POST요청 전송
+		let req = http.request(POST_IDDname2, SubmitIDDnamecallback);						//POST요청 전송
 		req.on('error', function (error) {
 
 			console.log('can not connect to APD');								// 관리서버와 연결 불가능할 때에 오류 체크
@@ -74,7 +74,7 @@ module.exports = {
 				});
 			}
 		}
-		let req = http.request(POST_UserExercise, SubmitUserExercisecallback);						//POST요청 전송
+		let req = http.request(POST_UserExercise2, SubmitUserExercisecallback);						//POST요청 전송
 		req.on('error', function (error) {
 			console.log('can not connect to APD');								// 관리서버와 연결 불가능할 때에 오류 체크
 		});
@@ -103,7 +103,7 @@ module.exports = {
 				});
 			}
 		}
-		let req = http.request(POST_Userleave, SubmitUserLeavecallback);						//POST요청 전송
+		let req = http.request(POST_Userleave2, SubmitUserLeavecallback);						//POST요청 전송
 		req.on('error', function (error) {
 
 			console.log('can not connect to APD' + error);								// 관리서버와 연결 불가능할 때에 오류 체크
