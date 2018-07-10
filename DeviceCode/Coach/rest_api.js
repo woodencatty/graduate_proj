@@ -46,6 +46,7 @@ module.exports = {
 				});
 			}
 		}
+	console.log(req.host);
 		let req = http.request(POST_IDDname, SubmitIDDnamecallback);						//POST요청 전송
 		req.on('error', function (error) {
 
