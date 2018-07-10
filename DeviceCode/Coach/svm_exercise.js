@@ -35,7 +35,6 @@ module.exports = {
 
         setTimeout(() => {
             GetAccelCallback_2 = (AccelX, AccelY, AccelZ, a, b, c, d, e, f) => {
-                console.log(AccelX_1, AccelY_1, AccelZ_1);
 
                 AccelX_2 = AccelX;
                 AccelY_2 = AccelY;
@@ -49,7 +48,7 @@ module.exports = {
             changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
             let force = (changeX + changeY + changeZ)
-            console.log(StepCount);
+            console.log(force);
             i++;
 
             if (force > ExerciseThreadhold) {
