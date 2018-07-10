@@ -171,19 +171,23 @@ router.get('/reset', function (req, res, next) {
 });
 
 router.get('/exercise', function (req, res, next) {
+  countcallback = (count) => {
   ttscallback = (tts) => {
     step2countcallback = (stepcount) => {
     res.render('exercise', {
       image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
       query: tts,
       username:User_Name,
-      count:User_Exercise_Count,
+      count:count,
       step:stepcount
     });
   }
     sql.countUserStep(User_Number, step2countcallback);
 }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
+  }
+  sql.countUserExercise(User_Number, countcallback);
+
 });
 
 
@@ -210,10 +214,13 @@ router.get('/exercise_walk', function (req, res, next) {
 });
 
 router.get('/exercise_walk_done', function (req, res, next) {
+  countcallback = (count) => {
+
   stepcountcallback = (stepcount) => {
 
   res.render('exercise_walk_done', {
     name: User_Name,
+    count:count,
     todaywalk: User_Step,
     todaycalorie: User_Step * 0.66,
     totalwalk: stepcount,
@@ -223,6 +230,11 @@ router.get('/exercise_walk_done', function (req, res, next) {
   });
   }
   sql.countUserStep(User_Number, stepcountcallback);
+
+  
+}
+sql.countUserExercise(User_Number, countcallback);
+
 });
 
 router.get('/end', function (req, res, next) {
