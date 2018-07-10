@@ -85,7 +85,6 @@ module.exports = {
       
       },700)  
     }, 1000);
-ls
     connectRange = connectRange1;
     leaveRange = leaveRange1;
     deviceID = deviceID1;
