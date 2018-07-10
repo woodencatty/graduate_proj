@@ -27,6 +27,7 @@ POST_Userleave2 = {														//POST요청 JSON데이터 정
 
 module.exports = {
 	SubmitIDDname: (ID) => {
+		console.log(POST_IDDname2);
 		SubmitIDDnamecallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
