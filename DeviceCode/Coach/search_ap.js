@@ -101,6 +101,14 @@ module.exports = {
         }
         console.log('Connected');
     });
+    setTimeout(()=>{
+      wifi.disconnect(function(err) {
+        if (err) {
+            console.log(err);
+        }
+        console.log('Disconnected');
+    });
+    }, 4000)
     },5000)
     connectRange = connectRange1;
     leaveRange = leaveRange1;
