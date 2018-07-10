@@ -208,7 +208,7 @@ router.get('/exercise_walk', function (req, res, next) {
       query: tts
     });
   }
-
+  sql.countUserStep(User_Number, stepcountcallback);
 }
   sql.requestExerciseTTS(User_Exercise, ttscallback);
 });
