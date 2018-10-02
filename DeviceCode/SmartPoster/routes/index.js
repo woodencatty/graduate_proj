@@ -7,9 +7,9 @@ var router = express.Router();
 const sql = require('./sql.js');
 const fs = require('fs');
 const http = require('http');
-const coachSearch = require('./CoachSearch.js');
-var McpAdc = require('mcp-adc');
-var adc = new McpAdc.Mcp3008();
+//const coachSearch = require('./CoachSearch.js');
+//var McpAdc = require('mcp-adc');
+//var adc = new McpAdc.Mcp3008();
 
 
 let refreshInterval = 1;
@@ -59,19 +59,6 @@ function Setup_IDD_Socket() {
   });
 }
 
-function userEnterCheck(interval){
-  setInterval(()=>{
-    adc.readRawValue(channel_0, function(value0) {
-      adc.readRawValue(channel_1, function(value1) {
-        if(value0>500 || value1>500){
-          User_Enter=1;
-          console.log("User enter!");
-        }
-      });
-});
-
-  },interval);
-}
 
 function initialize() {
   fs.readFile('/home/pi/graduate_proj/DeviceCode/SmartPoster/settings.conf', 'utf8', function (err, data) {
@@ -79,7 +66,6 @@ function initialize() {
     Setup_IDD_Socket();
     interval = config.refreshInterval;
     poster_ID = config.deviceName;
-    userEnterCheck(config.enterInterval);
   });
   console.log("Page is Running..(3000)");
 }
