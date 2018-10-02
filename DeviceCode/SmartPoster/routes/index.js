@@ -1,15 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-//const sensor = require('./sensor.js');
-//const AP = require('./hotSpot.js');
-//const restAPI = require('./rest_api.js');
 const sql = require('./sql.js');
 const fs = require('fs');
 const http = require('http');
-//const coachSearch = require('./CoachSearch.js');
-//var McpAdc = require('mcp-adc');
-//var adc = new McpAdc.Mcp3008();
 
 
 let refreshInterval = 1;
@@ -21,10 +15,7 @@ let User_Number = "";
 let User_Exercise = "";
 let User_Exercise_Count = 0;
 let User_Step = 0;
-//direct
-
-var channel_0 = 0;
-var channel_1 = 1;
+//direc
 
 var User_Enter = 0;
 
