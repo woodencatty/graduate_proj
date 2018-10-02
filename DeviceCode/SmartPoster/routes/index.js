@@ -20,41 +20,9 @@ let User_Step = 0;
 var User_Enter = 0;
 
 
-function Setup_IDD_Socket() {
-  http.createServer((request, response) => {
-    if (request.method == 'POST') {
-      if (request.url == '/identify/information') {
-        IDD_ID = request.headers.idd_id;
-        response.writeHead(200);
-        response.end("gotit"); //IDD에 확인메세지 전송
-        console.log("Hi! " + IDD_ID); //환자 식별
-      } else if (request.url == '/patient/exercise') {
-        response.writeHead(200);
-        User_Step = request.headers.exercise;
-        console.log(request.headers.exercise);
-        console.log(request.headers.idd_id);
-        IDD_ID = request.headers.idd_id;
-        response.end("gotit");
-      } else if (request.url == '/patient/leave') {
-        response.writeHead(200);
-        response.end("good-bye");
-        IDD_ID = "";
-      } else {
-        console.log("error");
-        response.writeHead(404);
-        response.end();
-      }
-    }
-  }).listen(3010, () => {
-    console.log('Socket is Running (3010) ...');
-  });
-}
-
-
 function initialize() {
   fs.readFile('/home/pi/graduate_proj/DeviceCode/SmartPoster/settings.conf', 'utf8', function (err, data) {
     var config = JSON.parse(data);
-    Setup_IDD_Socket();
     interval = config.refreshInterval;
     poster_ID = config.deviceName;
   });
@@ -68,11 +36,10 @@ router.get('/', function (req, res, next) {
   Statuscallback = (returnData) => {
     console.log("get data : " + returnData);
     if (returnData == "1") {
-      if (IDD_ID == "" || User_Enter == 0) {
+      if (IDD_ID == "") {
         res.render('index', {
           Interval: refreshInterval
         });
-        User_Enter=0;
       } else {
         res.redirect('/detected');
       }
@@ -109,6 +76,8 @@ router.get('/detected', function (req, res, next) {
   }
   sql.requestUserName(IDD_ID, Identifycallback);
 });
+
+//Need 2 fix
 
 router.get('/search_exercise', function (req, res, next) {
   dentifycallback = (returnData) => {
@@ -243,7 +212,7 @@ router.get('/pause', function (req, res, next) {
 
 });
 
-
+// need to fix
 router.get('/wrong_direction', function (req, res, next) {
   res.render('wrong_direction', {
     image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_walk331to305.png",
