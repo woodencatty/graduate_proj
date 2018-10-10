@@ -33,6 +33,12 @@ var SPCharacteristic = new BlenoCharacteristic({
   descriptors: SPdescriptor,
 });
 
+var SPprimaryService = new PrimaryService({
+  uuid: 'sp01', // or 'fff0' for 16-bit
+  characteristics: SPCharacteristic
+});
+
+util.inherits(SPCharacteristic, BlenoCharacteristic);
 
 
 SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
@@ -54,13 +60,6 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
   callback(this.RESULT_SUCCESS);
 };
 
-util.inherits(SPCharacteristic, BlenoCharacteristic);
-
-
-var SPprimaryService = new PrimaryService({
-    uuid: 'sp01', // or 'fff0' for 16-bit
-    characteristics: SPCharacteristic
-});
 
 
 bleno.on('stateChange', (state)=>{
