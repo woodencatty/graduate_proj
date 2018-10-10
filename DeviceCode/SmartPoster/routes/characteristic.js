@@ -37,11 +37,4 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
 };
 
 
-
-module.exports = {
-    test: (callback) => {
-        callback("wow");
-    }
-}
-
 module.exports = SPCharacteristic;

@@ -2,9 +2,99 @@ var express = require('express');
 var router = express.Router();
 
 const sql = require('./sql.js');
-const ble = require('./ble.js');
+//const ble = require('./ble.js');
 
-var SPCharacteristic = require('./characteristic');
+
+
+
+var bleno = require('bleno');
+
+
+this._value = new Buffer(0);
+this._updateValueCallback = null;
+
+var name = 'smartPoster';
+var serviceUuids = ['sp01']
+
+var Descriptor = bleno.Descriptor;
+var Characteristic = bleno.Characteristic;
+var PrimaryService = bleno.PrimaryService;
+
+var descriptor = new Descriptor({
+    uuid: '2901',
+    value: 'smartposter' // static value, must be of type Buffer or string if set
+});
+
+var characteristic = new Characteristic({
+  uuid: 'sp0n',
+  properties: ['read', 'write'],
+  value: null,
+  descriptors: descriptor,
+  onReadRequest: (offset, callback) => {
+    console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
+  
+    callback(this.RESULT_SUCCESS, this._value);
+  }, // optional read request handler, function(offset, callback) { ... }
+
+  onWriteRequest: (data, offset, withoutResponse, callback)=>{
+    this._value = data;
+    console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  
+    if (this._updateValueCallback) {
+      console.log('SPCharacteristic - onWriteRequest: notifying');
+  
+      this._updateValueCallback(this._value);
+    }
+  
+    callback(this.RESULT_SUCCESS);
+  }, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
+
+});
+
+
+var primaryService = new PrimaryService({
+    uuid: 'sp01', // or 'fff0' for 16-bit
+    characteristics: characteristic
+});
+
+
+
+
+bleno.on('stateChange', (state)=>{
+  if(state === 'poweredOn' ){
+  bleno.startAdvertising(name, serviceUuids, (error)=>{
+    console.log(error);
+  });
+  } else {
+  bleno.stopAdvertising();
+}
+});
+
+
+bleno.on('advertisingStart', function(error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+  if (!error) {
+    bleno.setServices(primaryService);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const fs = require('fs');
@@ -34,9 +124,6 @@ function initialize() {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  wowcallback = (returnData)=>{
-    console.log(returnData);
-  }
   console.log();
   console.log("routed to /")
   Statuscallback = (returnData) => {
@@ -53,7 +140,6 @@ router.get('/', function (req, res, next) {
       res.redirect('/unactivated');
     }            
   }
-  SPCharacteristic.test(wowcallback);
 
   sql.requestDeviceStatus(poster_ID, Statuscallback);
 
