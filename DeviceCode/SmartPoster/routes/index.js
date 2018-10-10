@@ -34,7 +34,6 @@ function initialize() {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  SPCharacteristic.test(wowcallback);
   wowcallback = (returnData)=>{
     console.log(returnData);
   }
@@ -54,6 +53,8 @@ router.get('/', function (req, res, next) {
       res.redirect('/unactivated');
     }            
   }
+  SPCharacteristic.test(wowcallback);
+
   sql.requestDeviceStatus(poster_ID, Statuscallback);
 
 });
