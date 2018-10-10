@@ -4,8 +4,10 @@ var router = express.Router();
 const sql = require('./sql.js');
 const ble = require('./ble.js');
 
+var SPCharacteristic = require('./characteristic');
+
+
 const fs = require('fs');
-const http = require('http');
 
 
 let refreshInterval = 1;
@@ -18,8 +20,6 @@ let User_Exercise = "";
 let User_Exercise_Count = 0;
 let User_Step = 0;
 //direc
-
-var User_Enter = 0;
 
 
 function initialize() {
@@ -34,6 +34,7 @@ function initialize() {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  console.log(SPCharacteristic._value);
   console.log("routed to /")
   Statuscallback = (returnData) => {
     console.log("get data : " + returnData);
