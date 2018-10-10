@@ -1,45 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var util = require('util');
 
 const sql = require('./sql.js');
 //const ble = require('./ble.js');
 
 
-
-
 var bleno = require('bleno');
 
+var util = require('util');
 
-this._value = new Buffer(0);
-this._updateValueCallback = null;
 
-var name = 'smartPoster';
-var serviceUuids = ['sp01']
-
-var Descriptor = bleno.Descriptor;
 var BlenoCharacteristic = bleno.Characteristic;
-var PrimaryService = bleno.PrimaryService;
 
-var SPdescriptor = new Descriptor({
-    uuid: '2901',
-    value: 'smartposter' // static value, must be of type Buffer or string if set
-});
+var SPCharacteristic = function() {
+  SPCharacteristic.super_.call(this, {
+    uuid: 'ec0e',
+    properties: ['read', 'write'],
+    value: null
+  });
 
-var SPCharacteristic = new BlenoCharacteristic({
-  uuid: 'sp0n',
-  properties: ['read', 'write'],
-  value: null,
-  descriptors: SPdescriptor,
-});
-
-var SPprimaryService = new PrimaryService({
-  uuid: 'sp01', // or 'fff0' for 16-bit
-  characteristics: SPCharacteristic
-});
+  this._value = new Buffer(0);
+  this._updateValueCallback = null;
+};
 
 util.inherits(SPCharacteristic, BlenoCharacteristic);
-
 
 SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
   console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
@@ -61,6 +45,12 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
 };
 
 
+var name = 'smartPoster';
+var serviceUuids = ['sp01']
+
+var BlenoPrimaryService = bleno.PrimaryService;
+
+
 
 bleno.on('stateChange', (state)=>{
   if(state === 'poweredOn' ){
@@ -76,15 +66,16 @@ bleno.on('stateChange', (state)=>{
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
   if (!error) {
-    bleno.setServices(SPprimaryService);
+    bleno.setServices([
+      new BlenoPrimaryService({
+        uuid: 'sp01',
+        characteristics: [
+          new SPCharacteristic()
+        ]
+      })
+    ]);
   }
 });
-
-
-
-
-
-
 
 
 
