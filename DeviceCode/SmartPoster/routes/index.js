@@ -37,13 +37,14 @@ var SPCharacteristic = function() {
 
 util.inherits(SPCharacteristic, BlenoCharacteristic);
 SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
+  console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('utf8'));
   callback(this.RESULT_SUCCESS, this._value);
 };
 
 SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
   console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('utf8'));
+  IDD_ID =  this._value.toString('utf8');
   if (this._updateValueCallback) {
     console.log('SPCharacteristic - onWriteRequest: notifying');
     this._updateValueCallback(this._value);
