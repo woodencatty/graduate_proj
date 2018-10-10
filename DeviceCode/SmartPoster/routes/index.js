@@ -26,7 +26,7 @@ var SPdescriptor = new Descriptor({
     value: 'smartposter' // static value, must be of type Buffer or string if set
 });
 
-var SPCharacteristic = new Characteristic({
+var SPCharacteristic = new BlenoCharacteristic({
   uuid: 'sp0n',
   properties: ['read', 'write'],
   value: null,
