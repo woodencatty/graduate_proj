@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const sql = require('./sql.js');
+const ble = require('./sql.js');
+
 const fs = require('fs');
 const http = require('http');
 
@@ -47,6 +49,7 @@ router.get('/', function (req, res, next) {
       res.redirect('/unactivated');
     }            
   }
+  console.log(poster_ID);
   sql.requestDeviceStatus(poster_ID, Statuscallback);
 
 });

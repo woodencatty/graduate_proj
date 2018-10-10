@@ -1,52 +1,34 @@
-var util = require('util');
-
 var bleno = require('bleno');
+var SPCharacteristic = require('./characteristic');
 
-var BlenoCharacteristic = bleno.Characteristic;
+var name = 'smartPoster';
+var serviceUuids = ['sp01']
 
-var APDCharacteristic = function() {
-  APDCharacteristic.super_.call(this, {
-    uuid: 'ec0e',
-    properties: ['read', 'write', 'notify'],
-    value: null
+var BlenoPrimaryService = bleno.PrimaryService;
+
+
+
+bleno.on('stateChange', (state)=>{
+  if(state === 'poweredOn' ){
+  bleno.startAdvertising(name, serviceUuids, (error)=>{
+    console.log(error);
   });
+  } else {
+  bleno.stopAdvertising();
+}
+});
 
-  this._value = new Buffer(0);
-  this._updateValueCallback = null;
-};
 
-util.inherits(APDCharacteristic, BlenoCharacteristic);
-
-APDCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  console.log('APDCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
-
-  callback(this.RESULT_SUCCESS, this._value);
-};
-
-APDCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
-  this._value = data;
-
-  console.log('APDCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
-
-  if (this._updateValueCallback) {
-    console.log('APDCharacteristic - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
+bleno.on('advertisingStart', function(error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+  if (!error) {
+    bleno.setServices([
+      new BlenoPrimaryService({
+        uuid: 'ec00',
+        characteristics: [
+          new SPCharacteristic()
+        ]
+      })
+    ]);
   }
-
-  callback(this.RESULT_SUCCESS);
-};
-
-APDCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
-  console.log('APDCharacteristic - onSubscribe');
-
-  this._updateValueCallback = updateValueCallback;
-};
-
-APDCharacteristic.prototype.onUnsubscribe = function() {
-  console.log('APDCharacteristic - onUnsubscribe');
-
-  this._updateValueCallback = null;
-};
-
-module.exports = APDCharacteristic;
+});
