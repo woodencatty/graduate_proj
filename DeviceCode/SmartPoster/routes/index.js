@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var util = require('util');
 
 const sql = require('./sql.js');
 //const ble = require('./ble.js');
@@ -17,7 +18,7 @@ var name = 'smartPoster';
 var serviceUuids = ['sp01']
 
 var Descriptor = bleno.Descriptor;
-var Characteristic = bleno.Characteristic;
+var BlenoCharacteristic = bleno.Characteristic;
 var PrimaryService = bleno.PrimaryService;
 
 var SPdescriptor = new Descriptor({
@@ -31,6 +32,8 @@ var SPCharacteristic = new Characteristic({
   value: null,
   descriptors: SPdescriptor,
 });
+
+util.inherits(SPCharacteristic, BlenoCharacteristic);
 
 
 SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
