@@ -3,83 +3,6 @@ var router = express.Router();
 
 const sql = require('./sql.js');
 //const ble = require('./ble.js');
-
-
-var bleno = require('bleno');
-
-var util = require('util');
-
-
-var BlenoCharacteristic = bleno.Characteristic;
-
-var SPCharacteristic = function() {
-  SPCharacteristic.super_.call(this, {
-    uuid: 'ec0e',
-    properties: ['read', 'write'],
-    value: null
-  });
-
-  this._value = new Buffer(0);
-  this._updateValueCallback = null;
-};
-
-util.inherits(SPCharacteristic, BlenoCharacteristic);
-
-SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
-
-  callback(this.RESULT_SUCCESS, this._value);
-};
-
-SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
-  this._value = data;
-  console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
-
-  if (this._updateValueCallback) {
-    console.log('SPCharacteristic - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
-
-  callback(this.RESULT_SUCCESS);
-};
-
-
-var name = 'smartPoster';
-var serviceUuids = ['sp01']
-
-var BlenoPrimaryService = bleno.PrimaryService;
-
-
-
-bleno.on('stateChange', (state)=>{
-  if(state === 'poweredOn' ){
-  bleno.startAdvertising(name, serviceUuids, (error)=>{
-    console.log(error);
-  });
-  } else {
-  bleno.stopAdvertising();
-}
-});
-
-
-bleno.on('advertisingStart', function(error) {
-  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-  if (!error) {
-    bleno.setServices([
-      new BlenoPrimaryService({
-        uuid: 'sp01',
-        characteristics: [
-          new SPCharacteristic()
-        ]
-      })
-    ]);
-  }
-});
-
-
-
-
 const fs = require('fs');
 
 
@@ -94,6 +17,68 @@ let User_Exercise_Count = 0;
 let User_Step = 0;
 //direc
 
+
+
+//whole ble
+
+var bleno = require('bleno');
+var util = require('util');
+var BlenoCharacteristic = bleno.Characteristic;
+
+var SPCharacteristic = function() {
+  SPCharacteristic.super_.call(this, {
+    uuid: 'ec0e',
+    properties: ['read', 'write'],
+    value: null
+  });
+  this._value = new Buffer(0);
+  this._updateValueCallback = null;
+};
+
+util.inherits(SPCharacteristic, BlenoCharacteristic);
+SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
+  callback(this.RESULT_SUCCESS, this._value);
+};
+
+SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+  this._value = data;
+  console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('utf8'));
+  if (this._updateValueCallback) {
+    console.log('SPCharacteristic - onWriteRequest: notifying');
+    this._updateValueCallback(this._value);
+  }
+  callback(this.RESULT_SUCCESS);
+};
+
+var name = 'smartPoster';
+var serviceUuids = ['sp01']
+var BlenoPrimaryService = bleno.PrimaryService;
+
+bleno.on('stateChange', (state)=>{
+  if(state === 'poweredOn' ){
+  bleno.startAdvertising(name, serviceUuids, (error)=>{
+    console.log(error);
+  });
+  } else {
+  bleno.stopAdvertising();
+}
+});
+bleno.on('advertisingStart', function(error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+  if (!error) {
+    bleno.setServices([
+      new BlenoPrimaryService({
+        uuid: 'sp01',
+        characteristics: [
+          new SPCharacteristic()
+        ]
+      })
+    ]);
+  }
+});
+
+//ble end
 
 function initialize() {
   fs.readFile('/home/pi/graduate_proj/DeviceCode/SmartPoster/settings.conf', 'utf8', function (err, data) {
