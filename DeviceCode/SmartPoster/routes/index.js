@@ -25,7 +25,7 @@ var SPdescriptor = new Descriptor({
     value: 'smartposter' // static value, must be of type Buffer or string if set
 });
 
-var SPcharacteristic = new Characteristic({
+var SPCharacteristic = new Characteristic({
   uuid: 'sp0n',
   properties: ['read', 'write'],
   value: null,
@@ -55,7 +55,7 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
 
 var SPprimaryService = new PrimaryService({
     uuid: 'sp01', // or 'fff0' for 16-bit
-    characteristics: SPcharacteristic
+    characteristics: SPCharacteristic
 });
 
 
