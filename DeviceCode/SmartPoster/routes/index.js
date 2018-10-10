@@ -30,34 +30,33 @@ var characteristic = new Characteristic({
   properties: ['read', 'write'],
   value: null,
   descriptors: descriptor,
-  onReadRequest: (offset, callback) => {
-    console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
-  
-    callback(this.RESULT_SUCCESS, this._value);
-  }, // optional read request handler, function(offset, callback) { ... }
-
-  onWriteRequest: (data, offset, withoutResponse, callback)=>{
-    this._value = data;
-    console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
-  
-    if (this._updateValueCallback) {
-      console.log('SPCharacteristic - onWriteRequest: notifying');
-  
-      this._updateValueCallback(this._value);
-    }
-  
-    callback(this.RESULT_SUCCESS);
-  }, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
-
 });
+
+
+SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  console.log('SPCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
+
+  callback(this.RESULT_SUCCESS, this._value);
+};
+
+SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+  this._value = data;
+  console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+
+  if (this._updateValueCallback) {
+    console.log('SPCharacteristic - onWriteRequest: notifying');
+
+    this._updateValueCallback(this._value);
+  }
+
+  callback(this.RESULT_SUCCESS);
+};
 
 
 var primaryService = new PrimaryService({
     uuid: 'sp01', // or 'fff0' for 16-bit
     characteristics: characteristic
 });
-
-
 
 
 bleno.on('stateChange', (state)=>{
@@ -77,16 +76,6 @@ bleno.on('advertisingStart', function(error) {
     bleno.setServices(primaryService);
   }
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
