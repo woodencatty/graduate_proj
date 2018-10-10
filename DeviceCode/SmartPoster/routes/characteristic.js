@@ -25,7 +25,6 @@ SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
-
   console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
 
   if (this._updateValueCallback) {
@@ -36,5 +35,13 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
 
   callback(this.RESULT_SUCCESS);
 };
+
+
+
+module.exports = {
+    test: (callback) => {
+        callback("wow");
+    }
+}
 
 module.exports = SPCharacteristic;
