@@ -33,7 +33,6 @@ var SPCharacteristic = new BlenoCharacteristic({
   descriptors: SPdescriptor,
 });
 
-util.inherits(SPCharacteristic, BlenoCharacteristic);
 
 
 SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
@@ -54,6 +53,8 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
 
   callback(this.RESULT_SUCCESS);
 };
+
+util.inherits(SPCharacteristic, BlenoCharacteristic);
 
 
 var SPprimaryService = new PrimaryService({
