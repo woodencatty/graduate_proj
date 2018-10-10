@@ -20,16 +20,16 @@ var Descriptor = bleno.Descriptor;
 var Characteristic = bleno.Characteristic;
 var PrimaryService = bleno.PrimaryService;
 
-var descriptor = new Descriptor({
+var SPdescriptor = new Descriptor({
     uuid: '2901',
     value: 'smartposter' // static value, must be of type Buffer or string if set
 });
 
-var characteristic = new Characteristic({
+var SPcharacteristic = new Characteristic({
   uuid: 'sp0n',
   properties: ['read', 'write'],
   value: null,
-  descriptors: descriptor,
+  descriptors: SPdescriptor,
 });
 
 
@@ -53,9 +53,9 @@ SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRespon
 };
 
 
-var primaryService = new PrimaryService({
+var SPprimaryService = new PrimaryService({
     uuid: 'sp01', // or 'fff0' for 16-bit
-    characteristics: characteristic
+    characteristics: SPcharacteristic
 });
 
 
@@ -73,7 +73,7 @@ bleno.on('stateChange', (state)=>{
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
   if (!error) {
-    bleno.setServices(primaryService);
+    bleno.setServices(SPprimaryService);
   }
 });
 
