@@ -79,6 +79,10 @@ bleno.on('advertisingStart', function(error) {
   }
 });
 
+bleno.on('accept', (clientAddress)=>{
+  console.log(clientAddress);
+}); 
+
 //ble end
 
 function initialize() {
