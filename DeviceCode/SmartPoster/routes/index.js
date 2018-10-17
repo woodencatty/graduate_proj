@@ -217,7 +217,7 @@ router.get('/exercise_walk', function (req, res, next) {
       totalwalk: stepcount,
       totalcalorie: stepcount * 0.66,
 
-      image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".png",
+      image: "http://192.9.44.54:8081/smash/resources/img/programimg/programImg_" + User_Exercise + ".gif",
       query: tts
     });
   }
