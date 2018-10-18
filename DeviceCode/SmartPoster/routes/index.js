@@ -18,7 +18,6 @@ let User_Step = 0;
 //direc
 
 
-
 //whole ble
 
 var bleno = require('bleno');
@@ -43,8 +42,11 @@ SPCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 SPCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
+  let written_data = this._value.toString('utf8');
+  let parsed_data = written_data.split(','); 
   console.log('SPCharacteristic - onWriteRequest: value = ' + this._value.toString('utf8'));
-  IDD_ID =  this._value.toString('utf8');
+  IDD_ID = parsed_data[0];
+  User_Step = parsed_data[1];
   if (this._updateValueCallback) {
     console.log('SPCharacteristic - onWriteRequest: notifying');
     this._updateValueCallback(this._value);
