@@ -27,6 +27,9 @@
    }else {
          // 시간이 남았을 경우 카운트다운을 지속한다.
         document.all.choonDiv.innerHTML = cnt;
+        if(cnt < 2 ){
+          document.all.choonDiv.innerHTML = "조금만 더 해봅시다!"
+        }
         setTimeout("countdown()",1000);
   cnt--;
    }
