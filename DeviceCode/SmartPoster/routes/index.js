@@ -125,6 +125,8 @@ router.get('/unactivated', function (req, res, next) {
 });
 
 router.get('/detected', function (req, res, next) {
+  console.log(IDD_ID)
+  console.log(User_Step);
   Identifycallback = (user_Name, user_Number) => {
     User_Name = user_Name; // 환자이름 빼먹음;
     User_Number = user_Number;
